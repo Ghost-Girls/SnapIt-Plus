@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
@@ -82,12 +82,13 @@ public partial class App
                 _ = services.AddSingleton<IGlobalHookService, GlobalHookService>();
                 _ = services.AddSingleton<IMouseService, MouseService>();
                 _ = services.AddSingleton<IKeyboardService, KeyboardService>();
-                _ = services.AddSingleton<IFileOperationService, FileOperationService>();
+                _ = services.AddSingleton<IFileOperationService, DatabaseOperationService>();
                 _ = services.AddSingleton<ISettingService, SettingService>();
                 _ = services.AddSingleton<IHotkeyService, HotkeyService>();
                 _ = services.AddSingleton<IWinApiService, WinApiService>();
                 _ = services.AddSingleton<IStoreLicenseService, StoreLicenseService>();
                 _ = services.AddSingleton<IWindowsService, WindowsService>();
+                _ = services.AddSingleton<IWindowEventService, WindowEventService>();
             }
         )
         .Build();
