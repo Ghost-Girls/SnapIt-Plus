@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SnapIt.Common.Entities;
@@ -42,6 +42,15 @@ public class SnapAreaEditor : Control
 
     public static readonly DependencyProperty IsAreaMouseOverProperty = DependencyProperty.Register("IsAreaMouseOver",
         typeof(bool), typeof(SnapAreaEditor), new PropertyMetadata(null));
+
+    public bool IsSelected
+    {
+        get => (bool)GetValue(IsSelectedProperty);
+        set => SetValue(IsSelectedProperty, value);
+    }
+
+    public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected",
+        typeof(bool), typeof(SnapAreaEditor), new PropertyMetadata(false));
 
     public SnapAreaTheme Theme
     {
@@ -140,6 +149,7 @@ public class SnapAreaEditor : Control
             }));
 
         Loaded += SnapAreaEditor_Loaded;
+        MouseLeftButtonDown += SnapAreaEditor_MouseLeftButtonDown;
     }
 
     private void SnapAreaEditor_Loaded(object sender, RoutedEventArgs e)
@@ -178,6 +188,15 @@ public class SnapAreaEditor : Control
     private void SnapAreaEditor_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
         IsAreaMouseOver = IsMouseOver;
+    }
+
+    private void SnapAreaEditor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (SnapControl.IsAreaSelectionMode)
+        {
+            SnapControl.ToggleAreaSelection(this);
+            e.Handled = true;
+        }
     }
 
     private void Split(SplitDirection direction, int divideCount = 2)

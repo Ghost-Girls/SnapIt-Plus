@@ -172,6 +172,11 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Area" Property="Background" Value="{Binding Path=Theme.HighlightBrush, RelativeSource={RelativeSource TemplatedParent}, FallbackValue=#FF4A90D9}" />
+                            <Setter TargetName="Area" Property="Opacity" Value="0.6" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

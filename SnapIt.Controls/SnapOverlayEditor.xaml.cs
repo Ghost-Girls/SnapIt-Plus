@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SnapIt.Common;
@@ -356,6 +356,11 @@ public partial class SnapOverlayEditor : UserControl
 
             if (new_width > 0 && new_height > 0)
             {
+                var baseLeft = selectedElement.Margin.Left;
+                var baseTop = selectedElement.Margin.Top;
+                var baseWidth = selectedElement.Width;
+                var baseHeight = selectedElement.Height;
+
                 var point = new Point(new_x, new_y);
                 var size = new Size(new_width, new_height);
 
@@ -363,6 +368,7 @@ public partial class SnapOverlayEditor : UserControl
 
                 if (selectedElement.Name == "MiniOverlay")
                 {
+                    ClampToParent(ref point, ref size, ActualWidth, ActualHeight);
                     SetPos(selectedElement, point, size);
                 }
                 else
@@ -371,6 +377,20 @@ public partial class SnapOverlayEditor : UserControl
                     {
                         return;
                     }
+
+                    ClampToContainer(ref point, ref size);
+
+                    if (_mouseHitType != ResizeHitType.Body)
+                    {
+                        var engine = new SnapEngine();
+                        engine.BuildSnapLines(SnapControl);
+                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRect(point.X, point.Y, size.Width, size.Height);
+                    }
+
+                    if (_mouseHitType is ResizeHitType.L or ResizeHitType.UL or ResizeHitType.LL)
+                        size.Width = baseLeft + baseWidth - point.X;
+                    if (_mouseHitType is ResizeHitType.T or ResizeHitType.UL or ResizeHitType.UR)
+                        size.Height = baseTop + baseHeight - point.Y;
 
                     SetPos(point, size);
 
@@ -455,6 +475,29 @@ public partial class SnapOverlayEditor : UserControl
         {
             Cursor = desired_cursor;
         }
+    }
+
+    private void ClampToContainer(ref Point point, ref Size size)
+    {
+        var parentWidth = SnapControl.MainOverlay.ActualWidth;
+        var parentHeight = SnapControl.MainOverlay.ActualHeight;
+
+        if (parentWidth <= 0 || parentHeight <= 0) return;
+
+        point.X = Math.Max(0, Math.Min(point.X, parentWidth - size.Width));
+        point.Y = Math.Max(0, Math.Min(point.Y, parentHeight - size.Height));
+        size.Width = Math.Min(size.Width, parentWidth - point.X);
+        size.Height = Math.Min(size.Height, parentHeight - point.Y);
+    }
+
+    private void ClampToParent(ref Point point, ref Size size, double parentWidth, double parentHeight)
+    {
+        if (parentWidth <= 0 || parentHeight <= 0) return;
+
+        point.X = Math.Max(0, Math.Min(point.X, parentWidth - size.Width));
+        point.Y = Math.Max(0, Math.Min(point.Y, parentHeight - size.Height));
+        size.Width = Math.Min(size.Width, parentWidth - point.X);
+        size.Height = Math.Min(size.Height, parentHeight - point.Y);
     }
 
     private void RemoveButton_Click(object sender, RoutedEventArgs e)

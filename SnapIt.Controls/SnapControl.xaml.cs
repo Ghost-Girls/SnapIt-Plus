@@ -1,5 +1,6 @@
-﻿using System.Windows;
+﻿﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Extensions;
 using SnapIt.Common.Graphics;
@@ -353,6 +354,127 @@ public partial class SnapControl : UserControl
         }
 
         MainOverlay.Children.Remove(snapOverlayEditor);
+    }
+
+    private HashSet<SnapAreaEditor> selectedAreas = [];
+
+    public bool IsAreaSelectionMode
+    {
+        get => (bool)GetValue(IsAreaSelectionModeProperty);
+        set => SetValue(IsAreaSelectionModeProperty, value);
+    }
+
+    public static readonly DependencyProperty IsAreaSelectionModeProperty = DependencyProperty.Register(
+        "IsAreaSelectionMode", typeof(bool), typeof(SnapControl),
+        new PropertyMetadata(false, IsAreaSelectionModeChanged));
+
+    private static void IsAreaSelectionModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var snapControl = (SnapControl)d;
+        var selectionBar = snapControl.FindChild<Border>("SelectionBar");
+        if (selectionBar != null)
+            selectionBar.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    public void EnterAreaSelectionMode()
+    {
+        selectedAreas.Clear();
+        IsAreaSelectionMode = true;
+        UpdateSelectionCount();
+
+        foreach (var area in this.FindChildren<SnapAreaEditor>())
+        {
+            area.IsSelected = false;
+            area.Cursor = Cursors.Hand;
+        }
+    }
+
+    public void ExitAreaSelectionMode()
+    {
+        IsAreaSelectionMode = false;
+
+        foreach (var area in this.FindChildren<SnapAreaEditor>())
+        {
+            area.IsSelected = false;
+            area.Cursor = Cursors.Arrow;
+        }
+
+        selectedAreas.Clear();
+    }
+
+    public void ToggleAreaSelection(SnapAreaEditor area)
+    {
+        if (!IsAreaSelectionMode) return;
+
+        area.IsSelected = !area.IsSelected;
+
+        if (area.IsSelected)
+            selectedAreas.Add(area);
+        else
+            selectedAreas.Remove(area);
+
+        UpdateSelectionCount();
+    }
+
+    private void UpdateSelectionCount()
+    {
+        var countText = this.FindChild<TextBlock>("SelectedCountText");
+        if (countText != null)
+            countText.Text = selectedAreas.Count.ToString();
+    }
+
+    public Rect CalculateBoundingBox(IEnumerable<SnapAreaEditor> areas)
+    {
+        double minX = double.MaxValue, minY = double.MaxValue;
+        double maxX = double.MinValue, maxY = double.MinValue;
+
+        foreach (var area in areas)
+        {
+            minX = Math.Min(minX, area.Margin.Left);
+            minY = Math.Min(minY, area.Margin.Top);
+            maxX = Math.Max(maxX, area.Margin.Left + area.Width);
+            maxY = Math.Max(maxY, area.Margin.Top + area.Height);
+        }
+
+        return new Rect(new Point(minX, minY), new Point(maxX, maxY));
+    }
+
+    public void ConfirmAreaSelection()
+    {
+        if (selectedAreas.Count == 0) return;
+
+        var bbox = CalculateBoundingBox(selectedAreas);
+
+        var overlayEditor = new SnapOverlayEditor(this, Theme)
+        {
+            ShowMiniOverlay = true
+        };
+
+        overlayEditor.SetPos(
+            new Point(bbox.X, bbox.Y),
+            new Size(bbox.Width, bbox.Height),
+            null);
+
+        MainOverlay.Children.Add(overlayEditor);
+
+        GenerateSnapOverlays();
+
+        ExitAreaSelectionMode();
+    }
+
+    public void CancelAreaSelection()
+    {
+        ExitAreaSelectionMode();
+    }
+
+    private void ConfirmAreaSelect_Click(object sender, RoutedEventArgs e)
+    {
+        ConfirmAreaSelection();
+    }
+
+    private void CancelAreaSelect_Click(object sender, RoutedEventArgs e)
+    {
+        CancelAreaSelection();
     }
 
     public void SetLayoutSize()

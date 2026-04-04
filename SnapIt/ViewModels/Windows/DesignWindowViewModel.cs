@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Interop;
 
 using SnapIt.Application.Contracts;
@@ -37,6 +37,7 @@ public class DesignWindowViewModel : ViewModelBase
     public DelegateCommand SaveLayoutCommand { get; }
     public DelegateCommand CloseLayoutCommand { get; }
     public DelegateCommand AddOverlayLayoutCommand { get; }
+    public DelegateCommand AddOverlayByAreaCommand { get; }
     public DelegateCommand ClearLayoutCommand { get; }
 
     public DesignWindowViewModel(
@@ -52,6 +53,7 @@ public class DesignWindowViewModel : ViewModelBase
         SaveLayoutCommand = new DelegateCommand(SaveLayoutCommandExecute);
         CloseLayoutCommand = new DelegateCommand(CloseLayoutCommandExecute);
         AddOverlayLayoutCommand = new DelegateCommand(AddOverlayLayoutCommandExecute);
+        AddOverlayByAreaCommand = new DelegateCommand(AddOverlayByAreaCommandExecute);
         ClearLayoutCommand = new DelegateCommand(ClearLayoutCommandExecute);
     }
 
@@ -77,6 +79,11 @@ public class DesignWindowViewModel : ViewModelBase
     private void AddOverlayLayoutCommandExecute()
     {
         Window.SnapControl.AddOverlay();
+    }
+
+    private void AddOverlayByAreaCommandExecute()
+    {
+        Window.SnapControl.EnterAreaSelectionMode();
     }
 
     private void ClearLayoutCommandExecute()
