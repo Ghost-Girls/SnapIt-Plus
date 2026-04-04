@@ -288,6 +288,25 @@ public partial class SnapControl : UserControl
         GenerateSnapAreas();
     }
 
+    public void RemoveBorder(SnapBorder borderToRemove)
+    {
+        if (!borderToRemove.IsDraggable) return;
+
+        MainGrid.Children.Remove(borderToRemove);
+
+        if (IsDesignMode && borderToRemove.SnapBorderTool != null)
+        {
+            MainGrid.Children.Remove(borderToRemove.SnapBorderTool);
+        }
+
+        if (borderToRemove.LayoutLine != null && Layout?.LayoutLines != null)
+        {
+            Layout.LayoutLines.Remove(borderToRemove.LayoutLine);
+        }
+
+        GenerateSnapAreas();
+    }
+
     public void ResetBorderTool()
     {
         var borderTools = MainGrid.FindChildren<SnapBorderTool>();

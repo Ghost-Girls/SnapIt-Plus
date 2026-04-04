@@ -108,6 +108,16 @@ public partial class SnapBorder : UserControl
         StopDragging();
     }
 
+    protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
+    {
+        base.OnMouseDoubleClick(e);
+
+        if (IsDraggable)
+        {
+            SnapControl.RemoveBorder(this);
+        }
+    }
+
     private void StopDragging()
     {
         Cursor = Cursors.Arrow;

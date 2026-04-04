@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Extensions;
 using Wpf.Ui.Input;
@@ -72,13 +73,45 @@ public class SnapAreaEditor : Control
         DependencyProperty.Register("SplitVerticallyCommand",
             typeof(IRelayCommand), typeof(SnapAreaEditor), new PropertyMetadata(null));
 
-    private IRelayCommand SplitVerticallyCommand => (IRelayCommand)GetValue(SplitHorizantallyCommandProperty);
+    private IRelayCommand SplitVerticallyCommand => (IRelayCommand)GetValue(SplitVerticallyCommandProperty);
 
     public static readonly DependencyProperty SplitHorizantallyCommandProperty =
         DependencyProperty.Register("SplitHorizantallyCommand",
             typeof(IRelayCommand), typeof(SnapAreaEditor), new PropertyMetadata(null));
 
     public IRelayCommand SplitHorizantallyCommand => (IRelayCommand)GetValue(SplitHorizantallyCommandProperty);
+
+    public int VerticalDivideCount
+    {
+        get => (int)GetValue(VerticalDivideCountProperty);
+        set => SetValue(VerticalDivideCountProperty, value);
+    }
+
+    public static readonly DependencyProperty VerticalDivideCountProperty =
+        DependencyProperty.Register("VerticalDivideCount", typeof(int), typeof(SnapAreaEditor),
+            new PropertyMetadata(3));
+
+    public int HorizontalDivideCount
+    {
+        get => (int)GetValue(HorizontalDivideCountProperty);
+        set => SetValue(HorizontalDivideCountProperty, value);
+    }
+
+    public static readonly DependencyProperty HorizontalDivideCountProperty =
+        DependencyProperty.Register("HorizontalDivideCount", typeof(int), typeof(SnapAreaEditor),
+            new PropertyMetadata(3));
+
+    public static readonly DependencyProperty SplitEqualVerticallyCommandProperty =
+        DependencyProperty.Register("SplitEqualVerticallyCommand",
+            typeof(IRelayCommand), typeof(SnapAreaEditor), new PropertyMetadata(null));
+
+    public IRelayCommand SplitEqualVerticallyCommand => (IRelayCommand)GetValue(SplitEqualVerticallyCommandProperty);
+
+    public static readonly DependencyProperty SplitEqualHorizontallyCommandProperty =
+        DependencyProperty.Register("SplitEqualHorizontallyCommand",
+            typeof(IRelayCommand), typeof(SnapAreaEditor), new PropertyMetadata(null));
+
+    public IRelayCommand SplitEqualHorizontallyCommand => (IRelayCommand)GetValue(SplitEqualHorizontallyCommandProperty);
 
     public SnapAreaEditor()
     {
@@ -94,7 +127,17 @@ public class SnapAreaEditor : Control
                 Split(SplitDirection.Horizontal);
             }));
 
-        //DesignPanel.Visibility = Visibility.Hidden;
+        SetValue(SplitEqualVerticallyCommandProperty,
+            new RelayCommand<object>(o =>
+            {
+                Split(SplitDirection.Vertical, VerticalDivideCount);
+            }));
+
+        SetValue(SplitEqualHorizontallyCommandProperty,
+            new RelayCommand<object>(o =>
+            {
+                Split(SplitDirection.Horizontal, HorizontalDivideCount);
+            }));
 
         Loaded += SnapAreaEditor_Loaded;
     }
@@ -106,6 +149,30 @@ public class SnapAreaEditor : Control
         {
             area.IsMouseDirectlyOverChanged += SnapAreaEditor_IsMouseDirectlyOverChanged;
         }
+
+        var splitVerticalEqual = this.FindChild<FrameworkElement>("SplitVerticalEqual");
+        if (splitVerticalEqual != null)
+        {
+            splitVerticalEqual.MouseWheel += SplitVerticalEqual_MouseWheel;
+        }
+
+        var splitHorizontalEqual = this.FindChild<FrameworkElement>("SplitHorizontalEqual");
+        if (splitHorizontalEqual != null)
+        {
+            splitHorizontalEqual.MouseWheel += SplitHorizontalEqual_MouseWheel;
+        }
+    }
+
+    private void SplitVerticalEqual_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        VerticalDivideCount = Math.Clamp(VerticalDivideCount + (e.Delta > 0 ? 1 : -1), 3, 10);
+        e.Handled = true;
+    }
+
+    private void SplitHorizontalEqual_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        HorizontalDivideCount = Math.Clamp(HorizontalDivideCount + (e.Delta > 0 ? 1 : -1), 3, 10);
+        e.Handled = true;
     }
 
     private void SnapAreaEditor_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -113,28 +180,35 @@ public class SnapAreaEditor : Control
         IsAreaMouseOver = IsMouseOver;
     }
 
-    private void Split(SplitDirection direction)
+    private void Split(SplitDirection direction, int divideCount = 2)
     {
-        Point point;
-        Size size;
-
         var rect = GetRect();
 
-        if (direction == SplitDirection.Vertical)
-        {
-            point = new Point((rect.TopLeft.X + rect.BottomRight.X) / 2, rect.TopLeft.Y);
-            size = new Size(double.NaN, rect.Height);
-        }
-        else
-        {
-            point = new Point(rect.TopLeft.X, (rect.TopLeft.Y + rect.BottomRight.Y) / 2);
-            size = new Size(rect.Width, double.NaN);
-        }
+        if (divideCount < 2) return;
 
-        var newBorder = new SnapBorder(SnapControl, new SnapAreaTheme());
-        newBorder.SetPos(point, size, direction);
+        for (int i = 1; i < divideCount; i++)
+        {
+            Point point;
+            Size size;
 
-        SnapControl.AddBorder(newBorder);
+            double ratio = (double)i / divideCount;
+
+            if (direction == SplitDirection.Vertical)
+            {
+                point = new Point(rect.TopLeft.X + rect.Width * ratio, rect.TopLeft.Y);
+                size = new Size(double.NaN, rect.Height);
+            }
+            else
+            {
+                point = new Point(rect.TopLeft.X, rect.TopLeft.Y + rect.Height * ratio);
+                size = new Size(rect.Width, double.NaN);
+            }
+
+            var newBorder = new SnapBorder(SnapControl, new SnapAreaTheme());
+            newBorder.SetPos(point, size, direction);
+
+            SnapControl.AddBorder(newBorder);
+        }
     }
 
     public Rect GetRect()

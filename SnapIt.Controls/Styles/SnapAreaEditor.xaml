@@ -69,6 +69,48 @@
                                     Icon="{ui:SymbolIcon SplitHorizontal28}"
                                     IsTabStop="False"
                                     ToolTip="Split Horizontally" />
+
+                                <ui:Button
+                                    x:Name="SplitVerticalEqual"
+                                    Height="36"
+                                    Margin="8,0,4,0"
+                                    Padding="10,0"
+                                    Appearance="Secondary"
+                                    Background="#DD555555"
+                                    Command="{Binding Path=SplitEqualVerticallyCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Icon="{ui:SymbolIcon SplitVertical28}"
+                                    IsTabStop="False"
+                                    ToolTip="垂直N等分 (滚轮调节)">
+                                    <ui:Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=VerticalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}"
+                                                       FontSize="13"
+                                                       FontWeight="Bold"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </ui:Button.Content>
+                                </ui:Button>
+
+                                <ui:Button
+                                    x:Name="SplitHorizontalEqual"
+                                    Height="36"
+                                    Margin="4,0"
+                                    Padding="10,0"
+                                    Appearance="Secondary"
+                                    Background="#DD555555"
+                                    Command="{Binding Path=SplitEqualHorizontallyCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Icon="{ui:SymbolIcon SplitHorizontal28}"
+                                    IsTabStop="False"
+                                    ToolTip="水平N等分 (滚轮调节)">
+                                    <ui:Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=HorizontalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}"
+                                                       FontSize="13"
+                                                       FontWeight="Bold"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </ui:Button.Content>
+                                </ui:Button>
                             </StackPanel>
                         </Grid>
                     </Grid>
