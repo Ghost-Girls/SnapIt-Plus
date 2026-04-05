@@ -368,7 +368,30 @@ public partial class SnapOverlayEditor : UserControl
 
                 if (selectedElement.Name == "MiniOverlay")
                 {
+                    var miniBaseLeft = selectedElement.Margin.Left;
+                    var miniBaseTop = selectedElement.Margin.Top;
+                    var miniBaseWidth = selectedElement.Width;
+                    var miniBaseHeight = selectedElement.Height;
+
                     ClampToParent(ref point, ref size, ActualWidth, ActualHeight);
+
+                    var engine = new SnapEngine();
+                    engine.BuildSnapLines(SnapControl);
+
+                    if (_mouseHitType == ResizeHitType.Body)
+                    {
+                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRectCenter(point.X, point.Y, size.Width, size.Height);
+                    }
+                    else
+                    {
+                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRect(point.X, point.Y, size.Width, size.Height);
+
+                        if (_mouseHitType is ResizeHitType.L or ResizeHitType.UL or ResizeHitType.LL)
+                            size.Width = miniBaseLeft + miniBaseWidth - point.X;
+                        if (_mouseHitType is ResizeHitType.T or ResizeHitType.UL or ResizeHitType.UR)
+                            size.Height = miniBaseTop + miniBaseHeight - point.Y;
+                    }
+
                     SetPos(selectedElement, point, size);
                 }
                 else

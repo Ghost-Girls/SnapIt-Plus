@@ -12,11 +12,15 @@ public class SnapEngine
 
     private List<double> snapLinesX = [];
     private List<double> snapLinesY = [];
+    private List<double> snapCentersX = [];
+    private List<double> snapCentersY = [];
 
     public void BuildSnapLines(SnapControl snapControl)
     {
         snapLinesX = [];
         snapLinesY = [];
+        snapCentersX = [];
+        snapCentersY = [];
 
         var gridWidth = snapControl.MainGrid.ActualWidth;
         var gridHeight = snapControl.MainGrid.ActualHeight;
@@ -28,12 +32,23 @@ public class SnapEngine
         snapLinesY.Add(0);
         snapLinesY.Add(gridHeight);
 
+        snapCentersX.Add(gridWidth / 2);
+        snapCentersY.Add(gridHeight / 2);
+
         foreach (var border in snapControl.FindChildren<SnapBorder>().Where(b => b.IsDraggable))
         {
             if (border.SplitDirection == SplitDirection.Vertical)
-                snapLinesX.Add(border.Margin.Left + SnapBorder.THICKNESSHALF);
+            {
+                var lineX = border.Margin.Left + SnapBorder.THICKNESSHALF;
+                snapLinesX.Add(lineX);
+                snapCentersX.Add(lineX);
+            }
             else
-                snapLinesY.Add(border.Margin.Top + SnapBorder.THICKNESSHALF);
+            {
+                var lineY = border.Margin.Top + SnapBorder.THICKNESSHALF;
+                snapLinesY.Add(lineY);
+                snapCentersY.Add(lineY);
+            }
         }
 
         foreach (var area in snapControl.FindChildren<SnapAreaEditor>())
@@ -42,11 +57,21 @@ public class SnapEngine
             var right = left + area.Width;
             var top = area.Margin.Top;
             var bottom = top + area.Height;
+            var centerX = (left + right) / 2;
+            var centerY = (top + bottom) / 2;
 
             snapLinesX.Add(left);
             snapLinesX.Add(right);
             snapLinesY.Add(top);
             snapLinesY.Add(bottom);
+
+            snapCentersX.Add(centerX);
+            snapCentersY.Add(centerY);
+
+            snapCentersX.Add(left);
+            snapCentersX.Add(right);
+            snapCentersY.Add(top);
+            snapCentersY.Add(bottom);
         }
     }
 
@@ -72,6 +97,26 @@ public class SnapEngine
             snappedTop,
             snappedRight - snappedLeft,
             snappedBottom - snappedTop
+        );
+    }
+
+    public (double x, double y) SnapCenter(double cx, double cy)
+    {
+        return (SnapValue(cx, snapCentersX), SnapValue(cy, snapCentersY));
+    }
+
+    public (double x, double y, double w, double h) SnapRectCenter(double x, double y, double w, double h)
+    {
+        var centerX = x + w / 2;
+        var centerY = y + h / 2;
+
+        var (snappedCX, snappedCY) = SnapCenter(centerX, centerY);
+
+        return (
+            snappedCX - w / 2,
+            snappedCY - h / 2,
+            w,
+            h
         );
     }
 }
