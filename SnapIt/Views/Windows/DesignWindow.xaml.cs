@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using SnapIt.Common;
 using SnapIt.Common.Contracts;
 using SnapIt.Common.Entities;
@@ -21,6 +21,12 @@ public partial class DesignWindow : IWindow
         MouseMove += DesignWindow_MouseMove;
     }
 
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        ViewModel?.SizeToWorkingArea();
+    }
+
     private void DesignWindow_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
     {
         Point myPoint = e.GetPosition(this);
@@ -39,7 +45,14 @@ public partial class DesignWindow : IWindow
             model.SnapScreen = snapScreen;
             model.Layout = layout;
 
-            designerSizeText.Text = $"Designer Size     {snapScreen.Bounds.Width:0.00} x {snapScreen.Bounds.Height:0.00}";
+            if (layout.Size.Width <= 0 || layout.Size.Height <= 0)
+            {
+                layout.Size = new SnapIt.Common.Graphics.Size(
+                    (float)snapScreen.DesignSize.Width,
+                    (float)snapScreen.DesignSize.Height);
+            }
+
+            designerSizeText.Text = $"Designer Size     {snapScreen.DesignSize.Width:0.00} x {snapScreen.DesignSize.Height:0.00}";
         }
 
         if (Dev.IsTopmostDisabled)

@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -158,15 +158,25 @@ public class SnapArea : Control
 
     public Rectangle ScreenSnapArea(Dpi dpi)
     {
-        var topLeft = PointToScreen(new Point(SnapControl.AreaPadding, SnapControl.AreaPadding));
+        var ctlOrigin = SnapControl.PointToScreen(new Point(0, 0));
+        var ctlFar = SnapControl.PointToScreen(new Point(SnapControl.ActualWidth, SnapControl.ActualHeight));
 
-        var bottomRight = PointToScreen(new Point(ActualWidth - SnapControl.AreaPadding, ActualHeight - SnapControl.AreaPadding));
+        double ctlPhysicalW = ctlFar.X - ctlOrigin.X;
+        double ctlPhysicalH = ctlFar.Y - ctlOrigin.Y;
+        double ctlW = SnapControl.ActualWidth;
+        double ctlH = SnapControl.ActualHeight;
 
-        return new Rectangle(
-           (int)topLeft.X,
-           (int)topLeft.Y,
-           (int)bottomRight.X,
-           (int)bottomRight.Y,
-           dpi);
+        if (ctlPhysicalW <= 0 || ctlPhysicalH <= 0 || ctlW <= 0 || ctlH <= 0)
+            return new Rectangle(0, 0, 0, 0, dpi);
+
+        double padL = SnapControl.AreaPadding;
+        double padT = SnapControl.AreaPadding;
+
+        int left = (int)(ctlOrigin.X + ((Margin.Left + padL) / ctlW) * ctlPhysicalW);
+        int top = (int)(ctlOrigin.Y + ((Margin.Top + padT) / ctlH) * ctlPhysicalH);
+        int right = (int)(ctlOrigin.X + ((Margin.Left + ActualWidth - padL) / ctlW) * ctlPhysicalW);
+        int bottom = (int)(ctlOrigin.Y + ((Margin.Top + ActualHeight - padT) / ctlH) * ctlPhysicalH);
+
+        return new Rectangle(left, top, right, bottom, dpi);
     }
 }

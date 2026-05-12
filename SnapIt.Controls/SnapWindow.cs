@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using SnapIt.Common;
@@ -42,10 +42,10 @@ public class SnapWindow : Window, IWindow
         Background = new SolidColorBrush(Colors.Transparent);
         ResizeMode = ResizeMode.NoResize;
         ShowInTaskbar = false;
-        Width = screen.WorkingArea.Width;
-        Height = screen.WorkingArea.Height;
-        Left = screen.WorkingArea.X;
-        Top = screen.WorkingArea.Y;
+        Width = screen.DesignSize.Width;
+        Height = screen.DesignSize.Height;
+        Left = screen.DesignSize.Left;
+        Top = screen.DesignSize.Top;
         WindowState = WindowState.Normal;
         WindowStyle = WindowStyle.None;
 
@@ -66,24 +66,6 @@ public class SnapWindow : Window, IWindow
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
-
-        MaximizeWindow();
-    }
-
-    private void MaximizeWindow()
-    {
-        var wih = new WindowInteropHelper(this);
-        var window = new ActiveWindow
-        {
-            Handle = wih.Handle
-        };
-
-        winApiService.MoveWindow(
-            window,
-            (int)Screen.WorkingArea.Left,
-            (int)Screen.WorkingArea.Top,
-            (int)Screen.WorkingArea.Width,
-            (int)Screen.WorkingArea.Height);
     }
 
     public void ApplyLayout()

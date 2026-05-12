@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Extensions;
+using SnapIt.Common.Extensions;
 using SnapIt.Common.Graphics;
 using SnapIt.Common.Mvvm;
 
@@ -16,6 +16,7 @@ public class SnapScreen : Bindable
 
     public string DeviceName { get; set; }
     public Rectangle WorkingArea { get; set; }
+    public Rectangle DesignSize { get; set; }
     public double ScaleFactor { get; set; }
     public Rectangle Bounds { get; set; }
 
@@ -51,6 +52,7 @@ public class SnapScreen : Bindable
         Resolution = $"{screen.Bounds.Width} X {screen.Bounds.Height}";
 
         WorkingArea = screen.WorkingArea.Convert();
+        DesignSize = screen.WpfWorkingArea.Convert();
         ScaleFactor = screen.ScaleFactor;
 
         Bounds = screen.WpfBounds.Convert();

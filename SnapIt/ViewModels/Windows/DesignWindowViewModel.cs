@@ -57,7 +57,7 @@ public class DesignWindowViewModel : ViewModelBase
         ClearLayoutCommand = new DelegateCommand(ClearLayoutCommandExecute);
     }
 
-    public override async Task InitializeAsync(RoutedEventArgs args)
+    public void SizeToWorkingArea()
     {
         var wih = new WindowInteropHelper(Window);
         var activeWindow = new ActiveWindow
@@ -66,11 +66,14 @@ public class DesignWindowViewModel : ViewModelBase
         };
 
         winApiService.MoveWindow(activeWindow,
-                             (int)SnapScreen.WorkingArea.Left,
-                             (int)SnapScreen.WorkingArea.Top,
-                             (int)SnapScreen.WorkingArea.Width,
-                             (int)SnapScreen.WorkingArea.Height);
+            (int)SnapScreen.WorkingArea.Left,
+            (int)SnapScreen.WorkingArea.Top,
+            (int)(SnapScreen.WorkingArea.Width / SnapScreen.ScaleFactor),
+            (int)(SnapScreen.WorkingArea.Height / SnapScreen.ScaleFactor));
+    }
 
+    public override async Task InitializeAsync(RoutedEventArgs args)
+    {
         snapManager.Dispose();
 
         Window.SnapControl.ResetBorderTool();
