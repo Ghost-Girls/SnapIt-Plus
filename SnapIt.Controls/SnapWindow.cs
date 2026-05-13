@@ -81,30 +81,27 @@ public class SnapWindow : Window, IWindow
 
     public void GenerateSnapAreaBoundries()
     {
-        if (SnapAreaBoundries == null)
+        SnapAreaBoundries = [];
+        SnapAreaRectangles = [];
+
+        var snapControl = Content as SnapControl;
+        var snapAreas = snapControl.FindChildren<SnapArea>();
+        var snapOverlays = snapControl.FindChildren<SnapOverlay>();
+
+        foreach (var snapOverlay in snapOverlays)
         {
-            SnapAreaBoundries = [];
-            SnapAreaRectangles = [];
-
-            var snapControl = Content as SnapControl;
-            var snapAreas = snapControl.FindChildren<SnapArea>();
-            var snapOverlays = snapControl.FindChildren<SnapOverlay>();
-
-            foreach (var snapOverlay in snapOverlays)
-            {
-                SnapAreaRectangles.Add(snapOverlay.AreaNumber, snapOverlay.ScreenSnapArea(Dpi));
-            }
-
-            foreach (var snapArea in snapAreas)
-            {
-                var rectangle = snapArea.ScreenSnapArea(Dpi);
-
-                SnapAreaRectangles.Add(snapArea.AreaNumber, rectangle);
-                SnapAreaBoundries.Add(rectangle);
-            }
-
-            SnapAreaBoundries = SnapAreaBoundries.OrderBy(i => i.X).ThenBy(i => i.Y).ToList();
+            SnapAreaRectangles.Add(snapOverlay.AreaNumber, snapOverlay.ScreenSnapArea(Dpi));
         }
+
+        foreach (var snapArea in snapAreas)
+        {
+            var rectangle = snapArea.ScreenSnapArea(Dpi);
+
+            SnapAreaRectangles.Add(snapArea.AreaNumber, rectangle);
+            SnapAreaBoundries.Add(rectangle);
+        }
+
+        SnapAreaBoundries = SnapAreaBoundries.OrderBy(i => i.X).ThenBy(i => i.Y).ToList();
     }
 
     public new void Hide()

@@ -1,4 +1,4 @@
-﻿using SnapIt.Application.Contracts;
+using SnapIt.Application.Contracts;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 using SnapIt.Controls;
@@ -81,6 +81,7 @@ public class WindowManager : IWindowManager
         {
             window.Show();
             window.Activate();
+            window.GenerateSnapAreaBoundries();
         });
     }
 
@@ -106,6 +107,11 @@ public class WindowManager : IWindowManager
 
     public void Dispose()
     {
+        mouseService.HideWindows -= MouseService_HideWindows;
+        mouseService.ShowWindowsIfNecessary -= MouseService_ShowWindowsIfNecessary;
+        mouseService.SelectElementWithPoint -= MouseService_SelectElementWithPoint;
+        keyboardService.GetSnapAreaBoundries -= KeyboardService_GetSnapAreaBoundries;
+
         if (snapWindows != null && snapWindows.Count != 0)
         {
             for (int i = 0; i < snapWindows.Count; i++)

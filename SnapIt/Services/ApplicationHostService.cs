@@ -1,4 +1,4 @@
-﻿using SnapIt.Views.Windows;
+using SnapIt.Views.Windows;
 using Wpf.Ui;
 
 namespace SnapIt.Services;

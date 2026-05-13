@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using SnapIt.Application.Contracts;
 using SnapIt.Common.Converters;
 using SnapIt.Common.Entities;
@@ -47,7 +47,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
                 mainWindow.Activate();
             }
-            else
+            else if (mainWindow != null)
             {
                 mainWindow.Show();
                 mainWindow.Activate();
