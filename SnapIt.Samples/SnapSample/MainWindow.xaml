@@ -1,0 +1,270 @@
+<Window
+    x:Class="SnapSample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SnapSample"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="窗口移动策略测试工具 - 目标: (0,-2160) 1920x2130"
+    Width="850"
+    Height="950"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+
+        <!--  Row 0: 目标窗口选择  -->
+        <Border
+            Grid.Row="0"
+            Margin="0,0,0,6"
+            Padding="6"
+            BorderBrush="#ccc"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontWeight="Bold"
+                    Text="目标窗口" />
+                <Button
+                    x:Name="BtnRefresh"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="10,2"
+                    Click="BtnRefresh_Click"
+                    Content="刷新列表" />
+
+                <ListBox
+                    x:Name="WindowList"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Height="200"
+                    Margin="0,4,0,0"
+                    DisplayMemberPath="DisplayText"
+                    SelectionChanged="WindowList_SelectionChanged" />
+            </Grid>
+        </Border>
+
+        <!--  Row 1: 选中窗口信息 + 快速目标预设  -->
+        <Border
+            Grid.Row="1"
+            Margin="0,0,0,6"
+            Padding="6"
+            BorderBrush="#ccc"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    x:Name="SelectedInfo"
+                    Grid.Column="0"
+                    Margin="0,0,12,0"
+                    VerticalAlignment="Center"
+                    Text="未选择窗口" />
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="左上角: " />
+                    <TextBox
+                        x:Name="TbTargetX"
+                        Width="60"
+                        Margin="2,0"
+                        Text="0" />
+                    <TextBox
+                        x:Name="TbTargetY"
+                        Width="70"
+                        Margin="2,0"
+                        Text="-2160" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text=" 尺寸: " />
+                    <TextBox
+                        x:Name="TbTargetW"
+                        Width="60"
+                        Margin="2,0"
+                        Text="1920" />
+                    <TextBlock VerticalAlignment="Center" Text="x" />
+                    <TextBox
+                        x:Name="TbTargetH"
+                        Width="60"
+                        Margin="2,0"
+                        Text="2130" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  Row 2: 策略按钮  -->
+        <ScrollViewer
+            Grid.Row="2"
+            Margin="0,0,0,6"
+            VerticalScrollBarVisibility="Auto">
+            <WrapPanel>
+                <Button
+                    x:Name="BtnA1"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnA1_Click"
+                    Content="① SetWindowPos 同步" />
+                <Button
+                    x:Name="BtnA2"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnA2_Click"
+                    Content="② SetWindowPos 异步(基线)" />
+                <Button
+                    x:Name="BtnB"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnB_Click"
+                    Content="③ 先SW_RESTORE再同步" />
+                <Button
+                    x:Name="BtnC"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnC_Click"
+                    Content="④ MoveWindow API" />
+                <Button
+                    x:Name="BtnD"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnD_Click"
+                    Content="⑤ SetWindowPlacement" />
+                <Button
+                    x:Name="BtnE"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnE_Click"
+                    Content="⑥ 分步调整(先大后小)" />
+                <Button
+                    x:Name="BtnF"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnF_Click"
+                    Content="⑦ 三次重试(50ms间隔)" />
+                <Button
+                    x:Name="BtnG"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnG_Click"
+                    Content="⑧ 先最大化再调整" />
+                <Button
+                    x:Name="BtnH"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnH_Click"
+                    Content="⑨ 清除窗口选择" />
+                <Button
+                    x:Name="BtnClear"
+                    Width="160"
+                    Height="36"
+                    Margin="3"
+                    Click="BtnClear_Click"
+                    Content="清空日志" />
+
+                <!--  左区补偿探测分隔  -->
+                <TextBlock
+                    Width="Auto"
+                    Height="36"
+                    Margin="6,3"
+                    Padding="4,0"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                     Foreground="#4a4"
+                     Text="── 左区补偿探测(SetWindowPlacement) ──" />
+
+                <Button Width="70" Height="30" Margin="2" Tag="-1"  Click="BtnComp_Click" Content="-1" />
+                <Button Width="70" Height="30" Margin="2" Tag="-2"  Click="BtnComp_Click" Content="-2" />
+                <Button Width="70" Height="30" Margin="2" Tag="-3"  Click="BtnComp_Click" Content="-3" />
+                <Button Width="70" Height="30" Margin="2" Tag="-4"  Click="BtnComp_Click" Content="-4" />
+                <Button Width="70" Height="30" Margin="2" Tag="-5"  Click="BtnComp_Click" Content="-5" />
+                <Button Width="70" Height="30" Margin="2" Tag="-6"  Click="BtnComp_Click" Content="-6" />
+                <Button Width="70" Height="30" Margin="2" Tag="-7"  Click="BtnComp_Click" Content="-7" Foreground="Red" FontWeight="Bold" />
+                <Button Width="70" Height="30" Margin="2" Tag="-8"  Click="BtnComp_Click" Content="-8" />
+                <Button Width="70" Height="30" Margin="2" Tag="-9"  Click="BtnComp_Click" Content="-9" />
+                <Button Width="70" Height="30" Margin="2" Tag="-10" Click="BtnComp_Click" Content="-10" />
+                <Button Width="70" Height="30" Margin="2" Tag="-14" Click="BtnComp_Click" Content="-14" />
+                <Button Width="70" Height="30" Margin="2" Tag="-20" Click="BtnComp_Click" Content="-20" Foreground="Red" FontWeight="Bold" />
+
+                <Border
+                    Height="30"
+                    Margin="6,0,0,0"
+                    Padding="4,0"
+                    BorderBrush="#4a4"
+                    BorderThickness="1"
+                    CornerRadius="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" Text="自定义:" />
+                        <TextBox
+                            x:Name="TbCustomOffset"
+                            Width="50"
+                            Margin="2,0"
+                            Text="-7" />
+                        <Button
+                            Width="50"
+                            Height="26"
+                            Click="BtnCompCustom_Click"
+                            Content="测试" />
+                    </StackPanel>
+                </Border>
+            </WrapPanel>
+        </ScrollViewer>
+
+        <!--  Row 3: 日志输出  -->
+        <Border
+            Grid.Row="3"
+            Padding="4"
+            BorderBrush="#ccc"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    FontWeight="Bold"
+                    Text="执行日志" />
+                <TextBox
+                    x:Name="LogBox"
+                    Grid.Row="1"
+                    FontFamily="Consolas"
+                    FontSize="11"
+                    HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Auto" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
