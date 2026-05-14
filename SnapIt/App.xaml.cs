@@ -9,6 +9,7 @@ using SnapIt.Application;
 using SnapIt.Application.Contracts;
 using SnapIt.Common;
 using SnapIt.Common.Applications;
+using SnapIt.Common.Contracts;
 using SnapIt.Common.Extensions;
 using SnapIt.Services;
 using SnapIt.Services.Contracts;
@@ -30,12 +31,19 @@ public partial class App
     // Configure Serilog logger before host creation
     static App()
     {
+        var logDir = Path.Combine(AppContext.BaseDirectory, "logs");
+
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File(
-                Path.Combine(AppContext.BaseDirectory, "logs", "log.txt"),
+                Path.Combine(logDir, "log.txt"),
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Information
+            )
+            .WriteTo.File(
+                Path.Combine(logDir, "diagnostics.log"),
+                rollingInterval: RollingInterval.Day,
+                restrictedToMinimumLevel: LogEventLevel.Debug
             )
             //.WriteTo.Console()
             .CreateLogger();
@@ -89,6 +97,7 @@ public partial class App
                 _ = services.AddSingleton<IStoreLicenseService, StoreLicenseService>();
                 _ = services.AddSingleton<IWindowsService, WindowsService>();
                 _ = services.AddSingleton<IWindowEventService, WindowEventService>();
+                _ = services.AddSingleton<ILoggerService, FileLoggerService>();
             }
         )
         .Build();

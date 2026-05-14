@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.IO;
 
 namespace SnapSample;
 
@@ -52,11 +53,29 @@ public partial class MainWindow : Window
     private const int SWP_SHOWWINDOW = 0x0040;
 
     private WindowItem selectedWindow;
+    private string logFilePath;
+    private readonly object logLock = new object();
 
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += (_, _) => RefreshWindowList();
+        Loaded += (_, _) => InitializeLogFile();
+    }
+
+    private void InitializeLogFile()
+    {
+        var logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+        if (!Directory.Exists(logDir))
+        {
+            Directory.CreateDirectory(logDir);
+        }
+
+        logFilePath = Path.Combine(logDir, $"SnapSample_{DateTime.Now:yyyyMMdd_HHmmss}.log");
+        
+        File.WriteAllText(logFilePath, $"=== 日志文件创建于 {DateTime.Now:yyyy-MM-dd HH:mm:ss} ===\n");
+        AppendLog($"日志文件: {logFilePath}");
+        
+        RefreshWindowList();
     }
 
     #region P/Invoke
@@ -288,7 +307,7 @@ public partial class MainWindow : Window
 
         AppendLog(new string('=', 60));
         AppendLog($"[{label}] 开始 — 目标: ({targetX},{targetY}) {targetW}x{targetH}");
-        AppendLog($"  窗口: [{selectedWindow.Handle}] \"{selectedWindow.Title}\"");
+        AppendLog($"  窗口: [{selectedWindow.Handle}] \"{selectedWindow.Title}\" ({selectedWindow.ClassName})");
 
         try
         {
@@ -519,8 +538,24 @@ public partial class MainWindow : Window
         Dispatcher.Invoke(() =>
         {
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
-            LogBox.AppendText($"[{timestamp}] {message}\n");
+            var logMessage = $"[{timestamp}] {message}\n";
+            LogBox.AppendText(logMessage);
             LogBox.ScrollToEnd();
+
+            lock (logLock)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(logFilePath))
+                    {
+                        File.AppendAllText(logFilePath, logMessage);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogBox.AppendText($"[日志写入错误] {ex.Message}\n");
+                }
+            }
         });
     }
 }

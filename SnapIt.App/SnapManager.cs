@@ -1,5 +1,6 @@
 using SnapIt.Application.Contracts;
 using SnapIt.Common;
+using SnapIt.Common.Contracts;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 using SnapIt.Controls;
@@ -17,6 +18,7 @@ public class SnapManager : ISnapManager
     private readonly IKeyboardService keyboardService;
     private readonly IWindowsService windowsService;
     private readonly IWindowEventService windowEventService;
+    private readonly ILoggerService logger;
 
     private SnapLoadingWindow loadingWindow;
     private bool isTrialEnded = false;
@@ -40,7 +42,8 @@ public class SnapManager : ISnapManager
         IMouseService mouseService,
         IKeyboardService keyboardService,
         IWindowsService windowsService,
-        IWindowEventService windowEventService)
+        IWindowEventService windowEventService,
+        ILoggerService loggerService)
     {
         this.windowManager = windowManager;
         this.settingService = settingService;
@@ -50,6 +53,7 @@ public class SnapManager : ISnapManager
         this.keyboardService = keyboardService;
         this.windowsService = windowsService;
         this.windowEventService = windowEventService;
+        logger = loggerService;
 
         keyboardService.SnapStartStop += KeyboardService_SnapStartStop;
     }
@@ -146,64 +150,6 @@ public class SnapManager : ISnapManager
         }
     }
 
-    //public async Task StartApplications(SnapScreen snapScreen, ApplicationGroup applicationGroup)
-    //{
-    //    if (windowsService.DisableIfFullScreen())
-    //    {
-    //        return;
-    //    }
-
-    //    await applicationService.InitializeAsync();
-
-    //    var areaRectangles = windowManager.GetSnapAreaRectangles(snapScreen);
-
-    //    foreach (var area in applicationGroup.ApplicationAreas)
-    //    {
-    //        if (area.Applications != null)
-    //        {
-    //            foreach (var application in area.Applications)
-    //            {
-    //                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-    //                {
-    //                    if (loadingWindow == null)
-    //                    {
-    //                        var primaryScreen = settingService.SnapScreens.FirstOrDefault(i => i.IsPrimary);
-    //                        if (primaryScreen == null)
-    //                        {
-    //                            primaryScreen = settingService.SnapScreens.First();
-    //                        }
-
-    //                        loadingWindow = new SnapLoadingWindow(winApiService, primaryScreen);
-    //                    }
-
-    //                    loadingWindow.SetLoadingMessage(
-    //                            !string.IsNullOrWhiteSpace(application?.Title) ?
-    //                            application?.Title : application?.Path);
-    //                });
-
-    //                if (areaRectangles != null && application != null && areaRectangles.ContainsKey(application.AreaNumber))
-    //                {
-    //                    await StartApplication(application, areaRectangles[application.AreaNumber]);
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    loadingWindow.Hide();
-
-    //    applicationService.Clear();
-    //}
-
-    //private async Task StartApplication(ApplicationItem application, Rectangle rectangle)
-    //{
-    //    var openedWindow = await applicationService.StartApplication(application, rectangle);
-
-    //    if (openedWindow != null)
-    //    {
-    //        MoveWindow(openedWindow, rectangle, false);
-    //    }
-    //}
-
     public void Dispose()
     {
         windowManager.Dispose();
@@ -245,6 +191,12 @@ public class SnapManager : ISnapManager
         {
             if (rectangle != null && !rectangle.Equals(Rectangle.Empty))
             {
+                var originalRect = new Rectangle(rectangle.Left, rectangle.Top, rectangle.Right, rectangle.Bottom, rectangle.Dpi);
+
+                logger.LogInfo($"[SnapManager.MoveWindow] Window=\"{currentWindow.Title}\" Handle={currentWindow.Handle} isLeftClick={isLeftClick}");
+                logger.LogInfo($"[SnapManager.MoveWindow] InputRect=({rectangle.Left},{rectangle.Top})-({rectangle.Right},{rectangle.Bottom}) sz={rectangle.Width}x{rectangle.Height}");
+                logger.LogInfo($"[SnapManager.MoveWindow] CurrentBoundry=({currentWindow.Boundry.Left},{currentWindow.Boundry.Top})-({currentWindow.Boundry.Right},{currentWindow.Boundry.Bottom}) sz={currentWindow.Boundry.Width}x{currentWindow.Boundry.Height}");
+
                 winApiService.GetWindowMargin(currentWindow, out Rectangle withMargin);
 
                 if (!withMargin.Equals(Rectangle.Empty))
@@ -258,14 +210,23 @@ public class SnapManager : ISnapManager
                         Bottom = currentWindow.Boundry.Height - withMargin.Height
                     };
 
+                    logger.LogInfo($"[SnapManager.MoveWindow] Margin: horizontal={marginHorizontal} systemMargin=(L:{systemMargin.Left},T:{systemMargin.Top},R:{systemMargin.Right},B:{systemMargin.Bottom})");
+
                     rectangle.Left -= systemMargin.Left;
                     rectangle.Top -= systemMargin.Top;
                     rectangle.Right += systemMargin.Right;
                     rectangle.Bottom += systemMargin.Bottom;
+
+                    logger.LogInfo($"[SnapManager.MoveWindow] AfterMarginAdjustment=({rectangle.Left},{rectangle.Top})-({rectangle.Right},{rectangle.Bottom}) sz={rectangle.Width}x{rectangle.Height}");
+                }
+                else
+                {
+                    logger.LogInfo($"[SnapManager.MoveWindow] No margin adjustment needed (ExtendedFrameBounds empty)");
                 }
 
                 if (isLeftClick)
                 {
+                    logger.LogInfo($"[SnapManager.MoveWindow] Left-click mode: dispatching to background thread with 100ms delay");
                     new Thread(() =>
                     {
                         Thread.Sleep(100);
@@ -274,22 +235,33 @@ public class SnapManager : ISnapManager
 
                         if (!rectangle.Dpi.Equals(currentWindow?.Dpi))
                         {
+                            logger.LogInfo($"[SnapManager.MoveWindow] DPI mismatch detected: rectDpi={rectangle.Dpi} windowDpi={currentWindow?.Dpi}, retrying");
                             winApiService.MoveWindow(currentWindow, rectangle);
                         }
                     }).Start();
                 }
                 else
                 {
+                    logger.LogInfo($"[SnapManager.MoveWindow] Keyboard mode: dispatching immediately");
                     winApiService.MoveWindow(currentWindow, rectangle);
 
                     if (!rectangle.Dpi.Equals(currentWindow?.Dpi))
                     {
+                        logger.LogInfo($"[SnapManager.MoveWindow] DPI mismatch detected: rectDpi={rectangle.Dpi} windowDpi={currentWindow?.Dpi}, retrying");
                         winApiService.MoveWindow(currentWindow, rectangle);
                     }
                 }
 
                 Telemetry.TrackEvent("MoveActiveWindow - Mouse");
             }
+            else
+            {
+                logger.LogWarn($"[SnapManager.MoveWindow] Rectangle is null or empty for window \"{currentWindow.Title}\"");
+            }
+        }
+        else
+        {
+            logger.LogWarn($"[SnapManager.MoveWindow] currentWindow is ActiveWindow.Empty");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using SnapIt.Common;
+using SnapIt.Common.Contracts;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 using SnapIt.Common.InteropServices;
@@ -35,12 +36,14 @@ public class WinApiService : IWinApiService
     public const int OBJID_WINDOW = 0x00000000;
 
     private readonly ISettingService settingService;
+    private readonly ILoggerService? logger;
 
     public bool IsInitialized { get; private set; }
 
-    public WinApiService(ISettingService settingService)
+    public WinApiService(ISettingService settingService, ILoggerService? loggerService = null)
     {
         this.settingService = settingService;
+        logger = loggerService;
     }
 
     public async Task InitializeAsync()
@@ -111,12 +114,20 @@ public class WinApiService : IWinApiService
     {
         if (activeWindow == null) return;
 
-        Dev.Log($"{activeWindow.Handle}, {X},{Y}  {width}x{height}");
+        var handle = activeWindow.Handle;
+        var title = activeWindow.Title ?? "(unknown)";
 
-        PInvoke.User32.ShowWindow(activeWindow.Handle, PInvoke.User32.WindowShowStyle.SW_SHOWNORMAL);
+        PInvoke.User32.GetWindowRect(handle, out PInvoke.RECT beforeRect);
+        var beforeDesc = $"left={beforeRect.left},top={beforeRect.top},right={beforeRect.right},bottom={beforeRect.bottom} sz={beforeRect.right - beforeRect.left}x{beforeRect.bottom - beforeRect.top}";
+
+        LogDebug($"[MoveWindow] Window=\"{title}\" Handle={handle}");
+        LogDebug($"[MoveWindow] BEFORE: {beforeDesc}");
+        LogDebug($"[MoveWindow] TARGET: X={X},Y={Y} W={width}xH={height}");
+
+        PInvoke.User32.ShowWindow(handle, PInvoke.User32.WindowShowStyle.SW_SHOWNORMAL);
 
         var res = PInvoke.User32.SetWindowPos(
-            activeWindow.Handle,
+            handle,
             PInvoke.User32.SpecialWindowHandles.HWND_TOP,
             X,
             Y,
@@ -124,11 +135,25 @@ public class WinApiService : IWinApiService
             height,
             PInvoke.User32.SetWindowPosFlags.SWP_SHOWWINDOW | PInvoke.User32.SetWindowPosFlags.SWP_ASYNCWINDOWPOS);
 
-        var msg = Marshal.GetLastWin32Error();
-        if (msg != 0)
+        var win32Error = Marshal.GetLastWin32Error();
+
+        PInvoke.User32.GetWindowRect(handle, out PInvoke.RECT afterRect);
+        var afterDesc = $"left={afterRect.left},top={afterRect.top},right={afterRect.right},bottom={afterRect.bottom} sz={afterRect.right - afterRect.left}x{beforeRect.bottom - beforeRect.top}";
+
+        LogDebug($"[MoveWindow] SetWindowPos result={res} win32Error={win32Error}");
+        LogDebug($"[MoveWindow] AFTER (immediate): {afterDesc}");
+
+        if (beforeRect.left != afterRect.left || beforeRect.top != afterRect.top ||
+            beforeRect.right != afterRect.right || beforeRect.bottom != afterRect.bottom)
         {
-            Dev.Log(msg);
+            LogDebug($"[MoveWindow] VERIFY-IMMEDIATE: Match");
         }
+        else
+        {
+            LogWarn($"[MoveWindow] VERIFY-IMMEDIATE: Position unchanged! BEFORE={beforeDesc} AFTER={afterDesc}");
+        }
+
+        _ = VerifyPositionAsync(handle, X, Y, width, height);
     }
 
     public void SendMessage(ActiveWindow activeWindow)
@@ -147,7 +172,12 @@ public class WinApiService : IWinApiService
                             out t,
                             Marshal.SizeOf(typeof(PInvoke.RECT)));
 
-            Dev.Log(t.ToString());
+            var boundry = activeWindow.Boundry;
+            var marginH = (boundry.Width - (t.right - t.left)) / 2;
+            LogDebug($"[GetWindowMargin] Title=\"{activeWindow.Title}\" Handle={activeWindow.Handle}");
+            LogDebug($"[GetWindowMargin] WindowBoundry=({boundry.Left},{boundry.Top})-({boundry.Right},{boundry.Bottom}) sz={boundry.Width}x{boundry.Height}");
+            LogDebug($"[GetWindowMargin] ExtendedFrameBounds=left={t.left},top={t.top},right={t.right},bottom={t.bottom} sz={t.right - t.left}x{t.bottom - t.top}");
+            LogDebug($"[GetWindowMargin] Calculated marginHorizontal={marginH}");
 
             withMargin = new Rectangle(t.left, t.top, t.right, t.bottom);
         }
@@ -223,5 +253,58 @@ public class WinApiService : IWinApiService
     {
         IsInitialized = false;
     }
-}
 
+    private async Task VerifyPositionAsync(nint handle, int expectedX, int expectedY, int expectedWidth, int expectedHeight)
+    {
+        var delays = new[] { 200, 500, 1000 };
+
+        foreach (var delay in delays)
+        {
+            await Task.Delay(delay);
+
+            if (!PInvoke.User32.IsWindow(handle))
+            {
+                LogWarn($"[VerifyPosition] Window handle {handle} is no longer valid at +{delay}ms");
+                return;
+            }
+
+            PInvoke.User32.GetWindowRect(handle, out PInvoke.RECT currentRect);
+            var actualLeft = currentRect.left;
+            var actualTop = currentRect.top;
+            var actualRight = currentRect.right;
+            var actualBottom = currentRect.bottom;
+            var actualWidth = actualRight - actualLeft;
+            var actualHeight = actualBottom - actualTop;
+
+            var match = actualLeft == expectedX && actualTop == expectedY &&
+                        actualWidth == expectedWidth && actualHeight == expectedHeight;
+
+            if (match)
+            {
+                LogDebug($"[VerifyPosition] +{delay}ms: Match expected=({expectedX},{expectedY}) sz={expectedWidth}x{expectedHeight}");
+            }
+            else
+            {
+                LogWarn($"[VerifyPosition] +{delay}ms: Mismatch! actual=({actualLeft},{actualTop})-({actualRight},{actualBottom}) sz={actualWidth}x{actualHeight} expected=({expectedX},{expectedY}) sz={expectedWidth}x{expectedHeight}");
+            }
+        }
+    }
+
+    private void LogDebug(string message, [System.Runtime.CompilerServices.CallerMemberName] string caller = "")
+    {
+        Dev.Log(message, false);
+        logger?.LogDebug(message, caller);
+    }
+
+    private void LogWarn(string message, [System.Runtime.CompilerServices.CallerMemberName] string caller = "")
+    {
+        Dev.Log(message, false);
+        logger?.LogWarn(message, caller);
+    }
+
+    private void LogError(string message, [System.Runtime.CompilerServices.CallerMemberName] string caller = "")
+    {
+        Dev.Log(message, false);
+        logger?.LogError(message, caller);
+    }
+}
