@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Graphics;
+using SnapIt.Common.Graphics;
 
 namespace SnapIt.Common.Entities;
 
@@ -6,6 +6,7 @@ public class ActiveWindow
 {
     public nint Handle { get; set; }
     public string Title { get; set; }
+    public string ClassName { get; set; }
     public Rectangle Boundry { get; set; }
     public Dpi Dpi { get; set; }
 

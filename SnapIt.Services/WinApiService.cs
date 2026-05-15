@@ -119,11 +119,12 @@ public class WinApiService : IWinApiService
 
         var handle = activeWindow.Handle;
         var title = activeWindow.Title ?? "(unknown)";
+        var className = activeWindow.ClassName ?? "(unknown)";
 
         PInvoke.User32.GetWindowRect(handle, out PInvoke.RECT beforeRect);
         var beforeDesc = $"left={beforeRect.left},top={beforeRect.top},right={beforeRect.right},bottom={beforeRect.bottom} sz={beforeRect.right - beforeRect.left}x{beforeRect.bottom - beforeRect.top}";
 
-        LogDebug($"[MoveWindow] Window=\"{title}\" Handle={handle}");
+        LogDebug($"[MoveWindow] Window=\"{title}\" Class=\"{className}\" Handle={handle}");
         LogDebug($"[MoveWindow] BEFORE: {beforeDesc}");
         LogDebug($"[MoveWindow] TARGET: X={X},Y={Y} W={width}xH={height}");
 
@@ -200,6 +201,7 @@ public class WinApiService : IWinApiService
             Handle = PInvoke.User32.GetForegroundWindow()
         };
 
+        // 获取窗口标题
         var chars = 256;
         var buff = new char[chars + 1];
         var length = PInvoke.User32.GetWindowText(activeWindow.Handle, buff, chars);
@@ -208,6 +210,15 @@ public class WinApiService : IWinApiService
             activeWindow.Title = new string(buff, 0, length);
         }
 
+        // 获取窗口类名
+        var classBuff = new char[256];
+        var classLength = PInvoke.User32.GetClassName(activeWindow.Handle, classBuff, 256);
+        if (classLength > 0)
+        {
+            activeWindow.ClassName = new string(classBuff, 0, classLength);
+        }
+
+        // 获取窗口矩形
         if (PInvoke.User32.GetWindowRect(activeWindow.Handle, out PInvoke.RECT rct))
         {
             activeWindow.Boundry = new Rectangle(rct.left, rct.top, rct.right, rct.bottom);

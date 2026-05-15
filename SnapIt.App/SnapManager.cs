@@ -193,7 +193,7 @@ public class SnapManager : ISnapManager
             {
                 var originalRect = new Rectangle(rectangle.Left, rectangle.Top, rectangle.Right, rectangle.Bottom, rectangle.Dpi);
 
-                logger.LogInfo($"[SnapManager.MoveWindow] Window=\"{currentWindow.Title}\" Handle={currentWindow.Handle} isLeftClick={isLeftClick}");
+                logger.LogInfo($"[SnapManager.MoveWindow] Window=\"{currentWindow.Title}\" Class=\"{currentWindow.ClassName}\" Handle={currentWindow.Handle} isLeftClick={isLeftClick}");
                 logger.LogInfo($"[SnapManager.MoveWindow] InputRect=({rectangle.Left},{rectangle.Top})-({rectangle.Right},{rectangle.Bottom}) sz={rectangle.Width}x{rectangle.Height}");
                 logger.LogInfo($"[SnapManager.MoveWindow] CurrentBoundry=({currentWindow.Boundry.Left},{currentWindow.Boundry.Top})-({currentWindow.Boundry.Right},{currentWindow.Boundry.Bottom}) sz={currentWindow.Boundry.Width}x{currentWindow.Boundry.Height}");
 

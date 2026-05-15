@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿﻿using System.Windows.Forms;
 using SharpHook;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Events;
