@@ -66,6 +66,18 @@ public class SnapWindow : Window, IWindow
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
+
+        var wih = new WindowInteropHelper(this);
+        var activeWindow = new ActiveWindow
+        {
+            Handle = wih.Handle
+        };
+
+        winApiService.MoveWindow(activeWindow,
+            (int)Screen.WorkingArea.Left,
+            (int)Screen.WorkingArea.Top,
+            (int)Screen.WorkingArea.Width,
+            (int)Screen.WorkingArea.Height);
     }
 
     public void ApplyLayout()

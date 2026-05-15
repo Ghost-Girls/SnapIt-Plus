@@ -68,8 +68,13 @@ public class DesignWindowViewModel : ViewModelBase
         winApiService.MoveWindow(activeWindow,
             (int)SnapScreen.WorkingArea.Left,
             (int)SnapScreen.WorkingArea.Top,
-            (int)(SnapScreen.WorkingArea.Width / SnapScreen.ScaleFactor),
-            (int)(SnapScreen.WorkingArea.Height / SnapScreen.ScaleFactor));
+            (int)SnapScreen.WorkingArea.Width,
+            (int)SnapScreen.WorkingArea.Height);
+
+        Window.Width = SnapScreen.DesignSize.Width;
+        Window.Height = SnapScreen.DesignSize.Height;
+        Window.Left = SnapScreen.DesignSize.Left;
+        Window.Top = SnapScreen.DesignSize.Top;
     }
 
     public override async Task InitializeAsync(RoutedEventArgs args)
