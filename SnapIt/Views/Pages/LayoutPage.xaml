@@ -310,7 +310,7 @@
                                             <Border
                                                 Width="198"
                                                 Height="154"
-                                                Background="White"
+                                                Background="Silver"
                                                 CornerRadius="8" />
                                         </VisualBrush.Visual>
                                     </VisualBrush>
@@ -388,10 +388,7 @@
                 </ListBox.ItemTemplate>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <ui:VirtualizingWrapPanel
-                            Orientation="Vertical"
-                            SpacingMode="Uniform"
-                            StretchItems="False" />
+                        <WrapPanel Orientation="Vertical" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
