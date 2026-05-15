@@ -31,6 +31,7 @@ public partial class App
     // Configure Serilog logger before host creation
     static App()
     {
+#if DEBUG
         var logDir = Path.Combine(AppContext.BaseDirectory, "logs");
 
         Log.Logger = new LoggerConfiguration()
@@ -45,8 +46,10 @@ public partial class App
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Debug
             )
-            //.WriteTo.Console()
             .CreateLogger();
+#else
+        Log.Logger = Serilog.Core.Logger.None;
+#endif
     }
 
     private static readonly IHost _host = Host.CreateDefaultBuilder()
