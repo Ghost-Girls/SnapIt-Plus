@@ -126,22 +126,25 @@ public class WinApiService : IWinApiService
 
         PInvoke.User32.ShowWindow(handle, PInvoke.User32.WindowShowStyle.SW_SHOWNORMAL);
 
-        var res = PInvoke.User32.SetWindowPos(
+        PInvoke.User32.SetWindowPos(
             handle,
             PInvoke.User32.SpecialWindowHandles.HWND_TOP,
-            X,
-            Y,
-            width,
-            height,
-            PInvoke.User32.SetWindowPosFlags.SWP_SHOWWINDOW | PInvoke.User32.SetWindowPosFlags.SWP_ASYNCWINDOWPOS);
+            X, Y, 0, 0,
+            PInvoke.User32.SetWindowPosFlags.SWP_NOSIZE |
+            PInvoke.User32.SetWindowPosFlags.SWP_SHOWWINDOW |
+            PInvoke.User32.SetWindowPosFlags.SWP_NOACTIVATE);
 
-        var win32Error = Marshal.GetLastWin32Error();
+        PInvoke.User32.SetWindowPos(
+            handle,
+            PInvoke.User32.SpecialWindowHandles.HWND_TOP,
+            0, 0, width, height,
+            PInvoke.User32.SetWindowPosFlags.SWP_NOMOVE |
+            PInvoke.User32.SetWindowPosFlags.SWP_SHOWWINDOW |
+            PInvoke.User32.SetWindowPosFlags.SWP_NOACTIVATE);
 
         PInvoke.User32.GetWindowRect(handle, out PInvoke.RECT afterRect);
-        var afterDesc = $"left={afterRect.left},top={afterRect.top},right={afterRect.right},bottom={afterRect.bottom} sz={afterRect.right - afterRect.left}x{beforeRect.bottom - beforeRect.top}";
-
-        LogDebug($"[MoveWindow] SetWindowPos result={res} win32Error={win32Error}");
-        LogDebug($"[MoveWindow] AFTER (immediate): {afterDesc}");
+        var afterDesc = $"left={afterRect.left},top={afterRect.top},right={afterRect.right},bottom={afterRect.bottom} sz={afterRect.right - afterRect.left}x{afterRect.bottom - afterRect.top}";
+        LogDebug($"[MoveWindow] AFTER: {afterDesc}");
 
         if (beforeRect.left != afterRect.left || beforeRect.top != afterRect.top ||
             beforeRect.right != afterRect.right || beforeRect.bottom != afterRect.bottom)
