@@ -42,8 +42,7 @@ public partial class App
                 restrictedToMinimumLevel: LogEventLevel.Information
             )
             .WriteTo.File(
-                Path.Combine(logDir, "diagnostics.log"),
-                rollingInterval: RollingInterval.Day,
+                Path.Combine(logDir, $"diagnostics_{DateTime.Now:yyyyMMdd_HHmmss}.log"),
                 restrictedToMinimumLevel: LogEventLevel.Debug
             )
             .CreateLogger();
