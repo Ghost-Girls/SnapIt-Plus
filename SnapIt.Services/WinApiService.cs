@@ -96,6 +96,9 @@ public class WinApiService : IWinApiService
 
     public bool IsFullscreen(ActiveWindow activeWindow)
     {
+        if (activeWindow == null || activeWindow.Boundry == null)
+            return false;
+
         PInvoke.User32.GetWindowRect(PInvoke.User32.GetDesktopWindow(), out PInvoke.RECT desktopWindow);
         var isFullScreen = activeWindow.Boundry.Left == desktopWindow.left &&
                 activeWindow.Boundry.Top == desktopWindow.top &&
