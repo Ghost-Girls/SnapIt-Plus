@@ -1,4 +1,4 @@
-﻿using SnapIt.ViewModels.Pages;
+using SnapIt.ViewModels.Pages;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
 
@@ -24,5 +24,10 @@ public partial class LayoutPage : INavigableView<LayoutPageViewModel>
         var menu = (sender as Button).ContextMenu;
         //menu.DataContext = DataContext;
         menu.IsOpen = true;
+    }
+
+    private void LayoutListBox_RequestBringIntoView(object sender, System.Windows.RequestBringIntoViewEventArgs e)
+    {
+        e.Handled = true;
     }
 }
