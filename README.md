@@ -1,4 +1,4 @@
-# SnapIt-Plus
+# SnapIt
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
@@ -10,7 +10,7 @@
 
 ***
 
-**SnapIt-Plus** 是一款适用于 Windows 10/11 的强大窗口管理器，通过将应用程序窗口拖放到可自定义的吸附区域中，显著提升单屏和多屏环境下的工作效率。本项目源自 [SnapIt](https://github.com/enginkirmaci/SnapIt)（作者 Engin KIRMACI），SnapIt-Plus 在此基础上持续演进，不断增加新功能和改进。
+**SnapIt **是一款适用于 Windows 10/11 的强大窗口管理器，通过将应用程序窗口拖放到可自定义的吸附区域中，显著提升单屏和多屏环境下的工作效率。本项目源自 [SnapIt](https://github.com/enginkirmaci/SnapIt)（作者 Engin KIRMACI），SnapIt-Plus 在此基础上持续演进，不断增加新功能和改进。
 
 设计理念：快速、直观、高度可定制——完美适配宽屏、超宽屏和多显示器场景。
 

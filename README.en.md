@@ -1,4 +1,4 @@
-# SnapIt-Plus
+# SnapIt
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
@@ -10,7 +10,7 @@
 
 ***
 
-**SnapIt-Plus** is a powerful window manager for Windows 10/11 that significantly boosts productivity in single-screen and multi-screen environments by organizing application windows into customizable snap zones. This project originates from [SnapIt](https://github.com/enginkirmaci/SnapIt) by Engin KIRMACI, with SnapIt-Plus evolving continuously to add new features and improvements.
+**SnapIt **is a powerful window manager for Windows 10/11 that significantly boosts productivity in single-screen and multi-screen environments by organizing application windows into customizable snap zones. This project originates from [SnapIt](https://github.com/enginkirmaci/SnapIt) by Engin KIRMACI, with SnapIt-Plus evolving continuously to add new features and improvements.
 
 Design philosophy: Fast, intuitive, and highly customizable — perfect for widescreen, ultrawide, and multi-monitor setups.
 
@@ -41,7 +41,7 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 
 ## Features
 
-### Screen Partitioning &amp; Layout System
+### Screen Partitioning & Layout System
 
 - Divide your screen into customizable snap zones using **vertical/horizontal dividers**
 - Each screen can have **independent layouts**
@@ -90,7 +90,7 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - Apply separately to mouse and keyboard snapping
 - Default exclusions: Action Center, Start Menu, New Notifications
 
-### Multi-Monitor &amp; DPI Support (Branch Enhancements)
+### Multi-Monitor & DPI Support (Branch Enhancements)
 
 - Full multi-monitor environment support
 - Independent DPI awareness per screen
@@ -163,49 +163,49 @@ Open the **SnapIt** application window to access all settings:
 
 ### Layouts
 
-| Option | Description |
-| ------ | ----------- |
+| Option        | Description                                        |
+| ------------- | -------------------------------------------------- |
 | Select Layout | Choose predefined or custom layout for each screen |
-| Edit Layout | Open visual designer to create/modify layouts |
-| Import Layout | Load layout from JSON file |
-| Export Layout | Save layout as JSON file |
+| Edit Layout   | Open visual designer to create/modify layouts      |
+| Import Layout | Load layout from JSON file                         |
+| Export Layout | Save layout as JSON file                           |
 
 ### Snapping Settings
 
-| Option | Default | Description |
-| ------ | ------- | ----------- |
-| Mouse Snap | On | Enable mouse drag snapping |
-| Snap Mouse Button | Middle | Left / Middle / Right button to trigger snap |
-| Drag Delay | 0ms | Delay before snap activates (0-1000ms) |
-| Override Win+Arrows | Off | Override Windows default snap hotkeys |
-| Keyboard Snap Hotkey | Ctrl+Alt+Arrow Keys | Hotkey to move window between zones |
+| Option               | Default             | Description                                  |
+| -------------------- | ------------------- | -------------------------------------------- |
+| Mouse Snap           | On                  | Enable mouse drag snapping                   |
+| Snap Mouse Button    | Middle              | Left / Middle / Right button to trigger snap |
+| Drag Delay           | 0ms                 | Delay before snap activates (0-1000ms)       |
+| Override Win+Arrows  | Off                 | Override Windows default snap hotkeys        |
+| Keyboard Snap Hotkey | Ctrl+Alt+Arrow Keys | Hotkey to move window between zones          |
 
 ### Appearance
 
-| Option | Default | Description |
-| ------ | ------- | ----------- |
-| Theme | Dark | Dark / Light / System |
-| Highlight Color | Custom | Zone highlight color on hover |
-| Overlay Color | Custom | Zone overlay color |
-| Border Color | Custom | Zone border color |
-| Border Thickness | Custom | Zone border thickness |
-| Opacity | Custom | Zone overlay opacity |
+| Option           | Default | Description                   |
+| ---------------- | ------- | ----------------------------- |
+| Theme            | Dark    | Dark / Light / System         |
+| Highlight Color  | Custom  | Zone highlight color on hover |
+| Overlay Color    | Custom  | Zone overlay color            |
+| Border Color     | Custom  | Zone border color             |
+| Border Thickness | Custom  | Zone border thickness         |
+| Opacity          | Custom  | Zone overlay opacity          |
 
 ### App Groups
 
-| Option | Description |
-| ------ | ----------- |
-| Add Group | Create a new app group for a screen |
-| Add App | Add app to group and assign target zone |
-| Launch Delay | Configure delay between launching each app |
-| One-Click Launch | Launch all apps in group and auto-place |
+| Option           | Description                                |
+| ---------------- | ------------------------------------------ |
+| Add Group        | Create a new app group for a screen        |
+| Add App          | Add app to group and assign target zone    |
+| Launch Delay     | Configure delay between launching each app |
+| One-Click Launch | Launch all apps in group and auto-place    |
 
 ### Exclusion Rules
 
-| Option | Default | Description |
-| ------ | ------- | ----------- |
-| Mouse Exclusions | Off | Contains / Exact / Wildcard matching |
-| Keyboard Exclusions | Off | Contains / Exact / Wildcard matching |
+| Option              | Default | Description                          |
+| ------------------- | ------- | ------------------------------------ |
+| Mouse Exclusions    | Off     | Contains / Exact / Wildcard matching |
+| Keyboard Exclusions | Off     | Contains / Exact / Wildcard matching |
 
 ***
 
@@ -244,36 +244,36 @@ SnapIt-Plus
 
 ### Key Components
 
-| Component | File | Responsibility |
-| --------- | ---- | -------------- |
-| **SnapManager** | [SnapManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/SnapManager.cs) | Central coordinator: manages snap sessions, zone detection, and window placement |
-| **SnapEngine** | [SnapEngine.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Controls/SnapEngine.cs) | Snap alignment calculation (8px threshold) |
-| **ScreenManager** | [ScreenManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/ScreenManager.cs) | Multi-monitor enumeration, DPI handling, hot-plug events |
-| **WindowManager** | [WindowManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/WindowManager.cs) | Window positioning, resizing, and state management (P/Invoke) |
-| **KeyboardService** | [KeyboardService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Hooks/KeyboardService.cs) | Global keyboard hook and hotkey dispatch |
-| **MouseService** | [MouseService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Hooks/MouseService.cs) | Global mouse hook, detects drag snapping |
-| **SettingsService** | [SettingsService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Services/SettingsService.cs) | EF Core SQLite persistence for settings and layouts |
+| Component           | File                                                                                                                    | Responsibility                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **SnapManager**     | [SnapManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/SnapManager.cs)                       | Central coordinator: manages snap sessions, zone detection, and window placement |
+| **SnapEngine**      | [SnapEngine.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Controls/SnapEngine.cs)                    | Snap alignment calculation (8px threshold)                                       |
+| **ScreenManager**   | [ScreenManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/ScreenManager.cs)                   | Multi-monitor enumeration, DPI handling, hot-plug events                         |
+| **WindowManager**   | [WindowManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/WindowManager.cs)                   | Window positioning, resizing, and state management (P/Invoke)                    |
+| **KeyboardService** | [KeyboardService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Hooks/KeyboardService.cs)    | Global keyboard hook and hotkey dispatch                                         |
+| **MouseService**    | [MouseService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Hooks/MouseService.cs)          | Global mouse hook, detects drag snapping                                         |
+| **SettingsService** | [SettingsService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Services/SettingsService.cs) | EF Core SQLite persistence for settings and layouts                              |
 
 ***
 
 ## Tech Stack
 
-| Technology | Purpose |
-| ---------- | ------- |
-| **.NET 9.0** | Target framework (`net9.0-windows10.0.17763.0`) |
-| **WPF** | Desktop UI framework |
-| **WPF-UI 4.0.3** | Modern UI control library (Navigation, Snackbar, Dialog, Themes) |
-| **MVVM** | Architecture pattern (custom ViewModelBase + DelegateCommand) |
-| **Microsoft.Extensions.Hosting/DI** | Dependency injection &amp; hosted services |
-| **Serilog** | Structured file logging |
-| **Entity Framework Core + SQLite** | Persistent storage for settings and layouts |
-| **SharpHook 7.0** | Global mouse/keyboard hooks |
-| **GlobalHotKeyCore** | Global hotkey registration |
-| **WpfScreenHelper** | Multi-screen DPI awareness |
-| **WindowsDisplayAPI** | Display/monitor API |
-| **PInvoke.SHCore** | Windows P/Invoke interop |
-| **XamlAnimatedGif** | GIF animation support |
-| **Inno Setup** | Standalone installer creation |
+| Technology                          | Purpose                                                          |
+| ----------------------------------- | ---------------------------------------------------------------- |
+| **.NET 9.0**                        | Target framework (`net9.0-windows10.0.17763.0`)                  |
+| **WPF**                             | Desktop UI framework                                             |
+| **WPF-UI 4.0.3**                    | Modern UI control library (Navigation, Snackbar, Dialog, Themes) |
+| **MVVM**                            | Architecture pattern (custom ViewModelBase + DelegateCommand)    |
+| **Microsoft.Extensions.Hosting/DI** | Dependency injection & hosted services                           |
+| **Serilog**                         | Structured file logging                                          |
+| **Entity Framework Core + SQLite**  | Persistent storage for settings and layouts                      |
+| **SharpHook 7.0**                   | Global mouse/keyboard hooks                                      |
+| **GlobalHotKeyCore**                | Global hotkey registration                                       |
+| **WpfScreenHelper**                 | Multi-screen DPI awareness                                       |
+| **WindowsDisplayAPI**               | Display/monitor API                                              |
+| **PInvoke.SHCore**                  | Windows P/Invoke interop                                         |
+| **XamlAnimatedGif**                 | GIF animation support                                            |
+| **Inno Setup**                      | Standalone installer creation                                    |
 
 ***
 
@@ -289,11 +289,11 @@ SnapIt-Plus
 
 ### Build Configurations
 
-| Configuration | Description |
-| ------------- | ----------- |
-| `Debug` | Debug build, for development |
-| `Release` | Release build |
-| `Standalone` | Standalone build (non-Microsoft Store version) |
+| Configuration | Description                                    |
+| ------------- | ---------------------------------------------- |
+| `Debug`       | Debug build, for development                   |
+| `Release`     | Release build                                  |
+| `Standalone`  | Standalone build (non-Microsoft Store version) |
 
 ### Debugging
 

@@ -90,10 +90,10 @@
                                 Icon="{ui:SymbolIcon Link24}"
                                 NavigateUri="{Binding Source={x:Static c:Constants.AppFeedbackUrl}, Converter={StaticResource UriConverter}}" />
 
-                            <ui:HyperlinkButton
+                            <!--<ui:HyperlinkButton
                                 Command="{Binding RateReviewStoreClick}"
                                 Content="Rate and review on Microsoft Store"
-                                Icon="{ui:SymbolIcon Link24}" />
+                                Icon="{ui:SymbolIcon Link24}" />-->
                         </StackPanel>
                     </ui:CardExpander>
 
