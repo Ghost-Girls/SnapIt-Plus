@@ -261,6 +261,14 @@ public class SettingService : ISettingService
                     var physW = currentSetting.Resolution.Width;
                     var physH = currentSetting.Resolution.Height;
                     snapScreen.Resolution = $"{physW} X {physH}";
+
+                    var scaleX = physW / (float)screen.Bounds.Width;
+                    var scaleY = physH / (float)screen.Bounds.Height;
+                    snapScreen.PhysicalBounds = new SnapIt.Common.Graphics.Rectangle(
+                        (float)(screen.Bounds.X * scaleX),
+                        (float)(screen.Bounds.Y * scaleY),
+                        (float)((screen.Bounds.X + screen.Bounds.Width) * scaleX),
+                        (float)((screen.Bounds.Y + screen.Bounds.Height) * scaleY));
                 }
             }
 

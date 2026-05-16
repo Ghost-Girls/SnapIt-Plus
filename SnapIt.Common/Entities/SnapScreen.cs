@@ -19,6 +19,7 @@ public class SnapScreen : Bindable
     public Rectangle DesignSize { get; set; }
     public double ScaleFactor { get; set; }
     public Rectangle Bounds { get; set; }
+    public Rectangle PhysicalBounds { get; set; }
 
     public bool IsActive
     { get => isActive; set { SetProperty(ref isActive, value); } }
@@ -56,6 +57,7 @@ public class SnapScreen : Bindable
         ScaleFactor = screen.ScaleFactor;
 
         Bounds = screen.WpfBounds.Convert();
+        PhysicalBounds = screen.Bounds.Convert();
         if (!string.IsNullOrEmpty(devicePath))
         {
             DeviceName = devicePath;

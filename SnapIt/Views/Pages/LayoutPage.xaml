@@ -140,10 +140,13 @@
                     BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="4">
-                    <controls:SnapScreenViewer
-                        Height="400"
-                        ItemsSource="{Binding SnapScreens, Mode=TwoWay}"
-                        SelectedItem="{Binding SelectedSnapScreen, Mode=TwoWay}">
+                    <ScrollViewer
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <controls:SnapScreenViewer
+                            Height="400"
+                            ItemsSource="{Binding SnapScreens, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedSnapScreen, Mode=TwoWay}">
                         <controls:SnapScreenViewer.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="Foreground">
@@ -254,6 +257,7 @@
                             </Style>
                         </controls:SnapScreenViewer.ItemContainerStyle>
                     </controls:SnapScreenViewer>
+                    </ScrollViewer>
                 </Border>
 
                 <ui:CardControl Margin="0,0,0,8" Icon="{ui:SymbolIcon DataTreemap24}">
