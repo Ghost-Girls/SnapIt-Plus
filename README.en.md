@@ -6,15 +6,15 @@
 [![WPF](https://img.shields.io/badge/UI-WPF-5C2D91.svg)](https://github.com/dotnet/wpf)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 
-**Read in other languages: [English](README.en.md), [中文](README.md)**
+**Read in other languages:** **[English](README.en.md),** **[中文](README.md)**
 
----
+***
 
 **SnapIt-Plus** is a powerful window manager for Windows 10/11 that significantly boosts productivity in single-screen and multi-screen environments by organizing application windows into customizable snap zones. This project originates from [SnapIt](https://github.com/enginkirmaci/SnapIt) by Engin KIRMACI, with SnapIt-Plus evolving continuously to add new features and improvements.
 
 Design philosophy: Fast, intuitive, and highly customizable — perfect for widescreen, ultrawide, and multi-monitor setups.
 
----
+***
 
 ## Screenshots
 
@@ -37,28 +37,34 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
   </tr>
 </table>
 
----
+***
 
 ## Features
 
 ### Screen Partitioning &amp; Layout System
+
 - Divide your screen into customizable snap zones using **vertical/horizontal dividers**
 - Each screen can have **independent layouts**
 - **11 built-in layouts** covering common use cases (portrait/landscape)
 - **Visual layout designer**: Drag-and-drop to create and edit custom layouts
 - Snap alignment based on **SnapEngine** (8px snap threshold)
 - Import/export layouts as JSON files
+- Branch features: Create new overlays based on divided zones
+- Branch features: Multi-equal distribution layouts, hover over icons to change the number of equal divisions
+- Branch features: Edge snap and center alignment, double-click to delete dividers
 
 ### Window Snapping Methods
 
 **Mouse Drag Snapping**
+
 - Simply drag a window to a snap zone for automatic placement
 - Configurable mouse button (left/middle/right)
-- Adjustable drag delay
+- Adjustable drag tolerance
 - Support for "hold titlebar to drag" mode
 - Support for modifier keys to toggle enable/disable
 
 **Keyboard Snapping**
+
 - Move windows between zones using keyboard shortcuts
 - Default shortcut: `Ctrl+Alt+Arrow Keys`
 - Override Windows default snap hotkeys (`Win+Arrow Keys`)
@@ -66,28 +72,33 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - Start/stop shortcut (`Ctrl+Alt+S`)
 
 ### App Launcher (App Groups)
+
 - Configure **app groups** for each screen
 - Launch multiple apps at once and automatically place them into designated zones
 - Support for startup delay settings
 
 ### Theme System
+
 - Customize snap zone **highlight color, overlay color, border color, border thickness, and opacity**
 - Three theme modes: **Dark/Light/System**
 - Real-time theme preview
 
 ### Window Exclusion Rules
+
 - Exclude specific apps from snapping by window title matching
 - Three matching rules: **Contains / Exact / Wildcard**
 - Apply separately to mouse and keyboard snapping
 - Default exclusions: Action Center, Start Menu, New Notifications
 
-### Multi-Monitor &amp; DPI Support
+### Multi-Monitor &amp; DPI Support (Branch Enhancements)
+
 - Full multi-monitor environment support
 - Independent DPI awareness per screen
 - Hot-plug detection for screens
 - Support for screens with different taskbar positions
 
 ### Application Management
+
 - System tray icon for quick access
 - Auto-start on boot
 - New version check
@@ -96,11 +107,12 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - Automatic handling of window rounded corners
 
 ### Settings Storage
+
 - Uses **SQLite** database (`SnapItSettings.db`), stored in `%LocalApplicationData%\SnapIt\`
 - **Automatic migration** from legacy JSON files on first run
 - Benefits: ACID transaction guarantees, improved read/write performance, single-file backup
 
----
+***
 
 ## Requirements
 
@@ -108,20 +120,23 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - **Runtime**: .NET 9.0 Desktop Runtime (required for standalone version)
 - **Architecture**: x86 / x64
 
----
+***
 
 ## Installation
 
 ### Microsoft Store Version (MSIX Packaging)
+
 1. Open the SnapIt.Packaging project in Visual Studio
 2. Build the WAP project to generate `.msix`
 3. Install using the generated package
 
 ### Standalone Installer (Inno Setup)
+
 1. Download the latest `setup_SnapIt_x.x.x.x.exe` from the [Releases](https://github.com/Ghost-Girls/SnapIt-Plus/releases) page
 2. Run the installer and follow the wizard
 
 ### Build from Source
+
 ```bash
 git clone https://github.com/Ghost-Girls/SnapIt-Plus.git
 cd SnapIt-Plus
@@ -140,23 +155,25 @@ dotnet publish SnapIt/SnapIt.csproj -c Standalone -a x86 -o ./SnapIt.Setup/build
 iscc.exe SnapIt.Setup/innoSetup.iss /DMyAppVersion=5.3.0.0
 ```
 
----
+***
 
 ## Configuration
 
 Open the **SnapIt** application window to access all settings:
 
 ### Layouts
+
 | Option | Description |
-|--------|-------------|
+| ------ | ----------- |
 | Select Layout | Choose predefined or custom layout for each screen |
 | Edit Layout | Open visual designer to create/modify layouts |
 | Import Layout | Load layout from JSON file |
 | Export Layout | Save layout as JSON file |
 
 ### Snapping Settings
+
 | Option | Default | Description |
-|--------|---------|-------------|
+| ------ | ------- | ----------- |
 | Mouse Snap | On | Enable mouse drag snapping |
 | Snap Mouse Button | Middle | Left / Middle / Right button to trigger snap |
 | Drag Delay | 0ms | Delay before snap activates (0-1000ms) |
@@ -164,8 +181,9 @@ Open the **SnapIt** application window to access all settings:
 | Keyboard Snap Hotkey | Ctrl+Alt+Arrow Keys | Hotkey to move window between zones |
 
 ### Appearance
+
 | Option | Default | Description |
-|--------|---------|-------------|
+| ------ | ------- | ----------- |
 | Theme | Dark | Dark / Light / System |
 | Highlight Color | Custom | Zone highlight color on hover |
 | Overlay Color | Custom | Zone overlay color |
@@ -174,20 +192,22 @@ Open the **SnapIt** application window to access all settings:
 | Opacity | Custom | Zone overlay opacity |
 
 ### App Groups
+
 | Option | Description |
-|--------|-------------|
+| ------ | ----------- |
 | Add Group | Create a new app group for a screen |
 | Add App | Add app to group and assign target zone |
 | Launch Delay | Configure delay between launching each app |
 | One-Click Launch | Launch all apps in group and auto-place |
 
 ### Exclusion Rules
+
 | Option | Default | Description |
-|--------|---------|-------------|
+| ------ | ------- | ----------- |
 | Mouse Exclusions | Off | Contains / Exact / Wildcard matching |
 | Keyboard Exclusions | Off | Contains / Exact / Wildcard matching |
 
----
+***
 
 ## Architecture
 
@@ -225,7 +245,7 @@ SnapIt-Plus
 ### Key Components
 
 | Component | File | Responsibility |
-|-----------|------|----------------|
+| --------- | ---- | -------------- |
 | **SnapManager** | [SnapManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/SnapManager.cs) | Central coordinator: manages snap sessions, zone detection, and window placement |
 | **SnapEngine** | [SnapEngine.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Controls/SnapEngine.cs) | Snap alignment calculation (8px threshold) |
 | **ScreenManager** | [ScreenManager.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.App/ScreenManager.cs) | Multi-monitor enumeration, DPI handling, hot-plug events |
@@ -234,12 +254,12 @@ SnapIt-Plus
 | **MouseService** | [MouseService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Hooks/MouseService.cs) | Global mouse hook, detects drag snapping |
 | **SettingsService** | [SettingsService.cs](file:///c:/Users/NexusStudio/source/repos/SnapIt-Plus/SnapIt.Services/Services/SettingsService.cs) | EF Core SQLite persistence for settings and layouts |
 
----
+***
 
 ## Tech Stack
 
 | Technology | Purpose |
-|------------|---------|
+| ---------- | ------- |
 | **.NET 9.0** | Target framework (`net9.0-windows10.0.17763.0`) |
 | **WPF** | Desktop UI framework |
 | **WPF-UI 4.0.3** | Modern UI control library (Navigation, Snackbar, Dialog, Themes) |
@@ -255,51 +275,47 @@ SnapIt-Plus
 | **XamlAnimatedGif** | GIF animation support |
 | **Inno Setup** | Standalone installer creation |
 
----
+***
 
 ## Development
 
 ### Prerequisites
+
 - **Visual Studio 2022+** (with .NET Desktop Development workload)
 - **.NET 9.0 SDK**
 - Windows 10 (Build 17763+) or Windows 11
 
+***
+
 ### Build Configurations
+
 | Configuration | Description |
-|---------------|-------------|
+| ------------- | ----------- |
 | `Debug` | Debug build, for development |
 | `Release` | Release build |
 | `Standalone` | Standalone build (non-Microsoft Store version) |
 
 ### Debugging
+
 Set `SnapIt` as the startup project and press **F5** to run. The application runs as a standalone WPF window.
 
 ### Logging
+
 Logs are written to the application data directory via **Serilog** for troubleshooting.
 
----
+***
 
 ## CI/CD
 
 - **CI Pipeline**: Triggered on push/PR to `main` — builds all configurations
 - **Release Pipeline**: Manually triggered — automatic versioning, Inno Setup packaging, GitHub Release creation
 
----
-
-## Known Issues
-
-### Window Snap Delay in High DPI Environments
-Window snapping may have slight delays in some high-DPI multi-monitor configurations. This is related to DPI scaling round-trip calculations.
-
-**Status**: Investigation in progress.
-
----
-
 ## Contributing
 
 Contributions and issues are welcome!
 
 ### Getting Started
+
 1. Fork this repository
 2. Create a new branch for your changes
 3. Commit your changes
@@ -307,7 +323,7 @@ Contributions and issues are welcome!
 
 Please follow the code style and conventions used in the project.
 
----
+***
 
 ## License
 
@@ -316,6 +332,6 @@ Please follow the code style and conventions used in the project.
 **Original Author**: Engin KIRMACI
 **Maintainer**: [Ghost-Girls](https://github.com/Ghost-Girls)
 
----
+***
 
 *Made for Windows power users who value a tidy desktop.*
