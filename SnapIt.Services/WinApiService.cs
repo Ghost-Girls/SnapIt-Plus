@@ -35,6 +35,24 @@ public class WinApiService : IWinApiService
 
     public const int OBJID_WINDOW = 0x00000000;
 
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern IntPtr SetThreadDpiAwarenessContext(IntPtr dpiContext);
+
+    private static readonly IntPtr DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = (IntPtr)(-4);
+
+    public static IDisposable BeginPerMonitorV2()
+    {
+        var previous = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+        return new DpiContextGuard(previous);
+    }
+
+    private class DpiContextGuard : IDisposable
+    {
+        private readonly IntPtr previous;
+        public DpiContextGuard(IntPtr previous) { this.previous = previous; }
+        public void Dispose() { SetThreadDpiAwarenessContext(previous); }
+    }
+
     private readonly ISettingService settingService;
     private readonly ILoggerService? logger;
 
@@ -172,21 +190,27 @@ public class WinApiService : IWinApiService
     {
         if (activeWindow != null)
         {
-            var t = new PInvoke.RECT();
-            DwmApi.DwmGetWindowAttribute(
-                            activeWindow.Handle,
-                            DWMWINDOWATTRIBUTE.ExtendedFrameBounds,
-                            out t,
-                            Marshal.SizeOf(typeof(PInvoke.RECT)));
+            using (BeginPerMonitorV2())
+            {
+                PInvoke.User32.GetWindowRect(activeWindow.Handle, out PInvoke.RECT dpiAwareRect);
+                var t = new PInvoke.RECT();
+                DwmApi.DwmGetWindowAttribute(
+                                activeWindow.Handle,
+                                DWMWINDOWATTRIBUTE.ExtendedFrameBounds,
+                                out t,
+                                Marshal.SizeOf(typeof(PInvoke.RECT)));
 
-            var boundry = activeWindow.Boundry;
-            var marginH = (boundry.Width - (t.right - t.left)) / 2;
-            LogDebug($"[GetWindowMargin] Title=\"{activeWindow.Title}\" Handle={activeWindow.Handle}");
-            LogDebug($"[GetWindowMargin] WindowBoundry=({boundry.Left},{boundry.Top})-({boundry.Right},{boundry.Bottom}) sz={boundry.Width}x{boundry.Height}");
-            LogDebug($"[GetWindowMargin] ExtendedFrameBounds=left={t.left},top={t.top},right={t.right},bottom={t.bottom} sz={t.right - t.left}x{t.bottom - t.top}");
-            LogDebug($"[GetWindowMargin] Calculated marginHorizontal={marginH}");
+                var boundry = activeWindow.Boundry;
+                var dpiAwareW = dpiAwareRect.right - dpiAwareRect.left;
+                var marginH = (dpiAwareW - (t.right - t.left)) / 2;
+                LogDebug($"[GetWindowMargin] Title=\"{activeWindow.Title}\" Handle={activeWindow.Handle}");
+                LogDebug($"[GetWindowMargin] WindowBoundry=({boundry.Left},{boundry.Top})-({boundry.Right},{boundry.Bottom}) sz={boundry.Width}x{boundry.Height}");
+                LogDebug($"[GetWindowMargin] DpiAwareRect=({dpiAwareRect.left},{dpiAwareRect.top})-({dpiAwareRect.right},{dpiAwareRect.bottom}) sz={dpiAwareW}x{dpiAwareRect.bottom - dpiAwareRect.top}");
+                LogDebug($"[GetWindowMargin] ExtendedFrameBounds=left={t.left},top={t.top},right={t.right},bottom={t.bottom} sz={t.right - t.left}x{t.bottom - t.top}");
+                LogDebug($"[GetWindowMargin] Calculated marginHorizontal={marginH}");
 
-            withMargin = new Rectangle(t.left, t.top, t.right, t.bottom);
+                withMargin = new Rectangle(t.left, t.top, t.right, t.bottom);
+            }
         }
         else
         {
@@ -218,10 +242,13 @@ public class WinApiService : IWinApiService
             activeWindow.ClassName = new string(classBuff, 0, classLength);
         }
 
-        // 获取窗口矩形
-        if (PInvoke.User32.GetWindowRect(activeWindow.Handle, out PInvoke.RECT rct))
+        // 获取窗口矩形（PerMonitorV2 上下文确保物理坐标）
+        using (BeginPerMonitorV2())
         {
-            activeWindow.Boundry = new Rectangle(rct.left, rct.top, rct.right, rct.bottom);
+            if (PInvoke.User32.GetWindowRect(activeWindow.Handle, out PInvoke.RECT physicalRect))
+            {
+                activeWindow.Boundry = new Rectangle(physicalRect.left, physicalRect.top, physicalRect.right, physicalRect.bottom);
+            }
         }
 
         if (activeWindow.Handle == nint.Zero || activeWindow.Boundry.Equals(Rectangle.Empty))
