@@ -9,6 +9,40 @@ public class WhatsNewPageViewModel : ViewModelBase
     [
         new ChangeLogItem()
         {
+            Header = "v5.3.0.0",
+            Lines =
+            [
+                "Updated GitHub URLs to Ghost-Girls organization.",
+                "Added new branch features documentation.",
+                "Updated README with Chinese and English versions.",
+                "Improved document formatting and readability."
+            ]
+        },
+        new ChangeLogItem()
+        {
+            Header = "v5.2.0.0",
+            Lines =
+            [
+                "Branch features: Create new overlays based on divided areas.",
+                "Branch features: Multi-equal distribution layouts.",
+                "Branch features: Edge snap and center alignment.",
+                "Branch features: Double-click to delete dividers.",
+                "Improved multi-monitor and DPI support (Branch enhancements)."
+            ]
+        },
+        new ChangeLogItem()
+        {
+            Header = "v5.1.0.0",
+            Lines =
+            [
+                "Added new branch features for layout designer.",
+                "Improved drag tolerance instead of delay for mouse snapping.",
+                "Updated window manager and snap engine.",
+                "Minor UI improvements and bug fixes."
+            ]
+        },
+        new ChangeLogItem()
+        {
             Header = "v5.0.7.0",
             Lines =
             [
