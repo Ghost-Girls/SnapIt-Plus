@@ -10,8 +10,8 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     x:Name="MainWindowView"
     Title="{x:Static c:Constants.AppName}"
-    Width="980"
-    Height="900"
+    Width="1080"
+    Height="1080"
     MinWidth="640"
     MinHeight="440"
     d:DataContext="{d:DesignInstance local:MainWindow,

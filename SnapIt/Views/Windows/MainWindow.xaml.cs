@@ -27,6 +27,20 @@ public partial class MainWindow : INavigationWindow
 
         InitializeComponent();
 
+        // 设置窗口默认大小为工作区域的 2/3
+        var workArea = SystemParameters.WorkArea;
+        if(workArea.Width > 1920)
+        {
+            Width = workArea.Width * 2 / 3;
+            Height = workArea.Height * 2 / 3;
+        }
+        else
+        {
+            Width = workArea.Width * 2 / 3;
+            Height = workArea.Height * 2 / 3;
+        }
+
+
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetContentPresenter(RootContentDialog);
