@@ -247,39 +247,49 @@ public class SettingService : ISettingService
 
         var displays = WindowsDisplayAPI.Display.GetDisplays();
 
-        using (WinApiService.BeginPerMonitorV2())
+        foreach (var screen in Screen.AllScreens)
         {
-            foreach (var screen in Screen.AllScreens)
+            var display = displays.FirstOrDefault(display => display.DisplayName == screen.DeviceName);
+            var snapScreen = new SnapScreen(screen, display?.DevicePath);
+
+            // 从 WindowsDisplayAPI 获取物理分辨率（不受线程 DPI 上下文影响）
+            if (display != null)
             {
-                var display = displays.FirstOrDefault(display => display.DisplayName == screen.DeviceName);
-                var snapScreen = new SnapScreen(screen, display?.DevicePath);
-                var layoutGuid = Settings.ScreensLayouts.ContainsKey(snapScreen.DeviceName)
-                    ? Settings.ScreensLayouts[snapScreen.DeviceName] : string.Empty;
-
-                if (string.IsNullOrWhiteSpace(layoutGuid)) //fallback for older version
+                var currentSetting = display.CurrentSetting;
+                if (currentSetting != null)
                 {
-                    layoutGuid = Settings.ScreensLayouts.ContainsKey(snapScreen.DeviceName)
-                    ? Settings.ScreensLayouts[snapScreen.DeviceName] : string.Empty;
+                    var physW = currentSetting.Resolution.Width;
+                    var physH = currentSetting.Resolution.Height;
+                    snapScreen.Resolution = $"{physW} X {physH}";
                 }
-
-                if (!string.IsNullOrWhiteSpace(layoutGuid))
-                {
-                    snapScreen.Layout = Layouts.FirstOrDefault(layout => layout.Guid.ToString() == layoutGuid);
-                }
-                else
-                {
-                    snapScreen.Layout = Layouts.FirstOrDefault();
-                }
-
-                snapScreen.ApplicationGroups = ApplicationGroupSettings.ScreensApplicationGroups != null ?
-                    ApplicationGroupSettings.ScreensApplicationGroups.ContainsKey(snapScreen.DeviceName)
-                    ? ApplicationGroupSettings.ScreensApplicationGroups[snapScreen.DeviceName] : []
-                    : [];
-
-                snapScreen.IsActive = !Settings.DeactivedScreens.Contains(snapScreen.DeviceName);
-
-                snapScreens.Add(snapScreen);
             }
+
+            var layoutGuid = Settings.ScreensLayouts.ContainsKey(snapScreen.DeviceName)
+                ? Settings.ScreensLayouts[snapScreen.DeviceName] : string.Empty;
+
+            if (string.IsNullOrWhiteSpace(layoutGuid)) //fallback for older version
+            {
+                layoutGuid = Settings.ScreensLayouts.ContainsKey(snapScreen.DeviceName)
+                ? Settings.ScreensLayouts[snapScreen.DeviceName] : string.Empty;
+            }
+
+            if (!string.IsNullOrWhiteSpace(layoutGuid))
+            {
+                snapScreen.Layout = Layouts.FirstOrDefault(layout => layout.Guid.ToString() == layoutGuid);
+            }
+            else
+            {
+                snapScreen.Layout = Layouts.FirstOrDefault();
+            }
+
+            snapScreen.ApplicationGroups = ApplicationGroupSettings.ScreensApplicationGroups != null ?
+                ApplicationGroupSettings.ScreensApplicationGroups.ContainsKey(snapScreen.DeviceName)
+                ? ApplicationGroupSettings.ScreensApplicationGroups[snapScreen.DeviceName] : []
+                : [];
+
+            snapScreen.IsActive = !Settings.DeactivedScreens.Contains(snapScreen.DeviceName);
+
+            snapScreens.Add(snapScreen);
         }
 
         return snapScreens;
