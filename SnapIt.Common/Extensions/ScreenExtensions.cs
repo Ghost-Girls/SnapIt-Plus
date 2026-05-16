@@ -1,4 +1,4 @@
-﻿using PInvoke;
+using PInvoke;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 

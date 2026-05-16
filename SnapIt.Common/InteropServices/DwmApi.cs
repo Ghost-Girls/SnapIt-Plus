@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using SnapIt.Common.Entities;
 
 namespace SnapIt.Common.InteropServices;

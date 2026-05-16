@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Entities;
+using SnapIt.Common.Entities;
 
 namespace SnapIt.Common.Events;
 

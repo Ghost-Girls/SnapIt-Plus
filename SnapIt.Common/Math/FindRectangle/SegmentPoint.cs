@@ -1,4 +1,4 @@
-﻿using Point = System.Drawing.Point;
+using Point = System.Drawing.Point;
 
 namespace SnapIt.Common.Math.FindRectangle;
 

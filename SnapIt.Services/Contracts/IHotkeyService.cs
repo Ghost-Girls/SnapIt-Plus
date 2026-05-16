@@ -1,4 +1,4 @@
-﻿using GlobalHotKey;
+using GlobalHotKey;
 using SnapIt.Common.Contracts;
 
 namespace SnapIt.Services.Contracts;

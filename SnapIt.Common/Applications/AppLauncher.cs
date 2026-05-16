@@ -1,4 +1,4 @@
-﻿namespace SnapIt.Common.Applications;
+namespace SnapIt.Common.Applications;
 
 public class AppLauncher
 {

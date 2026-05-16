@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using SnapIt.Common.Entities;
 using SnapIt.Services.Contracts;
 

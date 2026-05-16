@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Contracts;
+using SnapIt.Common.Contracts;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 

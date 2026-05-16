@@ -1,4 +1,4 @@
-﻿namespace SnapIt.Layouts;
+namespace SnapIt.Layouts;
 
 public static class PredefinedLayout
 {

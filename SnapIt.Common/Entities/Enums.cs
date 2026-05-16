@@ -1,4 +1,4 @@
-﻿namespace SnapIt.Common.Entities;
+namespace SnapIt.Common.Entities;
 
 public enum LicenseStatus
 {

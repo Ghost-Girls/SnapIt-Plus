@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Entities;
+using SnapIt.Common.Entities;
 using MouseButton = SnapIt.Common.Entities.MouseButton;
 
 namespace SnapIt.ViewModels.DesignTime;

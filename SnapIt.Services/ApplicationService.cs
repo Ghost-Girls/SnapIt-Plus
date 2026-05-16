@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Shell;
 using SnapIt.Common;
 using SnapIt.Common.Entities;

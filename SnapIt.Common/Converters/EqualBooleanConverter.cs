@@ -1,4 +1,4 @@
-﻿namespace SnapIt.Common.Converters;
+namespace SnapIt.Common.Converters;
 
 public class EqualBooleanConverter : IValueConverter
 {

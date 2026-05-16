@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Entities;
+using SnapIt.Common.Entities;
 using SnapIt.Common.Mvvm;
 using SnapIt.Services.Contracts;
 

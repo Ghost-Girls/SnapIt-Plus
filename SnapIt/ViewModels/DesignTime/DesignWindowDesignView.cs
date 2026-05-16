@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Entities;
+using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 using Point = SnapIt.Common.Graphics.Point;
 using Size = SnapIt.Common.Graphics.Size;

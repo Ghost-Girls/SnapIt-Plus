@@ -1,4 +1,4 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using SnapIt.ViewModels.Pages;
 using Wpf.Ui.Abstractions.Controls;
 

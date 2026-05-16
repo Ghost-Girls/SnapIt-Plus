@@ -1,4 +1,4 @@
-﻿using Binding = System.Windows.Data.Binding;
+using Binding = System.Windows.Data.Binding;
 using InputDevice = SnapIt.Common.Entities.InputDevice;
 
 namespace SnapIt.Common.Converters;

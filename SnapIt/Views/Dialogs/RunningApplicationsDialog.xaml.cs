@@ -1,4 +1,4 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using SnapIt.ViewModels.Dialogs;
 using Wpf.Ui.Controls;

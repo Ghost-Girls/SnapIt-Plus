@@ -1,4 +1,4 @@
-﻿//using System;
+//using System;
 //using SnapIt.Common.Entities;
 //using SnapIt.Services.Contracts;
 //using ThinkSharp.Licensing;

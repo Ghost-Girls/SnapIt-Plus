@@ -1,4 +1,4 @@
-﻿namespace SnapIt.Common.Graphics;
+namespace SnapIt.Common.Graphics;
 
 public class Point
 {

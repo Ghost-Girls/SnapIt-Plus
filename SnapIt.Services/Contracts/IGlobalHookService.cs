@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using SharpHook;
+﻿﻿﻿﻿﻿﻿using SharpHook;
 using SnapIt.Common.Contracts;
 
 namespace SnapIt.Services.Contracts;

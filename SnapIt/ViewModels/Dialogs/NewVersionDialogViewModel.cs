@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using SnapIt.Common.Mvvm;
 
 namespace SnapIt.ViewModels.Dialogs;

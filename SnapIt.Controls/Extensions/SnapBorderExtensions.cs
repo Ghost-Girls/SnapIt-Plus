@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Extensions;
 using SnapIt.Controls;

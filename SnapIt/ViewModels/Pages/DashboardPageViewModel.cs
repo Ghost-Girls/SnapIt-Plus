@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Converters;
+using SnapIt.Common.Converters;
 using SnapIt.Common.Mvvm;
 using Wpf.Ui;
 

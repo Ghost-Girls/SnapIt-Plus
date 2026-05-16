@@ -1,4 +1,4 @@
-﻿using Prism.Commands;
+using Prism.Commands;
 using SnapIt.Common.Entities;
 using SnapIt.Common.Graphics;
 

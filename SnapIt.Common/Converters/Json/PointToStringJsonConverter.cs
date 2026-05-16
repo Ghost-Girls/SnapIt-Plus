@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using SnapIt.Common.Graphics;
 
 namespace SnapIt.Common.Converters.Json;

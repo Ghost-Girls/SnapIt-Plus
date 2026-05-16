@@ -1,4 +1,4 @@
-﻿using System.Windows.Media;
+using System.Windows.Media;
 using SnapIt.Common.Extensions;
 using SnapIt.Common.Mvvm;
 

@@ -1,4 +1,4 @@
-﻿using GlobalHotKey;
+using GlobalHotKey;
 using SharpHook;
 using SharpHook.Data;
 using SnapIt.Common;

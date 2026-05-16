@@ -1,4 +1,4 @@
-﻿using System.Windows.Interop;
+using System.Windows.Interop;
 using SnapIt.Application.Contracts;
 using SnapIt.Common;
 

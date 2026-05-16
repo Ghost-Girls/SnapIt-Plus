@@ -1,4 +1,4 @@
-﻿namespace SnapIt.ViewModels.DesignTime;
+namespace SnapIt.ViewModels.DesignTime;
 
 public class KeyboardSettingsDesignView
 {

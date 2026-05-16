@@ -1,4 +1,4 @@
-﻿using SnapIt.Common.Graphics;
+using SnapIt.Common.Graphics;
 using SnapIt.Common.Mvvm;
 
 namespace SnapIt.Common.Entities;

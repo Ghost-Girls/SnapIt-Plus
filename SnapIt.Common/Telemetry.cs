@@ -1,4 +1,4 @@
-﻿//using Microsoft.ApplicationInsights;
+//using Microsoft.ApplicationInsights;
 //using Microsoft.ApplicationInsights.Extensibility;
 
 namespace SnapIt.Common;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using System.Windows.Forms;
 
 using SnapIt.Application.Contracts;
