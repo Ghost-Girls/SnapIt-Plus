@@ -201,21 +201,16 @@ public class SnapManager : ISnapManager
 
                 if (!withMargin.Equals(Rectangle.Empty))
                 {
-                    var marginHorizontal = (currentWindow.Boundry.Width - withMargin.Width) / 2;
-                    var systemMargin = new Rectangle
-                    {
-                        Left = marginHorizontal,
-                        Right = marginHorizontal,
-                        Top = 0,
-                        Bottom = currentWindow.Boundry.Height - withMargin.Height
-                    };
+                    // FancyZones 方式：每边独立计算 Delta，不做 /2 对称假设
+                    int leftDelta = (int)(withMargin.Left - currentWindow.Boundry.Left);
+                    int rightDelta = (int)(withMargin.Right - currentWindow.Boundry.Right);
+                    int bottomDelta = (int)(withMargin.Bottom - currentWindow.Boundry.Bottom);
 
-                    logger.LogInfo($"[SnapManager.MoveWindow] Margin: horizontal={marginHorizontal} systemMargin=(L:{systemMargin.Left},T:{systemMargin.Top},R:{systemMargin.Right},B:{systemMargin.Bottom})");
+                    logger.LogInfo($"[SnapManager.MoveWindow] Margin: leftDelta={leftDelta} rightDelta={rightDelta} bottomDelta={bottomDelta}");
 
-                    rectangle.Left -= systemMargin.Left;
-                    rectangle.Top -= systemMargin.Top;
-                    rectangle.Right += systemMargin.Right;
-                    rectangle.Bottom += systemMargin.Bottom;
+                    rectangle.Left -= leftDelta;
+                    rectangle.Right -= rightDelta;
+                    rectangle.Bottom -= bottomDelta;
 
                     logger.LogInfo($"[SnapManager.MoveWindow] AfterMarginAdjustment=({rectangle.Left},{rectangle.Top})-({rectangle.Right},{rectangle.Bottom}) sz={rectangle.Width}x{rectangle.Height}");
                 }

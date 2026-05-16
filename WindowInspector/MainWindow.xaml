@@ -1,0 +1,391 @@
+<Window
+    x:Class="WindowInspector.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Window Inspector"
+    Width="1080"
+    Height="760"
+    Background="#F3F3F5"
+    FontFamily="Segoe UI, sans-serif"
+    Foreground="#1A1A2E"
+    TextOptions.TextFormattingMode="Display"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="HeaderLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#666" />
+            <Setter Property="Margin" Value="0,0,0,2" />
+        </Style>
+        <Style x:Key="ValueBlock" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="BorderBrush" Value="#E0E0E2" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style x:Key="SectionBox" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="14,12" />
+            <Setter Property="BorderBrush" Value="#E0E0E2" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Margin="0,0,0,10"
+            Style="{StaticResource SectionBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#1A1A2E"
+                        Text="Window Inspector" />
+                    <TextBlock
+                        Margin="0,2,0,0"
+                        FontSize="12"
+                        Foreground="#888"
+                        Text="Select a window to inspect its bounds, shadow margins, and DPI deltas" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        x:Name="TxtTimer"
+                        Margin="0,0,8,0"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Foreground="#4CAF50"
+                        Text="auto-refresh: on" />
+                    <Button
+                        x:Name="BtnRefresh"
+                        Width="36"
+                        Height="32"
+                        Click="BtnRefresh_Click"
+                        Content="⟳"
+                        FontSize="16"
+                        ToolTip="Refresh window list" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="380" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource SectionBox}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="0,0,0,6"
+                        Style="{StaticResource HeaderLabel}"
+                        Text="WINDOWS" />
+                    <ListBox
+                        x:Name="WindowList"
+                        Grid.Row="1"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        DisplayMemberPath="Display"
+                        FontSize="13"
+                        SelectionChanged="WindowList_SelectionChanged" />
+                </Grid>
+            </Border>
+
+            <GridSplitter
+                Grid.Column="1"
+                Width="4"
+                Margin="4,0"
+                Background="Transparent" />
+
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="DetailPanel" Margin="0">
+                    <TextBlock
+                        x:Name="TxtNoSelection"
+                        Margin="0,120,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#999"
+                        Text="← Select a window from the list" />
+
+                    <StackPanel x:Name="InfoSection" Visibility="Collapsed">
+
+                        <Border Margin="0,0,0,8" Style="{StaticResource SectionBox}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource HeaderLabel}" Text="WINDOW INFO" />
+                                <Grid Margin="0,6,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Text="Title:" />
+                                    <TextBlock
+                                        x:Name="TxtTitle"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontSize="12"
+                                        TextTrimming="CharacterEllipsis" />
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Margin="0,3,0,0"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Text="Class:" />
+                                    <TextBlock
+                                        x:Name="TxtClass"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0,3,0,0"
+                                        FontSize="12" />
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Margin="0,3,0,0"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Text="Handle:" />
+                                    <TextBlock
+                                        x:Name="TxtHandle"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0,3,0,0"
+                                        FontSize="12" />
+
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Margin="0,3,0,0"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Text="DPI:" />
+                                    <TextBlock
+                                        x:Name="TxtDpi"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Margin="0,3,0,0"
+                                        FontSize="12" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Margin="0,0,0,8" Style="{StaticResource SectionBox}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource HeaderLabel}" Text="COORDINATE SYSTEMS" />
+                                <Grid Margin="0,6,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border
+                                        Grid.Column="0"
+                                        Margin="0,0,4,0"
+                                        Style="{StaticResource ValueBlock}">
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="11"
+                                                FontWeight="SemiBold"
+                                                Foreground="#1976D2"
+                                                Text="GetWindowRect (总边框)" />
+                                            <TextBlock
+                                                x:Name="TxtTotalLeft"
+                                                Margin="0,4,0,0"
+                                                FontSize="13" />
+                                            <TextBlock x:Name="TxtTotalTop" FontSize="13" />
+                                            <TextBlock x:Name="TxtTotalRight" FontSize="13" />
+                                            <TextBlock x:Name="TxtTotalBottom" FontSize="13" />
+                                            <TextBlock
+                                                x:Name="TxtTotalSize"
+                                                FontSize="13"
+                                                FontWeight="SemiBold"
+                                                Foreground="#1976D2" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="1"
+                                        Margin="4,0,0,0"
+                                        Style="{StaticResource ValueBlock}">
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="11"
+                                                FontWeight="SemiBold"
+                                                Foreground="#388E3C"
+                                                Text="ExtendedFrameBounds (视觉边界)" />
+                                            <TextBlock
+                                                x:Name="TxtFrameLeft"
+                                                Margin="0,4,0,0"
+                                                FontSize="13" />
+                                            <TextBlock x:Name="TxtFrameTop" FontSize="13" />
+                                            <TextBlock x:Name="TxtFrameRight" FontSize="13" />
+                                            <TextBlock x:Name="TxtFrameBottom" FontSize="13" />
+                                            <TextBlock
+                                                x:Name="TxtFrameSize"
+                                                FontSize="13"
+                                                FontWeight="SemiBold"
+                                                Foreground="#388E3C" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Margin="0,0,0,8" Style="{StaticResource SectionBox}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource HeaderLabel}" Text="PER-SIDE DELTA (FancyZones 方式)" />
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Text="← Left:" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaLeft"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontFamily="Consolas"
+                                        FontSize="13" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaLeftNote"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Margin="8,0,0,0"
+                                        FontSize="11"
+                                        Foreground="#888" />
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Margin="0,4,0,0"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Text="→ Right:" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaRight"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0,4,0,0"
+                                        FontFamily="Consolas"
+                                        FontSize="13" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaRightNote"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Margin="8,4,0,0"
+                                        FontSize="11"
+                                        Foreground="#888" />
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Margin="0,4,0,0"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Text="↓ Bottom:" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaBottom"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0,4,0,0"
+                                        FontFamily="Consolas"
+                                        FontSize="13" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaBottomNote"
+                                        Grid.Row="2"
+                                        Grid.Column="2"
+                                        Margin="8,4,0,0"
+                                        FontSize="11"
+                                        Foreground="#888" />
+
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Margin="0,4,0,0"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="#999"
+                                        Text="△ Top:" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaTop"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Margin="0,4,0,0"
+                                        FontFamily="Consolas"
+                                        FontSize="13"
+                                        Foreground="#999" />
+                                    <TextBlock
+                                        x:Name="TxtDeltaTopNote"
+                                        Grid.Row="3"
+                                        Grid.Column="2"
+                                        Margin="8,4,0,0"
+                                        FontSize="11"
+                                        Foreground="#888" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource SectionBox}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource HeaderLabel}" Text="COMPENSATION FORMULA" />
+                                <TextBlock
+                                    x:Name="TxtFormula"
+                                    Margin="0,6,0,0"
+                                    FontFamily="Consolas"
+                                    FontSize="13"
+                                    LineHeight="20" />
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
