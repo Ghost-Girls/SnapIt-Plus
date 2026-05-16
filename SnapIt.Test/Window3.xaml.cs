@@ -1,4 +1,4 @@
-﻿//using System.Windows;
+//using System.Windows;
 //using System.Windows.Automation;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +43,7 @@ public partial class Window3 : Window
         globalHook.MouseDragStarted += GlobalHook_MouseDragStarted;
         globalHook.MouseDragFinished += GlobalHook_MouseDragFinished;
 
-        winApiService = new WinApiService();
+        winApiService = new WinApiService(null!);
     }
 
     private void GlobalHook_MouseDragStarted(object? sender, System.Windows.Forms.MouseEventArgs e)

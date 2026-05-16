@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -32,8 +32,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
 		<PackageReference Include="Prism.DryIoc" Version="8.1.97" /> 
-		<PackageReference Include="WPF-UI" Version="3.0.0-preview.13" />
-		<PackageReference Include="WPF-UI.Tray" Version="3.0.0-preview.11" />
+		<PackageReference Include="WPF-UI" Version="4.0.3" />
+		<PackageReference Include="WPF-UI.Tray" Version="4.0.3" />
+		<PackageReference Include="MouseKeyHook" Version="5.7.1" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -27,7 +27,7 @@ public partial class Window2 : Window
 
     private async Task AnimateWindow()
     {
-        var winApiService = new WinApiService();
+        var winApiService = new WinApiService(null!);
         var wih = new WindowInteropHelper(this);
         var window = new ActiveWindow
         {
