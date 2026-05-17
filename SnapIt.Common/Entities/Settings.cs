@@ -11,8 +11,8 @@ public class Settings
     public string Version = "2.0";
     public bool EnableMouse { get; set; } = true;
     public bool DragByTitle { get; set; } = true;
-    public MouseButton MouseButton { get; set; } = MouseButton.Left;
-    public int MouseDragDelay { get; set; } = 20;
+    public MouseButton MouseButton { get; set; } = MouseButton.Right;
+    public int MouseDragDelay { get; set; } = 40;
     public bool EnableHoldKey { get; set; } = false;
     public HoldKey HoldKey { get; set; } = HoldKey.Control;
     public HoldKeyBehaviour HoldKeyBehaviour { get; set; } = HoldKeyBehaviour.HoldToEnable;
@@ -22,6 +22,7 @@ public class Settings
     public bool EnableAutomaticWindowCornering { get; set; } = false;
     public bool ShowMainWindow { get; set; } = true;
     public UITheme AppTheme { get; set; } = UITheme.System;
+    public string SelectedLanguage { get; set; } = "en-US";
     public Dictionary<string, string> ScreensLayouts { get; set; }
     public List<string> DeactivedScreens { get; set; }
     public string MoveUpShortcut { get; set; } = "Ctrl + Alt + Up";
