@@ -235,27 +235,11 @@ public partial class SnapOverlayEditor : UserControl
         PositionGrid.Visibility = Visibility.Hidden;
     }
 
-    private bool IsDescendantOf(DependencyObject parent, DependencyObject child)
-    {
-        while (child != null)
-        {
-            if (child == parent)
-                return true;
-            child = LogicalTreeHelper.GetParent(child);
-        }
-        return false;
-    }
-
     protected override void OnMouseDown(MouseButtonEventArgs e)
     {
         base.OnMouseDown(e);
 
-        // 检查是否点击在 PositionGrid 内部，如果是，直接返回，不做其他处理
         var hitElement = InputHitTest(Mouse.GetPosition(this)) as FrameworkElement;
-        if (hitElement != null && IsDescendantOf(PositionGrid, hitElement))
-        {
-            return;
-        }
 
         if (hitElement != null && (hitElement.Name == "MiniOverlayBorder" || hitElement.Name == "FullOverlayBorder"))
         {
@@ -311,6 +295,8 @@ public partial class SnapOverlayEditor : UserControl
 
         PositionGrid.Visibility = Visibility.Visible;
 
+        if (PositionGrid.IsKeyboardFocusWithin) return;
+
         if (element.Name == "MiniOverlay")
         {
             PositionX = (Margin.Left + MiniOverlay.Margin.Left + MiniOverlay.Width / 2).ToString("0.00");
@@ -338,7 +324,7 @@ public partial class SnapOverlayEditor : UserControl
     {
         base.OnMouseLeave(e);
 
-        if (_lockedElement == null)
+        if (_lockedElement == null && !PositionGrid.IsKeyboardFocusWithin)
         {
             DesignPanel.Visibility = Visibility.Hidden;
             OutlineBorder.Visibility = Visibility.Hidden;
@@ -352,6 +338,8 @@ public partial class SnapOverlayEditor : UserControl
 
         DesignPanel.Visibility = Visibility.Visible;
         OutlineBorder.Visibility = Visibility.Visible;
+
+        Keyboard.Focus(FullOverlay);
 
         if (!IsMouseCaptured)
         {
@@ -377,12 +365,6 @@ public partial class SnapOverlayEditor : UserControl
             SetMouseCursor();
 
             ResetDesignPanelButtons();
-
-            // 只在未锁定时更新 PositionGrid
-            if (_lockedElement == null)
-            {
-                ShowPositionGridForElement(selectedElement);
-            }
         }
         else
         {
