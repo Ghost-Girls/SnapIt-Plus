@@ -67,7 +67,7 @@
                 VerticalAlignment="Top"
                 Background="{Binding Theme.OverlayBrush, FallbackValue=#FF636363}">
                 <Border
-                    x:Name="Border"
+                    x:Name="MiniOverlayBorder"
                     BorderBrush="{Binding Theme.BorderBrush, FallbackValue=#FFC8C8C8}"
                     BorderThickness="{Binding Theme.BorderThickness, FallbackValue=1}" />
 

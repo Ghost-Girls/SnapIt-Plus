@@ -153,14 +153,14 @@ public partial class SnapBorder : UserControl
 
             //foreach (var col in Parent.FindChildren<SnapBorder>())
             //{
-            //    col.Border.Background = new SolidColorBrush(Color.FromArgb(255, 60, 60, 60));
+            //    col.MiniOverlayBorder.Background = new SolidColorBrush(Color.FromArgb(255, 60, 60, 60));
             //}
 
             var nearBorders = this.GetCollisions(thisRect);
 
             //foreach (var col in nearBorders)
             //{
-            //    col.Border.Background = new SolidColorBrush(Colors.Red);
+            //    col.MiniOverlayBorder.Background = new SolidColorBrush(Colors.Red);
             //}
 
             foreach (var near in nearBorders.Where(b => b.IsDraggable))
@@ -244,7 +244,7 @@ public partial class SnapBorder : UserControl
         {
             if (border != this && thisRect.IntersectsWith(border.GetRect()))
             {
-                //border.Border.Background = new SolidColorBrush(Colors.Blue);
+                //border.MiniOverlayBorder.Background = new SolidColorBrush(Colors.Blue);
 
                 isCollided = true;
                 break;
