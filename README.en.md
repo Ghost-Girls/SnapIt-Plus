@@ -53,6 +53,7 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - Branch features: Multi-equal distribution layouts, hover over icons to change the number of equal divisions
 - Branch features: Edge snap and center alignment, double-click to delete dividers
 - Branch features: Chinese UI support (i18n)
+- Branch features: Design window properties panel supports four-corner docking toggle
 
 ### Window Snapping Methods
 
