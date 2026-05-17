@@ -9,7 +9,8 @@
     <Description>SnapIt is a window manager for Windows. Organizes your windows to improve your productivity when working with wide and multiple screens.</Description>
     <Version>5.3.0.0</Version>
     <Copyright>Copyright ©  2026</Copyright>
-    <Company>Engin KIRMACI</Company>
+    <Company>Ghost-Girls</Company>
+    <Authors>Ghost-Girls</Authors>
     <FileVersion>
     </FileVersion>
     <AssemblyVersion>
@@ -67,20 +68,5 @@
   <ItemGroup>
     <Resource Include="Assets\Segoe Fluent Icons.ttf" />
     <Resource Include="Assets\Win-GIF.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Strings\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Strings\Resources.zh-CN.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </EmbeddedResource>
-    <Compile Update="Strings\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>

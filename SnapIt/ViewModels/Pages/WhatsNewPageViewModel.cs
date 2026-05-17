@@ -12,6 +12,7 @@ public class WhatsNewPageViewModel : ViewModelBase
             Header = "v5.3.0.0",
             Lines =
             [
+                "Branch features: Add Chinese UI support (i18n).",
                 "Updated GitHub URLs to Ghost-Girls organization.",
                 "Added new branch features documentation.",
                 "Updated README with Chinese and English versions.",

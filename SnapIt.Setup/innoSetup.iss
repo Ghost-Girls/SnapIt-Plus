@@ -6,7 +6,7 @@
 #ifndef MyAppVersion
   #define MyAppVersion "0.0.0.0"
 #endif
-#define MyAppPublisher "Engin KIRMACI"
+#define MyAppPublisher "Ghost-Girls"
 #define MyAppURL "https://getsnapit.com"
 #define MyAppExeName "SnapIt.exe"
 

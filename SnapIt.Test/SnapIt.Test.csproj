@@ -7,7 +7,7 @@
 		<UseWPF>true</UseWPF> 
 		<Product>SnapIt Test</Product>
 		<Copyright>Copyright ©  2019</Copyright>
-		<Company>Engin KIRMACI</Company>
+		<Company>Ghost-Girls</Company>
 		<FileVersion></FileVersion>
 		<AssemblyVersion></AssemblyVersion>
 		<Configurations>Debug;Release;Standalone</Configurations>
