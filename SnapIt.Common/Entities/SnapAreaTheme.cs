@@ -75,7 +75,7 @@ public class SnapAreaTheme : Bindable
         HighlightColor = Color.FromArgb(200, 0, 0, 0);
         OverlayColor = Color.FromArgb(50, 255, 255, 255);
         BorderColor = Color.FromArgb(200, 150, 150, 150);
-        BorderThickness = 1;
+        BorderThickness = 3;
         Opacity = 0.6;
     }
 

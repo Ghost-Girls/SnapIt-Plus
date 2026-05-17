@@ -18,10 +18,10 @@
 
         <Border
             x:Name="SelectionBar"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
             Margin="0,0,0,16"
             Padding="16,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
             Panel.ZIndex="999"
             Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"
             BorderBrush="{DynamicResource AccentFillColorDefaultBrush}"
@@ -31,20 +31,26 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock
                     VerticalAlignment="Center"
+                    Foreground="White"
                     Text="已选择 " />
                 <TextBlock
                     x:Name="SelectedCountText"
                     VerticalAlignment="Center"
                     FontWeight="Bold"
+                    Foreground="White"
                     Text="0" />
+
                 <TextBlock
                     VerticalAlignment="Center"
+                    Foreground="White"
                     Text=" 个区域" />
                 <ui:Button
                     Margin="12,0,0,0"
                     Appearance="Primary"
                     Click="ConfirmAreaSelect_Click"
                     Content="✓ Create Overlay"
+                    FontWeight="Bold"
+                    Foreground="White"
                     Icon="Checkmark24" />
                 <ui:Button
                     Margin="8,0,0,0"

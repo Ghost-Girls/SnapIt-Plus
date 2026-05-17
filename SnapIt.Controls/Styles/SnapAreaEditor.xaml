@@ -14,7 +14,7 @@
                     <Grid Margin="{Binding Path=AreaPadding, RelativeSource={RelativeSource TemplatedParent}}">
                         <Grid
                             x:Name="Area"
-                            Background="{Binding Path=Theme.OverlayBrush, RelativeSource={RelativeSource TemplatedParent}, FallbackValue=Transparent}"
+                            Background="Black"
                             Opacity="{Binding Path=Theme.Opacity, RelativeSource={RelativeSource TemplatedParent}, FallbackValue=0.85}">
                             <Grid.ContextMenu>
                                 <ContextMenu>
@@ -83,10 +83,11 @@
                                     ToolTip="垂直N等分 (滚轮调节)">
                                     <ui:Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=VerticalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}"
-                                                       FontSize="13"
-                                                       FontWeight="Bold"
-                                                       VerticalAlignment="Center" />
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="13"
+                                                FontWeight="Bold"
+                                                Text="{Binding Path=VerticalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}" />
                                         </StackPanel>
                                     </ui:Button.Content>
                                 </ui:Button>
@@ -104,10 +105,11 @@
                                     ToolTip="水平N等分 (滚轮调节)">
                                     <ui:Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=HorizontalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}"
-                                                       FontSize="13"
-                                                       FontWeight="Bold"
-                                                       VerticalAlignment="Center" />
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="13"
+                                                FontWeight="Bold"
+                                                Text="{Binding Path=HorizontalDivideCount, RelativeSource={RelativeSource AncestorType=control:SnapAreaEditor}}" />
                                         </StackPanel>
                                     </ui:Button.Content>
                                 </ui:Button>
@@ -174,8 +176,8 @@
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Area" Property="Background" Value="{Binding Path=Theme.HighlightBrush, RelativeSource={RelativeSource TemplatedParent}, FallbackValue=#FF4A90D9}" />
-                            <Setter TargetName="Area" Property="Opacity" Value="0.6" />
+                            <Setter TargetName="Area" Property="Background" Value="#3C0000" />
+                            <!--<Setter TargetName="Area" Property="Opacity" Value="0.1" />-->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
