@@ -401,19 +401,24 @@ public partial class SnapOverlayEditor : UserControl
                         return;
                     }
 
-                    ClampToContainer(ref point, ref size);
+                    ClampToParent(ref point, ref size, SnapControl.MainOverlay.ActualWidth, SnapControl.MainOverlay.ActualHeight);
 
-                    if (_mouseHitType != ResizeHitType.Body)
+                    var engine = new SnapEngine();
+                    engine.BuildSnapLines(SnapControl);
+
+                    if (_mouseHitType == ResizeHitType.Body)
                     {
-                        var engine = new SnapEngine();
-                        engine.BuildSnapLines(SnapControl);
-                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRect(point.X, point.Y, size.Width, size.Height);
+                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRectCenter(point.X, point.Y, size.Width, size.Height);
                     }
+                    else
+                    {
+                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRect(point.X, point.Y, size.Width, size.Height);
 
-                    if (_mouseHitType is ResizeHitType.L or ResizeHitType.UL or ResizeHitType.LL)
-                        size.Width = baseLeft + baseWidth - point.X;
-                    if (_mouseHitType is ResizeHitType.T or ResizeHitType.UL or ResizeHitType.UR)
-                        size.Height = baseTop + baseHeight - point.Y;
+                        if (_mouseHitType is ResizeHitType.L or ResizeHitType.UL or ResizeHitType.LL)
+                            size.Width = baseLeft + baseWidth - point.X;
+                        if (_mouseHitType is ResizeHitType.T or ResizeHitType.UL or ResizeHitType.UR)
+                            size.Height = baseTop + baseHeight - point.Y;
+                    }
 
                     SetPos(point, size);
 
