@@ -138,15 +138,8 @@ public partial class SnapOverlayEditor : UserControl
 
     private void MiniOverlay_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        var iconFactor = 0.2;
-        if (MiniOverlay.Width > MiniOverlay.Height)
-        {
-            MergedIcon.FontSize = MergedIcon.Width = MergedIcon.Height = MiniOverlay.Width * iconFactor;
-        }
-        else
-        {
-            MergedIcon.FontSize = MergedIcon.Width = MergedIcon.Height = MiniOverlay.Height * iconFactor;
-        }
+        var iconFactor = 0.6;
+        var size = MergedIcon.FontSize = MergedIcon.Width = MergedIcon.Height = Math.Min(MiniOverlay.Width, MiniOverlay.Height) * iconFactor;
     }
 
     public LayoutOverlay GetOverlay()

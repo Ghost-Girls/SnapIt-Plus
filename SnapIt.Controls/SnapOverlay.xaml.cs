@@ -143,17 +143,9 @@ public partial class SnapOverlay : UserControl
 
     private void SnapOverlay_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        var iconFactor = 0.2;
-        if (ActualWidth > ActualHeight)
-        {
-            var size = MergedIcon.Width = MergedIcon.Height = ActualWidth * iconFactor;
-            MergedIcon.FontSize = size > 0 ? size : 1;
-        }
-        else
-        {
-            var size = MergedIcon.Width = MergedIcon.Height = ActualHeight * iconFactor;
-            MergedIcon.FontSize = size > 0 ? size : 1;
-        }
+        var iconFactor = 0.6;
+        var size = MergedIcon.Width = MergedIcon.Height = Math.Min(ActualWidth, ActualHeight) * iconFactor;
+        MergedIcon.FontSize = size > 0 ? size : 1;
     }
 
     public Rectangle ScreenSnapArea(Dpi dpi)
