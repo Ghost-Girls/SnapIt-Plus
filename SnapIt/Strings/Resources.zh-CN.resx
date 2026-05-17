@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WatchTutorial" xml:space="preserve">
+    <value>观看教程</value>
+  </data>
+  <data name="StartSnapItWhenIStartWindows" xml:space="preserve">
+    <value>开机自启 SnapIt</value>
+  </data>
+  <data name="StartSnapItMinimizedToTray" xml:space="preserve">
+    <value>启动时最小化到托盘</value>
+  </data>
+  <data name="RunAsAdministrator" xml:space="preserve">
+    <value>以管理员身份运行（需重启应用）</value>
+  </data>
+  <data name="EnableMouseHoverAnimations" xml:space="preserve">
+    <value>启用鼠标悬停动画</value>
+  </data>
+  <data name="MouseHoverAnimationDescription" xml:space="preserve">
+    <value>如果悬停响应不够流畅，建议禁用此功能。</value>
+  </data>
+  <data name="CheckForNewVersion" xml:space="preserve">
+    <value>检查新版本</value>
+  </data>
+  <data name="AppTheme" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>仪表盘</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>布局</value>
+  </data>
+  <data name="Mouse" xml:space="preserve">
+    <value>鼠标</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>键盘</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>窗口</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Tutorials" xml:space="preserve">
+    <value>教程</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>更新日志</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="TrialVersion" xml:space="preserve">
+    <value>试用版本</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Layouts" xml:space="preserve">
+    <value>布局</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>反馈</value>
+  </data>
+  <data name="NewIdeasOrReportBug" xml:space="preserve">
+    <value>新想法或报告问题</value>
+  </data>
+  <data name="RateAndReviewOnStore" xml:space="preserve">
+    <value>在 Microsoft Store 上评分和评论</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>显示器</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>主</value>
+  </data>
+  <data name="Secondary" xml:space="preserve">
+    <value>副</value>
+  </data>
+  <data name="DashboardDescription" xml:space="preserve">
+    <value>简单、直观且强大的 Windows 窗口管理器。</value>
+  </data>
+  <data name="SelectAndEditLayouts" xml:space="preserve">
+    <value>选择和编辑布局</value>
+  </data>
+  <data name="ConfigureMouse" xml:space="preserve">
+    <value>配置鼠标</value>
+  </data>
+  <data name="ConfigureKeyboard" xml:space="preserve">
+    <value>配置键盘</value>
+  </data>
+  <data name="ConfigureWindow" xml:space="preserve">
+    <value>配置窗口</value>
+  </data>
+  <data name="CustomizeLayoutUI" xml:space="preserve">
+    <value>自定义布局界面</value>
+  </data>
+  <data name="LearnAndExplore" xml:space="preserve">
+    <value>学习和探索</value>
+  </data>
+  <data name="GettingStarted" xml:space="preserve">
+    <value>快速入门</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>简介</value>
+  </data>
+  <data name="HowToGetStarted" xml:space="preserve">
+    <value>如何开始使用？</value>
+  </data>
+  <data name="ConfigureAndUseApps" xml:space="preserve">
+    <value>配置和使用应用</value>
+  </data>
+  <data name="QuickTips" xml:space="preserve">
+    <value>快速提示</value>
+  </data>
+  <data name="OriginalAuthor" xml:space="preserve">
+    <value>原作者</value>
+  </data>
+  <data name="Maintainer" xml:space="preserve">
+    <value>维护者</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>源代码</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>官方网站</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>许可证</value>
+  </data>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>SnapIt 是一款适用于 Windows 的窗口管理器，可帮助您组织窗口，提高在宽屏和多屏幕环境下的工作效率。</value>
+  </data>
+  <data name="GiveFeedback" xml:space="preserve">
+    <value>提供反馈</value>
+  </data>
+  <data name="GiveFeedbackDescription" xml:space="preserve">
+    <value>帮助我让 SnapIt 变得更好。您可以在此提出新想法和功能建议，也可以为其他想法投票或提交 bug。</value>
+  </data>
+  <data name="WhatsNewDescription" xml:space="preserve">
+    <value>查看新功能和修复内容</value>
+  </data>
+  <data name="OpenSource" xml:space="preserve">
+    <value>开源</value>
+  </data>
+  <data name="OpenSourceDescription" xml:space="preserve">
+    <value>"通过参与 GitHub 上的开源项目来帮助改进 SnapIt！"</value>
+  </data>
+  <data name="Github" xml:space="preserve">
+    <value>Github</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>隐私政策</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>SnapIt 是一款适用于 Windows 的窗口管理器，可显著提升单屏和多屏环境下的工作效率。</value>
+  </data>
+  <data name="WatchTutorial" xml:space="preserve">
+    <value>观看教程</value>
+  </data>
+  <data name="DisableFullscreenSnapping" xml:space="preserve">
+    <value>禁用全屏应用程序和游戏的拖拽（推荐）</value>
+  </data>
+  <data name="DisableModalSnapping" xml:space="preserve">
+    <value>禁用模态窗口的拖拽（推荐）</value>
+  </data>
+  <data name="DisableModalSnappingDescription" xml:space="preserve">
+    <value>如果启用模态窗口拖拽，需要排除开始菜单、操作中心等才能正常工作。</value>
+  </data>
+  <data name="DisableWindowCornering" xml:space="preserve">
+    <value>禁用 Windows 11 窗口圆角</value>
+  </data>
+  <data name="DisableWindowCorneringDescription" xml:space="preserve">
+    <value>拖拽窗口时移除圆角（仅 Windows 11）</value>
+  </data>
+  <data name="ExcludeWindowsDefaultModals" xml:space="preserve">
+    <value>排除 Windows 默认模态窗口</value>
+  </data>
+  <data name="ExcludeWindowsDefaultModalsDescription" xml:space="preserve">
+    <value>此选项排除开始菜单、操作中心等 Windows 模态窗口</value>
+  </data>
+  <data name="Exclude" xml:space="preserve">
+    <value>排除</value>
+  </data>
+  <data name="ExcludedApplications" xml:space="preserve">
+    <value>排除的应用程序</value>
+  </data>
+  <data name="ExcludedApplicationsDescription" xml:space="preserve">
+    <value>如果您不想对某些应用程序使用拖拽功能，可以将它们添加到排除应用程序中。</value>
+  </data>
+  <data name="CurrentVersion" xml:space="preserve">
+    <value>当前版本</value>
+  </data>
+  <data name="OlderChanges" xml:space="preserve">
+    <value>历史更新</value>
+  </data>
+  <data name="OtherTopics" xml:space="preserve">
+    <value>其他主题</value>
+  </data>
+  <data name="AllTopics" xml:space="preserve">
+    <value>所有主题</value>
+  </data>
+  <data name="SelectCreateAndEditLayouts" xml:space="preserve">
+    <value>选择、创建和编辑布局</value>
+  </data>
+  <data name="HowToUseAndConfigureApps" xml:space="preserve">
+    <value>如何使用和配置应用</value>
+  </data>
+  <data name="LayoutName" xml:space="preserve">
+    <value>布局名称</value>
+  </data>
+  <data name="Screens" xml:space="preserve">
+    <value>屏幕</value>
+  </data>
+  <data name="ScreensDescription" xml:space="preserve">
+    <value>选择屏幕并进入布局部分。</value>
+  </data>
+  <data name="ChangeLayouts" xml:space="preserve">
+    <value>更改布局</value>
+  </data>
+  <data name="ChangeLayoutsDescription" xml:space="preserve">
+    <value>选择布局以应用到选定屏幕。您也可以点击三点菜单创建新布局或编辑布局。</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="OpenInDesigner" xml:space="preserve">
+    <value>在设计器中打开</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ApplyChanges" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="ApplyChangesQuestion" xml:space="preserve">
+    <value>您想要应用更改吗？</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="AreaTheme" xml:space="preserve">
+    <value>区域主题</value>
+  </data>
+  <data name="OverlayColor" xml:space="preserve">
+    <value>覆盖颜色</value>
+  </data>
+  <data name="HighlightColor" xml:space="preserve">
+    <value>高亮颜色</value>
+  </data>
+  <data name="OverallOpacity" xml:space="preserve">
+    <value>总体透明度</value>
+  </data>
+  <data name="BorderColor" xml:space="preserve">
+    <value>边框颜色</value>
+  </data>
+  <data name="BorderThickness" xml:space="preserve">
+    <value>边框粗细</value>
+  </data>
+  <data name="Keyword" xml:space="preserve">
+    <value>关键词</value>
+  </data>
+  <data name="MatchRule" xml:space="preserve">
+    <value>匹配规则</value>
+  </data>
+  <data name="AppliedFor" xml:space="preserve">
+    <value>应用于</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>新建</value>
+  </data>
+  <data name="UseMouseToSnapWindow" xml:space="preserve">
+    <value>使用鼠标拖拽窗口</value>
+  </data>
+  <data name="DelayMovementToActivateSnapping" xml:space="preserve">
+    <value>延迟移动以激活拖拽（像素）</value>
+  </data>
+  <data name="DelayMovementDisabledWhenHoldKeyInUse" xml:space="preserve">
+    <value>使用按住键时延迟移动被禁用</value>
+  </data>
+  <data name="OnlyUseWindowTitleToSnapWindow" xml:space="preserve">
+    <value>仅使用窗口标题拖拽窗口</value>
+  </data>
+  <data name="OnlyUseWindowTitleDescription" xml:space="preserve">
+    <value>如果您选择左键拖拽，建议启用此选项。</value>
+  </data>
+  <data name="MouseButtonForSnapping" xml:space="preserve">
+    <value>拖拽窗口的鼠标按键</value>
+  </data>
+  <data name="UseHoldKey" xml:space="preserve">
+    <value>使用按住键</value>
+  </data>
+  <data name="HoldKey" xml:space="preserve">
+    <value>按住键</value>
+  </data>
+  <data name="HoldKeyBehaviour" xml:space="preserve">
+    <value>按住键行为</value>
+  </data>
+  <data name="UseKeyboardToSnapWindow" xml:space="preserve">
+    <value>使用键盘调整窗口</value>
+  </data>
+  <data name="UseWinShortcutToSnapWindow" xml:space="preserve">
+    <value>使用 Win 快捷键调整窗口</value>
+  </data>
+  <data name="OverrideDefaultShortcuts" xml:space="preserve">
+    <value>覆盖默认快捷键（Win + 方向键）。</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>键盘快捷键</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="MoveLeft" xml:space="preserve">
+    <value>左移</value>
+  </data>
+  <data name="MoveRight" xml:space="preserve">
+    <value>右移</value>
+  </data>
+  <data name="StartStopSnapIt" xml:space="preserve">
+    <value>启动/停止 SnapIt</value>
+  </data>
+  <data name="CycleThroughLayouts" xml:space="preserve">
+    <value>循环当前屏幕的布局</value>
+  </data>
+</root>

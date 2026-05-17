@@ -7,6 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     x:Name="MainWindowView"
     Title="{x:Static c:Constants.AppName}"
@@ -109,10 +110,10 @@
                         VerticalAlignment="Center"
                         Appearance="Secondary"
                         Command="{Binding TrialVersionCommand}"
-                        Content="Trial Version"
+                        Content="{x:Static strings:Res.TrialVersion}"
                         FontSize="12"
                         FontWeight="Light"
-                        ToolTip="Trial Version"
+                        ToolTip="{x:Static strings:Res.TrialVersion}"
                         Visibility="{Binding IsTrial, Converter={StaticResource EqualVisibilityConverter}, ConverterParameter={StaticResource TrueValue}}" />
                 </Grid>
             </ui:TitleBar.Header>

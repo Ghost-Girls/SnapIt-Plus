@@ -7,8 +7,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="About"
+    Title="{x:Static strings:Res.About}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:AboutPage,
                                      IsDesignTimeCreatable=False}"
@@ -58,7 +59,7 @@
                 <StackPanel Grid.Row="1">
                     <TextBlock
                         Margin="0,12,0,0"
-                        Text="SnapIt is a window manager for Windows. Organizes your windows to improve your productivity when working with wide and multiple screens."
+                        Text="{x:Static strings:Res.AboutDescription}"
                         TextWrapping="Wrap" />
 
                     <!--<ui:HyperlinkButton
@@ -75,24 +76,24 @@
                                 <TextBlock
                                     FontSize="13"
                                     FontWeight="Medium"
-                                    Text="Give Feedback" />
+                                    Text="{x:Static strings:Res.GiveFeedback}" />
                                 <TextBlock
                                     FontSize="12"
                                     Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                    Text="Help me make SnapIt better. You can add new ideas and features, as well as vote other ideas and submit a bug here."
+                                    Text="{x:Static strings:Res.GiveFeedbackDescription}"
                                     TextWrapping="Wrap" />
                             </StackPanel>
                         </ui:CardExpander.Header>
                         <StackPanel>
                             <ui:HyperlinkButton
                                 Margin="0,0,0,4"
-                                Content="New ideas or report a bug"
+                                Content="{x:Static strings:Res.NewIdeasOrReportBug}"
                                 Icon="{ui:SymbolIcon Link24}"
                                 NavigateUri="{Binding Source={x:Static c:Constants.AppFeedbackUrl}, Converter={StaticResource UriConverter}}" />
 
                             <!--<ui:HyperlinkButton
                                 Command="{Binding RateReviewStoreClick}"
-                                Content="Rate and review on Microsoft Store"
+                                Content="{x:Static strings:Res.RateAndReviewOnStore}"
                                 Icon="{ui:SymbolIcon Link24}" />-->
                         </StackPanel>
                     </ui:CardExpander>
@@ -105,11 +106,11 @@
                             <TextBlock
                                 Margin="0,0,0,4"
                                 FontWeight="Medium"
-                                Text="What's New" />
+                                Text="{x:Static strings:Res.WhatsNew}" />
                             <TextBlock
                                 FontSize="11"
                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                Text="Check out new features and fixes" />
+                                Text="{x:Static strings:Res.WhatsNewDescription}" />
                         </StackPanel>
                     </ui:CardAction>
 
@@ -119,17 +120,17 @@
                                 <TextBlock
                                     Margin="0,0,0,4"
                                     FontWeight="Medium"
-                                    Text="Open Source" />
+                                    Text="{x:Static strings:Res.OpenSource}" />
                                 <TextBlock
                                     FontSize="11"
                                     Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                    Text="“Help improve the SnapIt by contributing to open-source project on GitHub!”" />
+                                    Text="{x:Static strings:Res.OpenSourceDescription}" />
                             </StackPanel>
                         </ui:CardControl.Header>
 
                         <ui:Anchor
                             Appearance="Secondary"
-                            Content="Github"
+                            Content="{x:Static strings:Res.Github}"
                             Icon="Link24"
                             NavigateUri="{Binding Source={x:Static c:Constants.GithubUrl}, Converter={StaticResource UriConverter}}" />
                     </ui:CardControl>
@@ -138,7 +139,7 @@
                 <Grid Grid.Row="2" Margin="0,24,0,0">
                     <ui:HyperlinkButton
                         HorizontalAlignment="Right"
-                        Content="Privacy policy"
+                        Content="{x:Static strings:Res.PrivacyPolicy}"
                         NavigateUri="{Binding Source={x:Static c:Constants.AppPrivacyUrl}, Converter={StaticResource UriConverter}}" />
                 </Grid>
             </Grid>

@@ -17,10 +17,13 @@ public class SettingsPageViewModel : ViewModelBase
     private readonly IThemeService themeService;
     private bool isStartupTaskActive;
     private UITheme selectedTheme;
+    private string selectedLanguage;
 
     private bool isStandalone;
 
     public ObservableCollection<UITheme> ThemeList { get; set; }
+
+    public ObservableCollection<string> LanguageList { get; set; }
 
     public UITheme SelectedTheme
     {
@@ -34,6 +37,21 @@ public class SettingsPageViewModel : ViewModelBase
             settingService.Settings.AppTheme = value;
             SetProperty(ref selectedTheme, value);
             ChangeTheme();
+        }
+    }
+
+    public string SelectedLanguage
+    {
+        get
+        {
+            selectedLanguage = settingService.Settings.SelectedLanguage;
+            return selectedLanguage;
+        }
+        set
+        {
+            settingService.Settings.SelectedLanguage = value;
+            SetProperty(ref selectedLanguage, value);
+            ChangeLanguage();
         }
     }
 
@@ -74,6 +92,7 @@ public class SettingsPageViewModel : ViewModelBase
             UITheme.Dark,
             UITheme.System
         ];
+        LanguageList = ["en-US", "zh-CN"];
 
 #if STANDALONE
                     IsStandalone = true;
@@ -118,5 +137,12 @@ public class SettingsPageViewModel : ViewModelBase
         }
 
         SystemThemeWatcher.Watch(System.Windows.Application.Current.MainWindow);
+    }
+
+    private void ChangeLanguage()
+    {
+        var culture = new System.Globalization.CultureInfo(selectedLanguage);
+        System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+        System.Threading.Thread.CurrentThread.CurrentCulture = culture;
     }
 }

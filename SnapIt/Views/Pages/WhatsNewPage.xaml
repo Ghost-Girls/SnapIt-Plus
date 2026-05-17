@@ -6,8 +6,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="What's New"
+    Title="{x:Static strings:Res.WhatsNew}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:WhatsNewPage,
                                      IsDesignTimeCreatable=False}"
@@ -29,7 +30,7 @@
                 Margin="0,0,0,8"
                 FontSize="18"
                 FontWeight="Medium"
-                Text="Current Version" />
+                Text="{x:Static strings:Res.CurrentVersion}" />
             <StackPanel DataContext="{Binding FirstChangeLog}">
                 <TextBlock
                     Margin="0,0,0,6"
@@ -47,7 +48,7 @@
                 </ItemsControl>
             </StackPanel>
 
-            <ui:CardExpander Margin="0,8,0,0" Header="Older Changes">
+            <ui:CardExpander Margin="0,8,0,0" Header="{x:Static strings:Res.OlderChanges}">
                 <ItemsControl ItemsSource="{Binding ChangeLogs}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

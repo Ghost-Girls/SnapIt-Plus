@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:SnapIt.Common.Converters;assembly=SnapIt.Common"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Exit="OnExit"
@@ -27,6 +28,8 @@
             <converter:InputDeviceConverter x:Key="InputDeviceConverter" />
             <converter:DoubleMultiplierConverter x:Key="DoubleMultiplierConverter" />
             <converter:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+
+            <ObjectDataProvider x:Key="Res" ObjectType="{x:Type strings:Res}" />
 
             <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
             <sys:Boolean x:Key="TrueValue">True</sys:Boolean>

@@ -6,9 +6,10 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     x:Name="WindowsViewPage"
-    Title="Windows"
+    Title="{x:Static strings:Res.Window}"
     d:DataContext="{d:DesignInstance local:WindowsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignWidth="800"
@@ -28,7 +29,7 @@
             Margin="0,-49,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Content="Watch tutorial"
+            Content="{x:Static strings:Res.WatchTutorial}"
             Icon="VideoClip24"
             NavigateUri="nuget.org/packages/WPF-UI/"
             Visibility="Collapsed" />
@@ -36,7 +37,7 @@
         <StackPanel>
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="Disable snapping for fullscreen application and games (recommended)"
+                Header="{x:Static strings:Res.DisableFullscreenSnapping}"
                 Icon="Empty">
                 <ui:ToggleSwitch IsChecked="{Binding DisableForFullscreen}" />
             </ui:CardControl>
@@ -47,11 +48,11 @@
                         <TextBlock
                             FontSize="13"
                             FontWeight="Medium"
-                            Text="Disable snapping for modal window (recommended)" />
+                            Text="{x:Static strings:Res.DisableModalSnapping}" />
                         <TextBlock
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="If enable snapping for modal, you need to exclude Start, Action Center and etc, to work correctly for windows."
+                            Text="{x:Static strings:Res.DisableModalSnappingDescription}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </ui:CardControl.Header>
@@ -64,11 +65,11 @@
                         <TextBlock
                             FontSize="13"
                             FontWeight="Medium"
-                            Text="Disable window cornering for Windows 11" />
+                            Text="{x:Static strings:Res.DisableWindowCornering}" />
                         <TextBlock
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="Removes rounded corners from windows when snapped (Windows 11 only)"
+                            Text="{x:Static strings:Res.DisableWindowCorneringDescription}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </ui:CardControl.Header>
@@ -84,11 +85,11 @@
                         <TextBlock
                             FontSize="13"
                             FontWeight="Medium"
-                            Text="Exclude Windows Default Modals" />
+                            Text="{x:Static strings:Res.ExcludeWindowsDefaultModals}" />
                         <TextBlock
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="This option excludes Windows modals like Start, Action Center and etc"
+                            Text="{x:Static strings:Res.ExcludeWindowsDefaultModalsDescription}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </ui:CardControl.Header>
@@ -97,7 +98,7 @@
                     HorizontalAlignment="Left"
                     Appearance="Secondary"
                     Command="{Binding ExcludeWindowsModalCommand}"
-                    Content="Exclude" />
+                    Content="{x:Static strings:Res.Exclude}" />
             </ui:CardControl>
 
             <ui:CardExpander IsExpanded="True">
@@ -111,11 +112,11 @@
                             <TextBlock
                                 FontSize="13"
                                 FontWeight="Medium"
-                                Text="Excluded Applications" />
+                                Text="{x:Static strings:Res.ExcludedApplications}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                Text="If you don't want to use snapping functionility for certain applications, you can add them to Excluded Applications."
+                                Text="{x:Static strings:Res.ExcludedApplicationsDescription}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
                         <ui:Button
@@ -125,7 +126,7 @@
                             VerticalAlignment="Center"
                             Appearance="Secondary"
                             Command="{Binding OpenExcludeApplicationCommand}"
-                            Content="New"
+                            Content="{x:Static strings:Res.New}"
                             Icon="{ui:SymbolIcon New24}" />
                     </Grid>
                 </ui:CardExpander.Header>
@@ -142,15 +143,15 @@
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding Keyword}"
-                            Header="Keyword" />
+                            Header="{x:Static strings:Res.Keyword}" />
                         <DataGridTextColumn
                             Width="100"
                             Binding="{Binding MatchRule}"
-                            Header="Match Rule" />
+                            Header="{x:Static strings:Res.MatchRule}" />
                         <DataGridTextColumn
                             Width="156"
                             Binding="{Binding AppliedFor, Converter={StaticResource InputDeviceConverter}}"
-                            Header="Applied For" />
+                            Header="{x:Static strings:Res.AppliedFor}" />
                         <DataGridTemplateColumn Width="36" Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -167,12 +168,12 @@
                                                 <ui:MenuItem
                                                     Command="{Binding Parent.PlacementTarget.Tag.OpenExcludeApplicationCommand, RelativeSource={RelativeSource Self}}"
                                                     CommandParameter="{Binding}"
-                                                    Header="Edit"
+                                                    Header="{x:Static strings:Res.Edit}"
                                                     Icon="{ui:SymbolIcon Edit24}" />
                                                 <ui:MenuItem
                                                     Command="{Binding Parent.PlacementTarget.Tag.RemoveExcludedApplicationCommand, RelativeSource={RelativeSource Self}}"
                                                     CommandParameter="{Binding}"
-                                                    Header="Delete"
+                                                    Header="{x:Static strings:Res.Delete}"
                                                     Icon="{ui:SymbolIcon Delete24}" />
                                             </ContextMenu>
                                         </ui:Button.ContextMenu>

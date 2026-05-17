@@ -8,8 +8,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Dashboard"
+    Title="{x:Static strings:Res.Dashboard}"
     Margin="0,42,0,0"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
@@ -71,7 +72,7 @@
                             FontSize="18"
                             FontWeight="Light"
                             Foreground="#B7FFFFFF"
-                            Text="The simple, intuitive and powerful window manager for Windows."
+                            Text="{x:Static strings:Res.DashboardDescription}"
                             TextWrapping="Wrap" />
                     </Border>
                 </StackPanel>
@@ -101,12 +102,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Layout"
+                        Text="{x:Static strings:Res.Layout}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Select &amp; Edit layouts" />
+                        Text="{x:Static strings:Res.SelectAndEditLayouts}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -143,12 +144,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Mouse"
+                        Text="{x:Static strings:Res.Mouse}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Configure mouse" />
+                        Text="{x:Static strings:Res.ConfigureMouse}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -163,12 +164,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Keyboard"
+                        Text="{x:Static strings:Res.Keyboard}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Configure keyboard" />
+                        Text="{x:Static strings:Res.ConfigureKeyboard}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -183,12 +184,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Window"
+                        Text="{x:Static strings:Res.Window}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Configure window" />
+                        Text="{x:Static strings:Res.ConfigureWindow}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -203,12 +204,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Theme"
+                        Text="{x:Static strings:Res.Theme}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Customize layout IU" />
+                        Text="{x:Static strings:Res.CustomizeLayoutUI}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -225,12 +226,12 @@
                     <ui:TextBlock
                         Margin="0"
                         FontTypography="BodyStrong"
-                        Text="Tutorials"
+                        Text="{x:Static strings:Res.Tutorials}"
                         TextWrapping="WrapWithOverflow" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Learn &amp; Explore" />
+                        Text="{x:Static strings:Res.LearnAndExplore}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -247,7 +248,7 @@
                         Margin="0"
                         FontSize="13"
                         FontWeight="Medium"
-                        Text="Settings" />
+                        Text="{x:Static strings:Res.Settings}" />
                 </StackPanel>
             </ui:CardAction>
 
@@ -264,7 +265,7 @@
                         Margin="0"
                         FontSize="13"
                         FontWeight="Medium"
-                        Text="About" />
+                        Text="{x:Static strings:Res.About}" />
                 </StackPanel>
             </ui:CardAction>
         </Grid>
@@ -275,30 +276,30 @@
                     Margin="0,0,6,0"
                     FontSize="16"
                     Symbol="Lightbulb24" />
-                <TextBlock FontSize="16" Text="Getting Started" />
+                <TextBlock FontSize="16" Text="{x:Static strings:Res.GettingStarted}" />
             </StackPanel>
 
             <ui:HyperlinkButton
                 Margin="0,0,0,4"
-                Content="Introduction"
+                Content="{x:Static strings:Res.Introduction}"
                 Icon="{ui:SymbolIcon VideoClip24}"
                 NavigateUri="https://youtu.be/3i1qF8BpcMU" />
 
             <ui:HyperlinkButton
                 Margin="0,0,0,4"
-                Content="How to get started?"
+                Content="{x:Static strings:Res.HowToGetStarted}"
                 Icon="{ui:SymbolIcon VideoClip24}"
                 NavigateUri="https://youtu.be/SAOJxPbm9wk" />
 
             <ui:HyperlinkButton
                 Margin="0,0,0,4"
-                Content="Configure and use Apps"
+                Content="{x:Static strings:Res.ConfigureAndUseApps}"
                 Icon="{ui:SymbolIcon VideoClip24}"
                 NavigateUri="https://youtu.be/5DbA2NLiI9E" />
 
             <ui:HyperlinkButton
                 Margin="0,0,0,4"
-                Content="Quick Tips"
+                Content="{x:Static strings:Res.QuickTips}"
                 Icon="{ui:SymbolIcon VideoClip24}"
                 NavigateUri="https://www.nuget.org/packages/WPF-ui/"
                 Visibility="Collapsed" />

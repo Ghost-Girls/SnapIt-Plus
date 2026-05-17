@@ -7,8 +7,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Keyboard"
+    Title="{x:Static strings:Res.Keyboard}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:KeyboardSettingsPage,
                                      IsDesignTimeCreatable=False}"
@@ -29,13 +30,13 @@
             Margin="0,-49,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Content="Watch tutorial"
+            Content="{x:Static strings:Res.WatchTutorial}"
             Icon="{ui:SymbolIcon VideoClip24}"
             NavigateUri="nuget.org/packages/WPF-UI/"
             Visibility="Collapsed" />
 
         <StackPanel>
-            <ui:CardControl Margin="0,0,0,8" Header="Use keyboard to snap window">
+            <ui:CardControl Margin="0,0,0,8" Header="{x:Static strings:Res.UseKeyboardToSnapWindow}">
                 <ui:ToggleSwitch IsChecked="{Binding EnableKeyboard}" />
             </ui:CardControl>
 
@@ -45,11 +46,11 @@
                         <TextBlock
                             FontSize="13"
                             FontWeight="Medium"
-                            Text="Use Win shortcust to snap window" />
+                            Text="{x:Static strings:Res.UseWinShortcutToSnapWindow}" />
                         <TextBlock
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="Override default shortcuts (Win + Arrow)." />
+                            Text="{x:Static strings:Res.OverrideDefaultShortcuts}" />
                     </StackPanel>
                 </ui:CardControl.Header>
                 <ui:Button
@@ -57,15 +58,15 @@
                     HorizontalAlignment="Left"
                     Appearance="Secondary"
                     Command="{Binding OverrideDefaultSnapCommand}"
-                    Content="Apply" />
+                    Content="{x:Static strings:Res.Apply}" />
             </ui:CardControl>
 
-            <ui:CardExpander Header="Keyboard Shortcuts" IsExpanded="True">
+            <ui:CardExpander Header="{x:Static strings:Res.KeyboardShortcuts}" IsExpanded="True">
                 <StackPanel>
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Move Up"
+                        Header="{x:Static strings:Res.MoveUp}"
                         Icon="{ui:SymbolIcon ArrowUp24}">
                         <controls:HotkeyEditorControl
                             Width="164"
@@ -75,7 +76,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Move Down"
+                        Header="{x:Static strings:Res.MoveDown}"
                         Icon="{ui:SymbolIcon ArrowDown24}">
                         <controls:HotkeyEditorControl
                             Width="164"
@@ -85,7 +86,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Move Left"
+                        Header="{x:Static strings:Res.MoveLeft}"
                         Icon="{ui:SymbolIcon ArrowLeft24}">
                         <controls:HotkeyEditorControl
                             Width="164"
@@ -95,7 +96,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Move Right"
+                        Header="{x:Static strings:Res.MoveRight}"
                         Icon="{ui:SymbolIcon ArrowRight24}">
                         <controls:HotkeyEditorControl
                             Width="164"
@@ -105,7 +106,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Start/Stop SnapIt"
+                        Header="{x:Static strings:Res.StartStopSnapIt}"
                         Icon="{ui:SymbolIcon VideoPlayPause24}">
                         <controls:HotkeyEditorControl
                             Width="164"
@@ -115,7 +116,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Cycle through layouts for active screen"
+                        Header="{x:Static strings:Res.CycleThroughLayouts}"
                         Icon="{ui:SymbolIcon ArrowSwap24}">
                         <controls:HotkeyEditorControl
                             Width="164"

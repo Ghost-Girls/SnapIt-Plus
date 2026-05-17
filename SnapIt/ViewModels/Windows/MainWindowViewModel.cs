@@ -72,33 +72,33 @@ public class MainWindowViewModel : ViewModelBase
 
         MenuItems =
         [
-            new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
+            new NavigationViewItem(Strings.Res.Home, SymbolRegular.Home24, typeof(DashboardPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Layout", SymbolRegular.DataTreemap24, typeof(LayoutPage)),
+            new NavigationViewItem(Strings.Res.Layout, SymbolRegular.DataTreemap24, typeof(LayoutPage)),
             new NavigationViewItem()
             {
-                Content = "Mouse",
+                Content = Strings.Res.Mouse,
                 Icon = new FontIcon { Glyph = "", FontFamily = new FontFamily("Segoe Fluent Icons") },
                 TargetPageType = typeof(MouseSettingsPage)
             },
-            new NavigationViewItem("Keyboard", SymbolRegular.Keyboard24, typeof(KeyboardSettingsPage)),
-            new NavigationViewItem("Window", SymbolRegular.CalendarMultiple24, typeof(WindowsPage)),
-            new NavigationViewItem("Theme", SymbolRegular.Color24, typeof(ThemePage)),
+            new NavigationViewItem(Strings.Res.Keyboard, SymbolRegular.Keyboard24, typeof(KeyboardSettingsPage)),
+            new NavigationViewItem(Strings.Res.Window, SymbolRegular.CalendarMultiple24, typeof(WindowsPage)),
+            new NavigationViewItem(Strings.Res.Theme, SymbolRegular.Color24, typeof(ThemePage)),
             new NavigationViewItem()
             {
-                Content = "Tutorials",
+                Content = Strings.Res.Tutorials,
                 Icon = new FontIcon { Glyph = "", FontFamily = new FontFamily("Segoe Fluent Icons") },
                 TargetPageType = typeof(TutorialsPage)
             },
-            new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage)),
+            new NavigationViewItem(Strings.Res.Settings, SymbolRegular.Settings24, typeof(SettingsPage)),
             new NavigationViewItem()
             {
-                Content = "About",
+                Content = Strings.Res.About,
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Info24 },
                 TargetPageType = typeof(AboutPage),
                 MenuItemsSource = new object[]
                 {
-                    new NavigationViewItem("What's New", typeof(WhatsNewPage))
+                    new NavigationViewItem(Strings.Res.WhatsNew, typeof(WhatsNewPage))
                 }
             }
         ];

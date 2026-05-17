@@ -6,8 +6,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Settings"
+    Title="{x:Static strings:Res.Settings}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
@@ -28,7 +29,7 @@
             Margin="0,-49,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Content="Watch tutorial"
+            Content="{x:Static strings:Res.WatchTutorial}"
             Icon="VideoClip24"
             NavigateUri="nuget.org/packages/WPF-UI/"
             Visibility="Collapsed" />
@@ -37,21 +38,21 @@
 
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="Start SnapIt when I start Windows"
+                Header="{x:Static strings:Res.StartSnapItWhenIStartWindows}"
                 Icon="Empty">
                 <ui:ToggleSwitch IsChecked="{Binding IsStartupTaskActive}" />
             </ui:CardControl>
 
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="Start SnapIt minimized to tray"
+                Header="{x:Static strings:Res.StartSnapItMinimizedToTray}"
                 Icon="Empty">
                 <ui:ToggleSwitch IsChecked="{Binding IsMinimizeTray}" />
             </ui:CardControl>
 
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="Run as administrator (needs to be restarted)"
+                Header="{x:Static strings:Res.RunAsAdministrator}"
                 Icon="Empty">
                 <ui:ToggleSwitch IsChecked="{Binding IsRunAsAdmin}" />
             </ui:CardControl>
@@ -59,11 +60,11 @@
             <ui:CardControl Margin="0,0,0,8">
                 <ui:CardControl.Header>
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock FontSize="14" Text="Enable mouse hover animations" />
+                        <TextBlock FontSize="14" Text="{x:Static strings:Res.EnableMouseHoverAnimations}" />
                         <TextBlock
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="It is recommend to disable it if hovering not responsive enough."
+                            Text="{x:Static strings:Res.MouseHoverAnimationDescription}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </ui:CardControl.Header>
@@ -72,7 +73,7 @@
 
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="Check for new version"
+                Header="{x:Static strings:Res.CheckForNewVersion}"
                 Icon="Empty"
                 Visibility="{Binding IsStandalone, Converter={StaticResource EqualVisibilityConverter}, ConverterParameter={StaticResource TrueValue}}">
                 <ui:ToggleSwitch IsChecked="{Binding CheckForNewVersion}" />
@@ -80,12 +81,22 @@
 
             <ui:CardControl
                 Margin="0,0,0,8"
-                Header="App Theme"
+                Header="{x:Static strings:Res.AppTheme}"
                 Icon="Empty">
                 <ComboBox
                     Width="106"
                     ItemsSource="{Binding ThemeList}"
                     SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />
+            </ui:CardControl>
+
+            <ui:CardControl
+                Margin="0,0,0,8"
+                Header="{x:Static strings:Res.Language}"
+                Icon="Empty">
+                <ComboBox
+                    Width="106"
+                    ItemsSource="{Binding LanguageList}"
+                    SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" />
             </ui:CardControl>
         </StackPanel>
     </Grid>

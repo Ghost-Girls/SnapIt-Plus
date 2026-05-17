@@ -6,8 +6,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Tutorials"
+    Title="{x:Static strings:Res.Tutorials}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:TutorialsPage,
                                      IsDesignTimeCreatable=False}"
@@ -27,7 +28,7 @@
         <StackPanel>
             <!--<ui:CardControl
                     Margin="0,0,0,12"
-                    Header="Getting Started"
+                    Header="{x:Static strings:Res.GettingStarted}"
                     Icon="{ui:SymbolIcon Lightbulb24}" />-->
 
             <StackPanel Margin="0,0,0,12" Orientation="Horizontal">
@@ -37,7 +38,7 @@
                     FontSize="16"
                     Foreground="{StaticResource PaletteYellowBrush}"
                     Symbol="Lightbulb24" />
-                <ui:TextBlock FontSize="16" Text="Getting Started" />
+                <ui:TextBlock FontSize="16" Text="{x:Static strings:Res.GettingStarted}" />
             </StackPanel>
 
             <Grid Margin="0,0,0,12">
@@ -55,7 +56,7 @@
                     NavigateUri="https://youtu.be/3i1qF8BpcMU">
                     <StackPanel Margin="24">
                         <ui:SymbolIcon FontSize="36" Symbol="VideoClip24" />
-                        <TextBlock Text="Introduction" />
+                        <TextBlock Text="{x:Static strings:Res.Introduction}" />
                     </StackPanel>
                 </ui:Anchor>
 
@@ -67,7 +68,7 @@
                     NavigateUri="https://youtu.be/SAOJxPbm9wk">
                     <StackPanel Margin="24">
                         <ui:SymbolIcon FontSize="36" Symbol="VideoClip24" />
-                        <TextBlock Text="How to get started?" />
+                        <TextBlock Text="{x:Static strings:Res.HowToGetStarted}" />
                     </StackPanel>
                 </ui:Anchor>
 
@@ -79,7 +80,7 @@
                     NavigateUri="https://youtu.be/5DbA2NLiI9E">
                     <StackPanel Margin="12,24">
                         <ui:SymbolIcon FontSize="36" Symbol="VideoClip24" />
-                        <TextBlock Text="Configure and use Apps" />
+                        <TextBlock Text="{x:Static strings:Res.ConfigureAndUseApps}" />
                     </StackPanel>
                 </ui:Anchor>
 
@@ -90,7 +91,7 @@
                         Icon="Empty">
                         <StackPanel Margin="24">
                             <ui:SymbolIcon FontSize="36" Symbol="VideoClip24" />
-                            <TextBlock Text="Quick Tips" />
+                            <TextBlock Text="{x:Static strings:Res.QuickTips}" />
                         </StackPanel>
                     </ui:Anchor>-->
             </Grid>
@@ -100,23 +101,23 @@
                         Margin="0,0,6,0"
                         FontSize="16"
                         Symbol="Bookmark24" />
-                    <TextBlock FontSize="16" Text="Other Topics" />
+                    <TextBlock FontSize="16" Text="{x:Static strings:Res.OtherTopics}" />
                 </StackPanel>
             -->
             <!--<ui:CardControl
                     Margin="0,0,0,12"
-                    Header="All Topics"
+                    Header="{x:Static strings:Res.AllTopics}"
                     Icon="Bookmark24" />-->
             <!--
 
                 <ui:Hyperlink
                     Margin="0,0,0,4"
-                    Content="Select, Create and Edit Layouts"
+                    Content="{x:Static strings:Res.SelectCreateAndEditLayouts}"
                     Icon="VideoClip24" />
 
                 <ui:Hyperlink
                     Margin="0,0,0,4"
-                    Content="How to use and configure Apps"
+                    Content="{x:Static strings:Res.HowToUseAndConfigureApps}"
                     Icon="VideoClip24" />-->
         </StackPanel>
     </Grid>

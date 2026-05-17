@@ -9,7 +9,8 @@
     xmlns:color="clr-namespace:ColorPickerLib.Controls;assembly=ColorPickerLib"
     xmlns:controls="clr-namespace:SnapIt.Controls;assembly=SnapIt.Controls"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
-    Title="Theme"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
+    Title="{x:Static strings:Res.Theme}"
     Margin="0,24,0,0"
     d:DataContext="{d:DesignInstance local:ThemePage,
                                      IsDesignTimeCreatable=False}"
@@ -35,7 +36,7 @@
             Margin="0,-49,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Content="Watch tutorial"
+            Content="{x:Static strings:Res.WatchTutorial}"
             Icon="VideoClip24"
             NavigateUri="nuget.org/packages/WPF-UI/"
             Visibility="Collapsed" />
@@ -64,14 +65,14 @@
                 <TextBlock
                     VerticalAlignment="Center"
                     FontWeight="Medium"
-                    Text="Do you want to apply changes?" />
+                    Text="{x:Static strings:Res.ApplyChangesQuestion}" />
                 <ui:Button
                     Grid.Column="1"
                     Height="32"
                     Margin="12,0,0,0"
                     Appearance="Secondary"
                     Command="{Binding ApplyChangesCommand}"
-                    Content="Apply Changes" />
+                    Content="{x:Static strings:Res.ApplyChanges}" />
                 <ui:Button
                     Grid.Column="2"
                     Height="32"
@@ -86,7 +87,7 @@
             <StackPanel>
                 <ui:CardControl
                     Margin="0,0,0,8"
-                    Header="Preview"
+                    Header="{x:Static strings:Res.Preview}"
                     Icon="{ui:SymbolIcon DataTreemap24}" />
 
                 <Border
@@ -111,14 +112,14 @@
 
             <ui:CardExpander
                 Margin="0,0,0,8"
-                Header="Area Theme"
+                Header="{x:Static strings:Res.AreaTheme}"
                 Icon="{ui:SymbolIcon Color24}"
                 IsExpanded="True">
 
                 <StackPanel>
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Overlay color"
+                        Header="{x:Static strings:Res.OverlayColor}"
                         Icon="Empty">
                         <color:ColorPicker
                             Width="256"
@@ -131,7 +132,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Highlight color"
+                        Header="{x:Static strings:Res.HighlightColor}"
                         Icon="Empty">
                         <color:ColorPicker
                             Width="256"
@@ -144,7 +145,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Overall Opacity"
+                        Header="{x:Static strings:Res.OverallOpacity}"
                         Icon="Empty">
                         <Slider
                             Width="256"
@@ -158,7 +159,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Border color"
+                        Header="{x:Static strings:Res.BorderColor}"
                         Icon="Empty">
                         <color:ColorPicker
                             Width="256"
@@ -171,7 +172,7 @@
 
                     <ui:CardControl
                         Margin="0,0,0,8"
-                        Header="Border thickness"
+                        Header="{x:Static strings:Res.BorderThickness}"
                         Icon="Empty">
                         <Slider
                             Width="256"

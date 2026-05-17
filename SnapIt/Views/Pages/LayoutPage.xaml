@@ -7,8 +7,9 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SnapIt.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="clr-namespace:SnapIt.Strings"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Layout"
+    Title="{x:Static strings:Res.Layout}"
     d:DataContext="{d:DesignInstance local:LayoutPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignWidth="908"
@@ -83,7 +84,7 @@
             <ui:HyperlinkButton
                 x:Name="TutorialHyperLink"
                 Padding="11,5,4,6"
-                Content="Watch tutorial  "
+                Content="{x:Static strings:Res.WatchTutorial}"
                 Icon="{ui:SymbolIcon VideoClip24}"
                 NavigateUri="http://nuget.org/packages/WPF-UI/" />
         </Grid>-->
@@ -103,7 +104,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel>
-                <TextBlock FontWeight="Medium" Text="Layout Name" />
+                <TextBlock FontWeight="Medium" Text="{x:Static strings:Res.LayoutName}" />
                 <TextBox
                     Margin="0,6,0,0"
                     HorizontalAlignment="Stretch"
@@ -123,11 +124,11 @@
                             <TextBlock
                                 FontSize="13"
                                 FontWeight="Medium"
-                                Text="Screens" />
+                                Text="{x:Static strings:Res.Screens}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                Text="Select screen and proceed to layout section."
+                                Text="{x:Static strings:Res.ScreensDescription}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
                     </ui:CardControl.Header>
@@ -266,11 +267,11 @@
                             <TextBlock
                                 FontSize="13"
                                 FontWeight="Medium"
-                                Text="Change Layouts" />
+                                Text="{x:Static strings:Res.ChangeLayouts}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                Text="Select layout to apply it to selected screen. You can also create new layout or edit layout by clicking three-dots menu."
+                                Text="{x:Static strings:Res.ChangeLayoutsDescription}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
                     </ui:CardControl.Header>
@@ -280,13 +281,13 @@
                             Margin="0,0,12,0"
                             Appearance="Secondary"
                             Command="{Binding NewLayoutCommand}"
-                            Content="New"
+                            Content="{x:Static strings:Res.New}"
                             Icon="{ui:SymbolIcon New24}" />
 
                         <ui:Button
                             Appearance="Secondary"
                             Command="{Binding ImportLayoutCommand}"
-                            Content="Import"
+                            Content="{x:Static strings:Res.Import}"
                             Icon="{ui:SymbolIcon ArrowImport24}" />
                     </StackPanel>
                 </ui:CardControl>
@@ -358,21 +359,21 @@
                                         <ui:MenuItem
                                             Command="{Binding Parent.PlacementTarget.Tag.DesignLayoutCommand, RelativeSource={RelativeSource Self}}"
                                             CommandParameter="{Binding}"
-                                            Header="Open in Designer" />
+                                            Header="{x:Static strings:Res.OpenInDesigner}" />
                                         <Separator />
                                         <ui:MenuItem
                                             Command="{Binding Parent.PlacementTarget.Tag.OpenRenameDialogCommand, RelativeSource={RelativeSource Self}}"
                                             CommandParameter="{Binding}"
-                                            Header="Rename" />
+                                            Header="{x:Static strings:Res.Rename}" />
                                         <ui:MenuItem
                                             Command="{Binding Parent.PlacementTarget.Tag.DeleteLayoutCommand, RelativeSource={RelativeSource Self}}"
                                             CommandParameter="{Binding}"
-                                            Header="Delete" />
+                                            Header="{x:Static strings:Res.Delete}" />
                                         <Separator />
                                         <ui:MenuItem
                                             Command="{Binding Parent.PlacementTarget.Tag.ExportLayoutCommand, RelativeSource={RelativeSource Self}}"
                                             CommandParameter="{Binding}"
-                                            Header="Export" />
+                                            Header="{x:Static strings:Res.Export}" />
                                     </ContextMenu>
                                 </ui:Button.ContextMenu>
                                 <i:Interaction.Triggers>

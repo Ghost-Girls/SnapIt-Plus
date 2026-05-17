@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WatchTutorial" xml:space="preserve">
+    <value>Watch tutorial</value>
+  </data>
+  <data name="StartSnapItWhenIStartWindows" xml:space="preserve">
+    <value>Start SnapIt when I start Windows</value>
+  </data>
+  <data name="StartSnapItMinimizedToTray" xml:space="preserve">
+    <value>Start SnapIt minimized to tray</value>
+  </data>
+  <data name="RunAsAdministrator" xml:space="preserve">
+    <value>Run as administrator (needs to be restarted)</value>
+  </data>
+  <data name="EnableMouseHoverAnimations" xml:space="preserve">
+    <value>Enable mouse hover animations</value>
+  </data>
+  <data name="MouseHoverAnimationDescription" xml:space="preserve">
+    <value>It is recommend to disable it if hovering not responsive enough.</value>
+  </data>
+  <data name="CheckForNewVersion" xml:space="preserve">
+    <value>Check for new version</value>
+  </data>
+  <data name="AppTheme" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Mouse" xml:space="preserve">
+    <value>Mouse</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Tutorials" xml:space="preserve">
+    <value>Tutorials</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="TrialVersion" xml:space="preserve">
+    <value>Trial Version</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Layouts" xml:space="preserve">
+    <value>Layouts</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="NewIdeasOrReportBug" xml:space="preserve">
+    <value>New ideas or report a bug</value>
+  </data>
+  <data name="RateAndReviewOnStore" xml:space="preserve">
+    <value>Rate and review on Microsoft Store</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="Secondary" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="DashboardDescription" xml:space="preserve">
+    <value>The simple, intuitive and powerful window manager for Windows.</value>
+  </data>
+  <data name="SelectAndEditLayouts" xml:space="preserve">
+    <value>Select &amp; Edit layouts</value>
+  </data>
+  <data name="ConfigureMouse" xml:space="preserve">
+    <value>Configure mouse</value>
+  </data>
+  <data name="ConfigureKeyboard" xml:space="preserve">
+    <value>Configure keyboard</value>
+  </data>
+  <data name="ConfigureWindow" xml:space="preserve">
+    <value>Configure window</value>
+  </data>
+  <data name="CustomizeLayoutUI" xml:space="preserve">
+    <value>Customize layout UI</value>
+  </data>
+  <data name="LearnAndExplore" xml:space="preserve">
+    <value>Learn &amp; Explore</value>
+  </data>
+  <data name="GettingStarted" xml:space="preserve">
+    <value>Getting Started</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="HowToGetStarted" xml:space="preserve">
+    <value>How to get started?</value>
+  </data>
+  <data name="ConfigureAndUseApps" xml:space="preserve">
+    <value>Configure and use Apps</value>
+  </data>
+  <data name="QuickTips" xml:space="preserve">
+    <value>Quick Tips</value>
+  </data>
+  <data name="OriginalAuthor" xml:space="preserve">
+    <value>Original Author</value>
+  </data>
+  <data name="Maintainer" xml:space="preserve">
+    <value>Maintainer</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>Source Code</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>SnapIt is a window manager for Windows. Organizes your windows to improve your productivity when working with wide and multiple screens.</value>
+  </data>
+  <data name="GiveFeedback" xml:space="preserve">
+    <value>Give Feedback</value>
+  </data>
+  <data name="GiveFeedbackDescription" xml:space="preserve">
+    <value>Help me make SnapIt better. You can add new ideas and features, as well as vote other ideas and submit a bug here.</value>
+  </data>
+  <data name="WhatsNewDescription" xml:space="preserve">
+    <value>Check out new features and fixes</value>
+  </data>
+  <data name="OpenSource" xml:space="preserve">
+    <value>Open Source</value>
+  </data>
+  <data name="OpenSourceDescription" xml:space="preserve">
+    <value>"Help improve the SnapIt by contributing to open-source project on GitHub!"</value>
+  </data>
+  <data name="Github" xml:space="preserve">
+    <value>Github</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>SnapIt is a window manager for Windows that significantly boosts productivity in single-screen and multi-screen environments.</value>
+  </data>
+  <data name="WatchTutorial" xml:space="preserve">
+    <value>Watch Tutorial</value>
+  </data>
+  <data name="DisableFullscreenSnapping" xml:space="preserve">
+    <value>Disable snapping for fullscreen application and games (recommended)</value>
+  </data>
+  <data name="DisableModalSnapping" xml:space="preserve">
+    <value>Disable snapping for modal window (recommended)</value>
+  </data>
+  <data name="DisableModalSnappingDescription" xml:space="preserve">
+    <value>If enable snapping for modal, you need to exclude Start, Action Center and etc, to work correctly for windows.</value>
+  </data>
+  <data name="DisableWindowCornering" xml:space="preserve">
+    <value>Disable window cornering for Windows 11</value>
+  </data>
+  <data name="DisableWindowCorneringDescription" xml:space="preserve">
+    <value>Removes rounded corners from windows when snapped (Windows 11 only)</value>
+  </data>
+  <data name="ExcludeWindowsDefaultModals" xml:space="preserve">
+    <value>Exclude Windows Default Modals</value>
+  </data>
+  <data name="ExcludeWindowsDefaultModalsDescription" xml:space="preserve">
+    <value>This option excludes Windows modals like Start, Action Center and etc</value>
+  </data>
+  <data name="Exclude" xml:space="preserve">
+    <value>Exclude</value>
+  </data>
+  <data name="ExcludedApplications" xml:space="preserve">
+    <value>Excluded Applications</value>
+  </data>
+  <data name="ExcludedApplicationsDescription" xml:space="preserve">
+    <value>If you don't want to use snapping functionility for certain applications, you can add them to Excluded Applications.</value>
+  </data>
+  <data name="CurrentVersion" xml:space="preserve">
+    <value>Current Version</value>
+  </data>
+  <data name="OlderChanges" xml:space="preserve">
+    <value>Older Changes</value>
+  </data>
+  <data name="OtherTopics" xml:space="preserve">
+    <value>Other Topics</value>
+  </data>
+  <data name="AllTopics" xml:space="preserve">
+    <value>All Topics</value>
+  </data>
+  <data name="SelectCreateAndEditLayouts" xml:space="preserve">
+    <value>Select, Create and Edit Layouts</value>
+  </data>
+  <data name="HowToUseAndConfigureApps" xml:space="preserve">
+    <value>How to use and configure Apps</value>
+  </data>
+  <data name="LayoutName" xml:space="preserve">
+    <value>Layout Name</value>
+  </data>
+  <data name="Screens" xml:space="preserve">
+    <value>Screens</value>
+  </data>
+  <data name="ScreensDescription" xml:space="preserve">
+    <value>Select screen and proceed to layout section.</value>
+  </data>
+  <data name="ChangeLayouts" xml:space="preserve">
+    <value>Change Layouts</value>
+  </data>
+  <data name="ChangeLayoutsDescription" xml:space="preserve">
+    <value>Select layout to apply it to selected screen. You can also create new layout or edit layout by clicking three-dots menu.</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="OpenInDesigner" xml:space="preserve">
+    <value>Open in Designer</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ApplyChanges" xml:space="preserve">
+    <value>Apply Changes</value>
+  </data>
+  <data name="ApplyChangesQuestion" xml:space="preserve">
+    <value>Do you want to apply changes?</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="AreaTheme" xml:space="preserve">
+    <value>Area Theme</value>
+  </data>
+  <data name="OverlayColor" xml:space="preserve">
+    <value>Overlay color</value>
+  </data>
+  <data name="HighlightColor" xml:space="preserve">
+    <value>Highlight color</value>
+  </data>
+  <data name="OverallOpacity" xml:space="preserve">
+    <value>Overall Opacity</value>
+  </data>
+  <data name="BorderColor" xml:space="preserve">
+    <value>Border color</value>
+  </data>
+  <data name="BorderThickness" xml:space="preserve">
+    <value>Border thickness</value>
+  </data>
+  <data name="Keyword" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="MatchRule" xml:space="preserve">
+    <value>Match Rule</value>
+  </data>
+  <data name="AppliedFor" xml:space="preserve">
+    <value>Applied For</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="UseMouseToSnapWindow" xml:space="preserve">
+    <value>Use mouse to snap window</value>
+  </data>
+  <data name="DelayMovementToActivateSnapping" xml:space="preserve">
+    <value>Delay movement to activate snapping (in pixel)</value>
+  </data>
+  <data name="DelayMovementDisabledWhenHoldKeyInUse" xml:space="preserve">
+    <value>Delay movement is disabled when hold key in use</value>
+  </data>
+  <data name="OnlyUseWindowTitleToSnapWindow" xml:space="preserve">
+    <value>Only use window title to snap window</value>
+  </data>
+  <data name="OnlyUseWindowTitleDescription" xml:space="preserve">
+    <value>It is recommend to enable it if you choose Left mouse button for snapping.</value>
+  </data>
+  <data name="MouseButtonForSnapping" xml:space="preserve">
+    <value>Mouse button for snapping window</value>
+  </data>
+  <data name="UseHoldKey" xml:space="preserve">
+    <value>Use Hold key</value>
+  </data>
+  <data name="HoldKey" xml:space="preserve">
+    <value>Hold Key</value>
+  </data>
+  <data name="HoldKeyBehaviour" xml:space="preserve">
+    <value>Hold Key Behaviour</value>
+  </data>
+  <data name="UseKeyboardToSnapWindow" xml:space="preserve">
+    <value>Use keyboard to snap window</value>
+  </data>
+  <data name="UseWinShortcutToSnapWindow" xml:space="preserve">
+    <value>Use Win shortcust to snap window</value>
+  </data>
+  <data name="OverrideDefaultShortcuts" xml:space="preserve">
+    <value>Override default shortcuts (Win + Arrow).</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="MoveLeft" xml:space="preserve">
+    <value>Move Left</value>
+  </data>
+  <data name="MoveRight" xml:space="preserve">
+    <value>Move Right</value>
+  </data>
+  <data name="StartStopSnapIt" xml:space="preserve">
+    <value>Start/Stop SnapIt</value>
+  </data>
+  <data name="CycleThroughLayouts" xml:space="preserve">
+    <value>Cycle through layouts for active screen</value>
+  </data>
+</root>

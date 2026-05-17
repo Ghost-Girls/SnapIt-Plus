@@ -102,7 +102,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         startItemMenu = new MenuItem
         {
-            Header = "Start",
+            Header = Strings.Res.Start,
             Icon = new SymbolIcon(SymbolRegular.Play24),
             Command = StartStopCommand
         };
@@ -110,7 +110,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         stopItemMenu = new MenuItem
         {
-            Header = "Stop",
+            Header = Strings.Res.Stop,
             Icon = new SymbolIcon(SymbolRegular.Stop24),
             Command = StartStopCommand
         };
@@ -120,7 +120,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         ContextMenu.Items.Add(new MenuItem
         {
-            Header = "Home",
+            Header = Strings.Res.Home,
             Icon = new SymbolIcon(SymbolRegular.Home24),
             Command = NavigateClickViewCommand,
             CommandParameter = "dashboard"
@@ -130,7 +130,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         layoutItem = new MenuItem
         {
-            Header = "Layouts",
+            Header = Strings.Res.Layouts,
             Icon = new SymbolIcon(SymbolRegular.DataTreemap24),
             Command = NavigateClickViewCommand,
             CommandParameter = "layout"
@@ -139,7 +139,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         ContextMenu.Items.Add(new MenuItem
         {
-            Header = "Settings",
+            Header = Strings.Res.Settings,
             Icon = new SymbolIcon(SymbolRegular.Settings24),
             Command = NavigateClickViewCommand,
             CommandParameter = "settings"
@@ -149,25 +149,25 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         var feedback = new MenuItem
         {
-            Header = "Feedback",
+            Header = Strings.Res.Feedback,
             Icon = new SymbolIcon(SymbolRegular.Heart24)
         };
         feedback.Items.Add(new MenuItem
         {
-            Header = "New ideas or report a bug",
+            Header = Strings.Res.NewIdeasOrReportBug,
             Command = HandleLinkCommand,
             CommandParameter = Constants.AppFeedbackUrl
         });
         feedback.Items.Add(new MenuItem
         {
-            Header = "Rate and review on Microsoft Store",
+            Header = Strings.Res.RateAndReviewOnStore,
             Command = RateReviewStoreCommand
         });
         ContextMenu.Items.Add(feedback);
 
         ContextMenu.Items.Add(new MenuItem
         {
-            Header = "About",
+            Header = Strings.Res.About,
             Icon = new SymbolIcon(SymbolRegular.Info24),
             Command = NavigateClickViewCommand,
             CommandParameter = "about"
@@ -177,7 +177,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         ContextMenu.Items.Add(new MenuItem
         {
-            Header = "Exit",
+            Header = Strings.Res.Exit,
             Icon = new SymbolIcon(SymbolRegular.Power24),
             Command = ExitApplicationCommand
         });
@@ -189,7 +189,7 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
     {
         base.OnRightClick();
 
-        statusItem.Header = snapManager.IsRunning ? "Running" : "Stopped";
+        statusItem.Header = snapManager.IsRunning ? Strings.Res.Running : Strings.Res.Stopped;
 
         if (!snapManager.IsRunning)
         {
@@ -209,9 +209,12 @@ public class NotifyIconService : Wpf.Ui.Tray.NotifyIconService, INotifyIconServi
 
         foreach (var screen in snapScreens)
         {
+            var primaryText = screen.Primary == "Primary" ? Strings.Res.Primary : "";
             var screenMenu = new MenuItem()
             {
-                Header = $"Display {screen.DeviceNumber} ({screen.Resolution}) - {screen.Primary}"
+                Header = string.IsNullOrEmpty(primaryText)
+                    ? $"{Strings.Res.Display} {screen.DeviceNumber} ({screen.Resolution})"
+                    : $"{Strings.Res.Display} {screen.DeviceNumber} ({screen.Resolution}) - {primaryText}"
             };
 
             if (snapScreens.Count > 1)
