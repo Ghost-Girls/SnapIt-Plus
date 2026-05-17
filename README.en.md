@@ -10,7 +10,7 @@
 
 ***
 
-**SnapIt **is a powerful window manager for Windows 10/11 that significantly boosts productivity in single-screen and multi-screen environments by organizing application windows into customizable snap zones. This project originates from [SnapIt](https://github.com/enginkirmaci/SnapIt) by Engin KIRMACI, with SnapIt-Plus evolving continuously to add new features and improvements.
+\*\*SnapIt \*\*is a powerful window manager for Windows 10/11 that significantly boosts productivity in single-screen and multi-screen environments by organizing application windows into customizable snap zones. This project originates from [SnapIt](https://github.com/enginkirmaci/SnapIt) by Engin KIRMACI, with SnapIt-Plus evolving continuously to add new features and improvements.
 
 Design philosophy: Fast, intuitive, and highly customizable — perfect for widescreen, ultrawide, and multi-monitor setups.
 
@@ -20,20 +20,28 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 
 <table>
   <tr>
-    <td><img src="/documents/00.png" alt="Demo" width="400"></td>
-    <td><img src="/documents/1.png" alt="Layout Manager" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/0.HomePage.png" alt="Home Page" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/1.LayoutPage.png" alt="Layout Page" width="400"></td>
   </tr>
   <tr>
-    <td align="center"><em>Window Snap Effect</em></td>
-    <td align="center"><em>Layout Management Interface</em></td>
+    <td align="center"><em>Home Page</em></td>
+    <td align="center"><em>Layout Page</em></td>
   </tr>
   <tr>
-    <td><img src="/documents/0.png" alt="Layout Designer" width="400"></td>
-    <td></td>
+    <td><img src="/documents/SnapIt-Plus/2.SettingPage.png" alt="Setting Page" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/3.ThemePage.png" alt="Theme Page" width="400"></td>
   </tr>
   <tr>
-    <td align="center"><em>Layout Designer</em></td>
-    <td></td>
+    <td align="center"><em>Setting Page</em></td>
+    <td align="center"><em>Theme Page</em></td>
+  </tr>
+  <tr>
+    <td><img src="/documents/SnapIt-Plus/4.DragWindow.png" alt="Drag Window" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/5.CreateMergeArea.png" alt="Create Merge Area" width="400"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Drag Window</em></td>
+    <td align="center"><em>Create Merge Area</em></td>
   </tr>
 </table>
 

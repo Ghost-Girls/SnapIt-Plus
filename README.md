@@ -20,20 +20,28 @@
 
 <table>
   <tr>
-    <td><img src="/documents/00.png" alt="使用演示" width="400"></td>
-    <td><img src="/documents/1.png" alt="布局管理" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/0.HomePage.png" alt="首页" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/1.LayoutPage.png" alt="布局页面" width="400"></td>
   </tr>
   <tr>
-    <td align="center"><em>窗口吸附效果</em></td>
-    <td align="center"><em>布局管理界面</em></td>
+    <td align="center"><em>首页</em></td>
+    <td align="center"><em>布局页面</em></td>
   </tr>
   <tr>
-    <td><img src="/documents/0.png" alt="布局设计器" width="400"></td>
-    <td></td>
+    <td><img src="/documents/SnapIt-Plus/2.SettingPage.png" alt="设置页面" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/3.ThemePage.png" alt="主题页面" width="400"></td>
   </tr>
   <tr>
-    <td align="center"><em>布局设计器</em></td>
-    <td></td>
+    <td align="center"><em>设置页面</em></td>
+    <td align="center"><em>主题页面</em></td>
+  </tr>
+  <tr>
+    <td><img src="/documents/SnapIt-Plus/4.DragWindow.png" alt="窗口拖拽" width="400"></td>
+    <td><img src="/documents/SnapIt-Plus/5.CreateMergeArea.png" alt="创建合并区域" width="400"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>窗口拖拽</em></td>
+    <td align="center"><em>创建合并区域</em></td>
   </tr>
 </table>
 
