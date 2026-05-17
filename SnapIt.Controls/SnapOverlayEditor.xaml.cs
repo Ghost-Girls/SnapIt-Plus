@@ -74,8 +74,8 @@ public partial class SnapOverlayEditor : UserControl
             snapOverlayEditor.Overlay.Opacity = snapOverlayEditor.Theme.Opacity;
             snapOverlayEditor.MiniOverlay.Background = snapOverlayEditor.Theme.OverlayBrush;
             snapOverlayEditor.FullOverlay.Background = snapOverlayEditor.Theme.OverlayBrush;
-            snapOverlayEditor.Border.BorderBrush = snapOverlayEditor.Theme.BorderBrush;
-            snapOverlayEditor.Border.BorderThickness = new Thickness(snapOverlayEditor.Theme.BorderThickness);
+            snapOverlayEditor.MiniOverlayBorder.BorderBrush = snapOverlayEditor.Theme.BorderBrush;
+            snapOverlayEditor.MiniOverlayBorder.BorderThickness = new Thickness(snapOverlayEditor.Theme.BorderThickness);
             snapOverlayEditor.FullOverlayBorder.BorderBrush = snapOverlayEditor.Theme.BorderBrush;
             snapOverlayEditor.FullOverlayBorder.BorderThickness = new Thickness(5);
         }
@@ -241,16 +241,13 @@ public partial class SnapOverlayEditor : UserControl
 
         var hitElement = InputHitTest(Mouse.GetPosition(this)) as FrameworkElement;
 
-        if (hitElement != null && (hitElement.Name == "Border" || hitElement.Name == "FullOverlayBorder"))
+        if (hitElement != null && (hitElement.Name == "MiniOverlayBorder" || hitElement.Name == "FullOverlayBorder"))
         {
             _lockedElement = ShowMiniOverlay ? MiniOverlay : this;
             selectedElement = _lockedElement;
             ShowPositionGridForElement(_lockedElement);
-            e.Handled = true;
-            return;
         }
-
-        if (hitElement != null && (hitElement.Name == "MiniOverlay" || hitElement.Name == "FullOverlay"))
+        else if (hitElement != null && (hitElement.Name == "MiniOverlay" || hitElement.Name == "FullOverlay"))
         {
             _lockedElement = ShowMiniOverlay ? MiniOverlay : this;
             selectedElement = _lockedElement;
@@ -258,6 +255,7 @@ public partial class SnapOverlayEditor : UserControl
         else if (_lockedElement != null)
         {
             UnlockElement();
+            return;
         }
 
         _mouseHitType = SetHitType(selectedElement, Mouse.GetPosition(selectedElement));
@@ -269,7 +267,7 @@ public partial class SnapOverlayEditor : UserControl
 
         CaptureMouse();
 
-        Border.Background = Theme.HighlightBrush;
+        MiniOverlayBorder.Background = Theme.HighlightBrush;
     }
 
     protected override void OnMouseUp(MouseButtonEventArgs e)
@@ -278,7 +276,7 @@ public partial class SnapOverlayEditor : UserControl
 
         ReleaseMouseCapture();
 
-        Border.Background = Theme.OverlayBrush;
+        MiniOverlayBorder.Background = Theme.OverlayBrush;
 
         SnapControl.GenerateSnapOverlays();
     }
@@ -304,7 +302,7 @@ public partial class SnapOverlayEditor : UserControl
             PositionWidth = MiniOverlay.Width.ToString("0.00");
             PositionHeight = MiniOverlay.Height.ToString("0.00");
         }
-        else if (element.Name == "Border")
+        else if (element.Name == "MiniOverlayBorder")
         {
             PositionX = (Margin.Left + MiniOverlay.Margin.Left + MiniOverlay.Width / 2).ToString("0.00");
             PositionY = (Margin.Top + MiniOverlay.Margin.Top + MiniOverlay.Height / 2).ToString("0.00");
@@ -447,24 +445,35 @@ public partial class SnapOverlayEditor : UserControl
                     var miniBaseWidth = selectedElement.Width;
                     var miniBaseHeight = selectedElement.Height;
 
-                    ClampToParent(ref point, ref size, ActualWidth, ActualHeight);
+                    var snapPoint = new Point(Margin.Left + point.X, Margin.Top + point.Y);
+                    var snapSize = new Size(size.Width, size.Height);
+
+                    snapPoint.X = Math.Max(Margin.Left, Math.Min(snapPoint.X, Margin.Left + ActualWidth - snapSize.Width));
+                    snapPoint.Y = Math.Max(Margin.Top, Math.Min(snapPoint.Y, Margin.Top + ActualHeight - snapSize.Height));
+                    snapSize.Width = Math.Min(snapSize.Width, Margin.Left + ActualWidth - snapPoint.X);
+                    snapSize.Height = Math.Min(snapSize.Height, Margin.Top + ActualHeight - snapPoint.Y);
 
                     var engine = new SnapEngine();
-                    engine.BuildSnapLines(SnapControl);
+                    engine.BuildSnapLines(SnapControl, includeOverlays: true);
 
                     if (_mouseHitType == ResizeHitType.Body)
                     {
-                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRectCenter(point.X, point.Y, size.Width, size.Height);
+                        (snapPoint.X, snapPoint.Y, snapSize.Width, snapSize.Height) = engine.SnapRectCenter(snapPoint.X, snapPoint.Y, snapSize.Width, snapSize.Height);
                     }
                     else
                     {
-                        (point.X, point.Y, size.Width, size.Height) = engine.SnapRect(point.X, point.Y, size.Width, size.Height);
+                        (snapPoint.X, snapPoint.Y, snapSize.Width, snapSize.Height) = engine.SnapRect(snapPoint.X, snapPoint.Y, snapSize.Width, snapSize.Height);
 
                         if (_mouseHitType is ResizeHitType.L or ResizeHitType.UL or ResizeHitType.LL)
-                            size.Width = miniBaseLeft + miniBaseWidth - point.X;
+                            snapSize.Width = (Margin.Left + miniBaseLeft) + miniBaseWidth - snapPoint.X;
                         if (_mouseHitType is ResizeHitType.T or ResizeHitType.UL or ResizeHitType.UR)
-                            size.Height = miniBaseTop + miniBaseHeight - point.Y;
+                            snapSize.Height = (Margin.Top + miniBaseTop) + miniBaseHeight - snapPoint.Y;
                     }
+
+                    point.X = snapPoint.X - Margin.Left;
+                    point.Y = snapPoint.Y - Margin.Top;
+                    size.Width = snapSize.Width;
+                    size.Height = snapSize.Height;
 
                     SetPos(selectedElement, point, size);
 
@@ -484,7 +493,7 @@ public partial class SnapOverlayEditor : UserControl
                     ClampToParent(ref point, ref size, SnapControl.MainOverlay.ActualWidth, SnapControl.MainOverlay.ActualHeight);
 
                     var engine = new SnapEngine();
-                    engine.BuildSnapLines(SnapControl);
+                    engine.BuildSnapLines(SnapControl, includeOverlays: false);
 
                     if (_mouseHitType == ResizeHitType.Body)
                     {
@@ -615,6 +624,9 @@ public partial class SnapOverlayEditor : UserControl
 
     private void ToggleOverlay_Click(object sender, RoutedEventArgs e)
     {
+        _lockedElement = null;
+        selectedElement = null;
+
         if (ShowMiniOverlay)
         {
             ShowMiniOverlay = false;

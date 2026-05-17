@@ -15,7 +15,7 @@ public class SnapEngine
     private List<double> snapCentersX = [];
     private List<double> snapCentersY = [];
 
-    public void BuildSnapLines(SnapControl snapControl)
+    public void BuildSnapLines(SnapControl snapControl, bool includeOverlays = true)
     {
         snapLinesX = [];
         snapLinesY = [];
@@ -34,6 +34,8 @@ public class SnapEngine
 
         snapCentersX.Add(gridWidth / 2);
         snapCentersY.Add(gridHeight / 2);
+
+        if (!includeOverlays) return;
 
         foreach (var border in snapControl.FindChildren<SnapBorder>().Where(b => b.IsDraggable))
         {
