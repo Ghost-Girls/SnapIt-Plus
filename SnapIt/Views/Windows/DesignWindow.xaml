@@ -65,9 +65,48 @@
             Theme="{Binding Theme, Mode=TwoWay}" />
 
         <StackPanel
+            x:Name="PropertiesPanel"
             Margin="0,20,20,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top">
+            <ui:CardAction
+                x:Name="DockButtonsCard"
+                Margin="0,0,0,8"
+                Padding="8,6"
+                HorizontalAlignment="Stretch"
+                Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"
+                Icon="{ui:SymbolIcon PositionBackward24}"
+                IsChevronVisible="False">
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button
+                        Margin="0,0,4,0"
+                        Padding="8,4"
+                        Appearance="Transparent"
+                        Click="DockTopLeft_Click"
+                        Content="↖"
+                        FontSize="14" />
+                    <ui:Button
+                        Margin="0,0,4,0"
+                        Padding="8,4"
+                        Appearance="Transparent"
+                        Click="DockTopRight_Click"
+                        Content="↗"
+                        FontSize="14" />
+                    <ui:Button
+                        Margin="0,0,4,0"
+                        Padding="8,4"
+                        Appearance="Transparent"
+                        Click="DockBottomLeft_Click"
+                        Content="↙"
+                        FontSize="14" />
+                    <ui:Button
+                        Padding="8,4"
+                        Appearance="Transparent"
+                        Click="DockBottomRight_Click"
+                        Content="↘"
+                        FontSize="14" />
+                </StackPanel>
+            </ui:CardAction>
             <Grid Margin="0,0,0,8">
                 <ui:CardExpander
                     Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"

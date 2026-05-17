@@ -36,6 +36,34 @@ public partial class DesignWindow : IWindow
         verticalRuler.RaiseVerticalRulerMoveEvent(e);
     }
 
+    private void DockTopLeft_Click(object sender, RoutedEventArgs e)
+    {
+        PropertiesPanel.HorizontalAlignment = HorizontalAlignment.Left;
+        PropertiesPanel.VerticalAlignment = VerticalAlignment.Top;
+        PropertiesPanel.Margin = new Thickness(20, 20, 0, 0);
+    }
+
+    private void DockTopRight_Click(object sender, RoutedEventArgs e)
+    {
+        PropertiesPanel.HorizontalAlignment = HorizontalAlignment.Right;
+        PropertiesPanel.VerticalAlignment = VerticalAlignment.Top;
+        PropertiesPanel.Margin = new Thickness(0, 20, 20, 0);
+    }
+
+    private void DockBottomLeft_Click(object sender, RoutedEventArgs e)
+    {
+        PropertiesPanel.HorizontalAlignment = HorizontalAlignment.Left;
+        PropertiesPanel.VerticalAlignment = VerticalAlignment.Bottom;
+        PropertiesPanel.Margin = new Thickness(20, 0, 0, 20);
+    }
+
+    private void DockBottomRight_Click(object sender, RoutedEventArgs e)
+    {
+        PropertiesPanel.HorizontalAlignment = HorizontalAlignment.Right;
+        PropertiesPanel.VerticalAlignment = VerticalAlignment.Bottom;
+        PropertiesPanel.Margin = new Thickness(0, 0, 20, 20);
+    }
+
     public void SetViewModel(SnapScreen snapScreen, Layout layout)
     {
         var model = ViewModel; //DataContext as DesignWindowViewModel;
