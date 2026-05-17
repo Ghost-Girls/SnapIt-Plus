@@ -14,8 +14,10 @@ public class WhatsNewPageViewModel : ViewModelBase
             [
                 "Branch features: Add Chinese UI support (i18n).",
                 "Updated GitHub URLs to Ghost-Girls organization.",
-                "Added new branch features documentation.",
-                "Updated README with Chinese and English versions.",
+                "Branch features: Overlay center coordinate display and editing.",
+                "Branch features: Border/Overlay click-to-lock editing (Esc to unlock).",
+                "Branch features: Snap coordinate space fix with mode-based snap range.",
+                "Branch features: PositionGrid input values preserved during editing.",
                 "Improved document formatting and readability."
             ]
         },

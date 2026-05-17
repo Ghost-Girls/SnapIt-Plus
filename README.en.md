@@ -54,6 +54,10 @@ Design philosophy: Fast, intuitive, and highly customizable — perfect for wide
 - Branch features: Edge snap and center alignment, double-click to delete dividers
 - Branch features: Chinese UI support (i18n)
 - Branch features: Design window properties panel supports four-corner docking toggle
+- Branch features: Overlay center coordinate display and editing
+- Branch features: Border/Overlay click-to-lock editing (Esc to unlock)
+- Branch features: MiniOverlay snap coordinate space fix with mode-based snap range
+- Branch features: PositionGrid input values preserved during editing
 
 ### Window Snapping Methods
 
