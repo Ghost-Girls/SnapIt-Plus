@@ -16,6 +16,7 @@ public partial class SnapOverlayEditor : UserControl
     private Point _lastPointInContiner;
     private ResizeHitType _mouseHitType = ResizeHitType.None;
     private FrameworkElement selectedElement = null;
+    private FrameworkElement _lockedElement = null;
 
     public SnapControl SnapControl { get; }
 
@@ -214,9 +215,50 @@ public partial class SnapOverlayEditor : UserControl
         }
     }
 
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+
+        if (e.Key == Key.Escape && _lockedElement != null)
+        {
+            UnlockElement();
+            e.Handled = true;
+        }
+    }
+
+    private void UnlockElement()
+    {
+        _lockedElement = null;
+        selectedElement = null;
+        DesignPanel.Visibility = Visibility.Hidden;
+        OutlineBorder.Visibility = Visibility.Hidden;
+        PositionGrid.Visibility = Visibility.Hidden;
+    }
+
     protected override void OnMouseDown(MouseButtonEventArgs e)
     {
         base.OnMouseDown(e);
+
+        var hitElement = InputHitTest(Mouse.GetPosition(this)) as FrameworkElement;
+
+        if (hitElement != null && (hitElement.Name == "Border" || hitElement.Name == "FullOverlayBorder"))
+        {
+            _lockedElement = ShowMiniOverlay ? MiniOverlay : this;
+            selectedElement = _lockedElement;
+            ShowPositionGridForElement(_lockedElement);
+            e.Handled = true;
+            return;
+        }
+
+        if (hitElement != null && (hitElement.Name == "MiniOverlay" || hitElement.Name == "FullOverlay"))
+        {
+            _lockedElement = ShowMiniOverlay ? MiniOverlay : this;
+            selectedElement = _lockedElement;
+        }
+        else if (_lockedElement != null)
+        {
+            UnlockElement();
+        }
 
         _mouseHitType = SetHitType(selectedElement, Mouse.GetPosition(selectedElement));
         SetMouseCursor();
@@ -246,20 +288,48 @@ public partial class SnapOverlayEditor : UserControl
         base.OnMouseEnter(e);
 
         ResetDesignPanelButtons();
+        ShowPositionGridForElement(_lockedElement ?? selectedElement);
+    }
 
-        PositionX = Margin.Left.ToString("0.00");
-        PositionY = Margin.Top.ToString("0.00");
-        PositionWidth = Width.ToString("0.00");
-        PositionHeight = Height.ToString("0.00");
+    private void ShowPositionGridForElement(FrameworkElement element)
+    {
+        if (element == null) return;
+
+        PositionGrid.Visibility = Visibility.Visible;
+
+        if (element.Name == "MiniOverlay")
+        {
+            PositionX = (Margin.Left + MiniOverlay.Margin.Left + MiniOverlay.Width / 2).ToString("0.00");
+            PositionY = (Margin.Top + MiniOverlay.Margin.Top + MiniOverlay.Height / 2).ToString("0.00");
+            PositionWidth = MiniOverlay.Width.ToString("0.00");
+            PositionHeight = MiniOverlay.Height.ToString("0.00");
+        }
+        else if (element.Name == "Border")
+        {
+            PositionX = (Margin.Left + MiniOverlay.Margin.Left + MiniOverlay.Width / 2).ToString("0.00");
+            PositionY = (Margin.Top + MiniOverlay.Margin.Top + MiniOverlay.Height / 2).ToString("0.00");
+            PositionWidth = MiniOverlay.Width.ToString("0.00");
+            PositionHeight = MiniOverlay.Height.ToString("0.00");
+        }
+        else
+        {
+            PositionX = (Margin.Left + Width / 2).ToString("0.00");
+            PositionY = (Margin.Top + Height / 2).ToString("0.00");
+            PositionWidth = Width.ToString("0.00");
+            PositionHeight = Height.ToString("0.00");
+        }
     }
 
     protected override void OnMouseLeave(MouseEventArgs e)
     {
         base.OnMouseLeave(e);
 
-        DesignPanel.Visibility = Visibility.Hidden;
-        OutlineBorder.Visibility = Visibility.Hidden;
-        PositionGrid.Visibility = Visibility.Hidden;
+        if (_lockedElement == null)
+        {
+            DesignPanel.Visibility = Visibility.Hidden;
+            OutlineBorder.Visibility = Visibility.Hidden;
+            PositionGrid.Visibility = Visibility.Hidden;
+        }
     }
 
     protected override void OnMouseMove(MouseEventArgs e)
@@ -277,13 +347,16 @@ public partial class SnapOverlayEditor : UserControl
 
             if (element != null)
             {
-                if (ShowMiniOverlay)
+                if (_lockedElement != null)
+                {
+                    selectedElement = _lockedElement;
+                }
+                else if (ShowMiniOverlay)
                 {
                     selectedElement = MiniOverlay;
                 }
                 else
                 {
-                    PositionGrid.Visibility = Visibility.Visible;
                     selectedElement = this;
                 }
             }
@@ -292,6 +365,7 @@ public partial class SnapOverlayEditor : UserControl
             SetMouseCursor();
 
             ResetDesignPanelButtons();
+            ShowPositionGridForElement(selectedElement);
         }
         else
         {
@@ -393,6 +467,12 @@ public partial class SnapOverlayEditor : UserControl
                     }
 
                     SetPos(selectedElement, point, size);
+
+                    PositionGrid.Visibility = Visibility.Visible;
+                    PositionX = (Margin.Left + MiniOverlay.Margin.Left + MiniOverlay.Width / 2).ToString("0.00");
+                    PositionY = (Margin.Top + MiniOverlay.Margin.Top + MiniOverlay.Height / 2).ToString("0.00");
+                    PositionWidth = MiniOverlay.Width.ToString("0.00");
+                    PositionHeight = MiniOverlay.Height.ToString("0.00");
                 }
                 else
                 {
@@ -422,8 +502,8 @@ public partial class SnapOverlayEditor : UserControl
 
                     SetPos(point, size);
 
-                    PositionX = Margin.Left.ToString("0.00");
-                    PositionY = Margin.Top.ToString("0.00");
+                    PositionX = (Margin.Left + Width / 2).ToString("0.00");
+                    PositionY = (Margin.Top + Height / 2).ToString("0.00");
                     PositionWidth = Width.ToString("0.00");
                     PositionHeight = Height.ToString("0.00");
                 }
@@ -555,12 +635,23 @@ public partial class SnapOverlayEditor : UserControl
 
     private void SetPosButton_Click(object sender, RoutedEventArgs e)
     {
-        if (double.TryParse(PositionX, out var positionX)
-            && double.TryParse(PositionY, out var positionY)
+        if (double.TryParse(PositionX, out var centerX)
+            && double.TryParse(PositionY, out var centerY)
             && double.TryParse(PositionWidth, out var positionWidth)
             && double.TryParse(PositionHeight, out var positionHeight))
         {
-            SetPos(new Point(positionX, positionY), new Size(positionWidth, positionHeight));
+            if (ShowMiniOverlay)
+            {
+                var marginLeft = centerX - Margin.Left - positionWidth / 2;
+                var marginTop = centerY - Margin.Top - positionHeight / 2;
+                SetPos(MiniOverlay, new Point(marginLeft, marginTop), new Size(positionWidth, positionHeight));
+            }
+            else
+            {
+                var marginLeft = centerX - positionWidth / 2;
+                var marginTop = centerY - positionHeight / 2;
+                SetPos(new Point(marginLeft, marginTop), new Size(positionWidth, positionHeight));
+            }
             SnapControl.GenerateSnapOverlays();
         }
     }

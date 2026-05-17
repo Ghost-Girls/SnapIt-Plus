@@ -140,7 +140,7 @@
                     Margin="0,0,8,0"
                     Padding="0"
                     VerticalAlignment="Center"
-                    Text="Position" />
+                    Text="Center" />
                 <TextBox
                     Grid.Column="1"
                     MinWidth="30"
